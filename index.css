@@ -1,5 +1,5 @@
 div.header {
-    background-color: #509bb9;
+    background-color: #ed2939;
     border-radius: 3px;
     width : 95%;
     height : 120px;
@@ -22,9 +22,9 @@ div.header {
     font-size: 14px;
     padding-left: 9px;
     height: 10%;
-    color : orange;
+    color : #ffffff;
     /*background-color: #EEEEEE;*/
-    background-color: #1E3F66;
+    background-color: orange;
     font-weight: bolder;
     opacity: 1;
     padding-right: 4px;
@@ -70,7 +70,7 @@ div.backMenu {
 }
 
 div.backMenu a {
-    color : #0098BA;
+    color : #ed2939;
     text-decoration: none;
 }
 
@@ -134,8 +134,8 @@ div.captionMenu {
 }
 
 fieldset.creditTitle {
-    border: 2px solid #509bb9; 
-    border-top-color: #509bb9;
+    border: 2px solid orange; 
+    border-top-color: orange;
     border-radius: 6px;
     box-sizing: border-box; 
     /*grid-area: 1 / 1; 
@@ -151,7 +151,7 @@ legend.legendTitle {
     font-size: 13px; 
     padding: 0 4px; 
     width : auto;
-    background-color: #38C;
+    background-color: orange;
     color: #FFFFFF;
     font-weight: 400;
 }
@@ -212,7 +212,7 @@ legend.legendTitle {
     font-size: 10px;
     font-weight:bold;
     font-family: 'Montserrat';
-    color : #0098BA;
+    color : #ed2939;
     /*border: 1px solid black;*/
 }
 /*
@@ -592,13 +592,13 @@ a {
 }
 
 .tutorial div:nth-child(2) {
-    background-color: #900a0a;
+    background-color: #1e3f66;
     color : #FFFFFF;
     font-weight: 100;
 }
 
 .tutorial div:nth-child(3) {
-    background-color: #000000;
+    background-color: #1e3f66;
     color : #FFFFFF;
     font-weight: 100;
 
