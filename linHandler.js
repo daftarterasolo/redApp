@@ -1,4 +1,4 @@
-import { lgin, clearForm } from './service/login.js';
+import { lgin, clearForm, checkTheLocalSession, setSession } from './service/login.js';
 
 function setSubmitBtn() {
 	const lin = document.getElementById("lin");
@@ -16,12 +16,14 @@ function setBackSubmitBtn() {
 	lin.style.color = "#FFFFFF";
 }
 
-function setSession(id, key) {
-	sessionStorage.setItem('id', id);
-	sessionStorage.setItem('key', key);
+function pageRedirect() {
+	window.location.replace("/redApp");
 }
 
+
 (function main() {
+	new checkTheLocalSession().getStatus === true ? pageRedirect() : '';
+
 	document.getElementById("lin").addEventListener("click", async () => {
 		const logIn = new lgin(document.getElementById("uname").value, document.getElementById("pass").value);
 		setSubmitBtn();
@@ -30,10 +32,17 @@ function setSession(id, key) {
 			document.querySelector(".alert").classList.remove("hidden");
 			document.getElementById("spanAlert").innerHTML = loginResult.data;
 		} else {
-			setSession(loginResult.id, loginResult.data);
+			new setSession(loginResult.id, loginResult.data);
+			pageRedirect();
 		}
 		setBackSubmitBtn();
 		const clFrm = new clearForm(["uname", "pass"]); 
-	});	
+	});
+	
+	document.querySelector(".octicon").addEventListener("click", () => {
+		document.querySelector(".alert").classList.add("hidden");
+		document.getElementById("spanAlert").innerHTML = "";	
+	});
+
 })();
 

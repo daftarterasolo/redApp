@@ -3,8 +3,19 @@ import { createFormPabrik } from './service/formPabrik.js';
 import { createFormSpbu } from './service/formSpbu.js';
 import { createFormLoko } from './service/formLoko.js';
 import { masySubmitProcessor, pabrikSubmitProcessor, lokoSubmitProcessor, spbuSubmitProcessor } from './service/submitProcessor.js';
+import { checkTheLocalSession } from './service/login.js';
+
+function pageRedirect() {
+	window.location.replace("login.html");
+}
+
+function setIdTitle() {
+	document.getElementById("idUser").innerHTML = sessionStorage.getItem('id');
+}
 
 (function main() {
+	new checkTheLocalSession().getStatus === true ? setIdTitle() : pageRedirect();
+	
 	let menuMsy = document.querySelector(".menu").children[1];
 
 	menuMsy.addEventListener("click", async () => {

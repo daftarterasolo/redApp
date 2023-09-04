@@ -1,6 +1,35 @@
+div.log {
+    background-color: #22303c;
+    border-radius: 3px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width : 95%;
+    height : 40px;
+    position: relative;
+    margin: 7px auto 0 auto;
+    margin-bottom: -7px;
+    left: 0;
+    right: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction:row-reverse;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content:flex-start;
+    font-size: 12px;
+}
+
+#iconImg {
+    border-radius: 20px;
+    border : 2px solid #22303c;
+}
+
 div.header {
     background-color: #ed2939;
     border-radius: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     width : 95%;
     height : 120px;
     position: relative;
@@ -15,7 +44,6 @@ div.header {
     background-position-x: right;
     background-position-y: bottom;
     border-bottom: 5px solid orange;
-;
 }
 
 #greeting0 {
@@ -64,7 +92,7 @@ div.backMenu {
     justify-content: center;
     background-color: #EEEEEE;
     color :#0098BA;
-    font-weight: bold;
+    font-weight: 500;
     padding: 5px 0;
 
 }
@@ -72,6 +100,8 @@ div.backMenu {
 div.backMenu a {
     color : #ed2939;
     text-decoration: none;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
 }
 
 div.menu {
@@ -134,8 +164,8 @@ div.captionMenu {
 }
 
 fieldset.creditTitle {
-    border: 2px solid orange; 
-    border-top-color: orange;
+    border: 2px solid #ed2939;
+    border-top-color: #ed2939;
     border-radius: 6px;
     box-sizing: border-box; 
     /*grid-area: 1 / 1; 
@@ -151,7 +181,7 @@ legend.legendTitle {
     font-size: 13px; 
     padding: 0 4px; 
     width : auto;
-    background-color: orange;
+    background-color: #ed2939;
     color: #FFFFFF;
     font-weight: 400;
 }
@@ -210,7 +240,7 @@ legend.legendTitle {
     width: 25%;
     height: 25px;
     font-size: 10px;
-    font-weight:bold;
+    font-weight:600;
     font-family: 'Montserrat';
     color : #ed2939;
     /*border: 1px solid black;*/

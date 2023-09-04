@@ -47,6 +47,42 @@ export class clearForm {
 	}	
 }
 
+export class checkTheLocalSession {
+	#status;
+	constructor() {
+		this.#status = false;
+		this.#check();
+	}
+
+	#check() {
+		if (sessionStorage.getItem("id") !== null && sessionStorage.getItem("key") !== null) {
+			this.#status = true;
+		} else {
+			this.#status = false;
+		}	
+	}
+	
+	get getStatus() {
+		return this.#status;
+	}
+
+}
+
+export class setSession {
+	#id;
+	#key;
+	constructor(id, key) {
+		this.#id = id;
+		this.#key = key;
+		this.#doSet();
+	}
+
+	#doSet() {
+		sessionStorage.setItem("id", this.#id);
+		sessionStorage.setItem("key", this.#key);	
+	}
+}
+
 export class lout extends signIn {
 
 }
