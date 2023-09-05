@@ -1,5 +1,5 @@
 div.log {
-    background-color: #22303c;
+    /*background-color: #22303c;*/
     border-radius: 3px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -18,6 +18,15 @@ div.log {
     align-items: center;
     justify-content:flex-start;
     font-size: 12px;
+    background: rgba(34,48,60, 1);
+}
+
+p#logMsg {
+    text-align: right;
+}
+
+a#logout {
+    text-decoration: none;
 }
 
 #iconImg {

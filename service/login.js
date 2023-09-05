@@ -84,6 +84,31 @@ export class setSession {
 }
 
 export class lout extends signIn {
+	#api;
+	#lData = {};
+	constructor(di, kento) {
+		super(constructor);
+		this.#api = "https://script.google.com/macros/s/AKfycbw1baXQH9pAbTCzAbw17ajqAVeuUvRS23wATbOFLb4kn9xjPTrE1WHVqRn586oeShTINQ/exec";
+		this.#lData = {
+			'di' : di,
+			'kento' : kento
+		}
+	}
+
+	async doOut() {
+		let result = {};
+
+		await fetch(this.#api, {
+			method : 'POST',
+			body : JSON.stringify(this.#lData)
+		})
+		.then(e => e.json())
+		.then(e => {
+			result = e;
+		});
+
+		return result;
+	}
 
 }
 

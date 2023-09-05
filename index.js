@@ -3,7 +3,7 @@ import { createFormPabrik } from './service/formPabrik.js';
 import { createFormSpbu } from './service/formSpbu.js';
 import { createFormLoko } from './service/formLoko.js';
 import { masySubmitProcessor, pabrikSubmitProcessor, lokoSubmitProcessor, spbuSubmitProcessor } from './service/submitProcessor.js';
-import { checkTheLocalSession } from './service/login.js';
+import { checkTheLocalSession, lout } from './service/login.js';
 
 function pageRedirect() {
 	window.location.replace("login.html");
@@ -13,8 +13,24 @@ function setIdTitle() {
 	document.getElementById("idUser").innerHTML = sessionStorage.getItem('id');
 }
 
+function removeSession() {
+	sessionStorage.removeItem('id');
+	sessionStorage.removeItem('key');
+}
+
+function clickLogout() {
+	document.getElementById("logout").addEventListener("click", async () => {
+		const l_out = new lout(parseInt(sessionStorage.getItem('id')), sessionStorage.getItem('key'));
+		let loutResult = await l_out.doOut();
+		loutResult.result === "success" ? removeSession() : '';
+		pageRedirect();
+	});
+}
+
 (function main() {
 	new checkTheLocalSession().getStatus === true ? setIdTitle() : pageRedirect();
+
+	clickLogout();
 	
 	let menuMsy = document.querySelector(".menu").children[1];
 

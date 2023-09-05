@@ -13,14 +13,17 @@ class submitProcessor {
 export class masySubmitProcessor extends submitProcessor {
 	#obj;
 	#api;
+	#authData;
+
 	constructor(obj) {
 		super(constructor);
 		this.#obj = obj;
 		this.#detectIfSubmitClicked();
-		//this.#api = "https://script.google.com/macros/s/AKfycbyy2jsLFItoH2iSsbee3o4IjH_d-X_gm8zJClJNmZ76nXcF532iqDtVb9FFP5SBLqmxBA/exec";
-
-		//this.#api = "https://script.google.com/macros/s/AKfycbysLaGr6E7Csyg62OqWf_gU9JBJsy0hEOszUTdISCvfYE-dPtZ7-qyEnUeXJCIkfe2eig/exec";
 		this.#api = "https://script.google.com/macros/s/AKfycbxCRpIT-PAtmRHksjns4-xHEraWMc9fC8MT9dYHMEYsv9zr1jCqfmYQIB7sZYxsii-MyA/exec";
+		this.#authData = {
+			'id' : sessionStorage.getItem('id'),
+			'token' : sessionStorage.getItem('key')
+		};
 	}
 
 	#checkIfDataToSendIsEmpty() {
@@ -59,7 +62,6 @@ export class masySubmitProcessor extends submitProcessor {
 		this.#obj.set_shopChartTemp = [];
 		this.#resetFormIdentitas();	
 		this.#deleteTableShopChart();
-		//alert(msg);
 	}
 
 	#ifEntryDataFail(msg) {
@@ -70,7 +72,8 @@ export class masySubmitProcessor extends submitProcessor {
 		
 		let dataComplete = {
 			'dataForm' : this.#obj.get_dataForm,
-			'dataToSend' : this.#obj.get_dataToSend 
+			'dataToSend' : this.#obj.get_dataToSend,
+			'authData' : this.#authData 
 		}
 
 		//console.log('Melakukan entry data ... ');
@@ -105,7 +108,6 @@ export class masySubmitProcessor extends submitProcessor {
 	#detectIfSubmitClicked() {
 		document.getElementById('sbmt').addEventListener('click', e => {
 			try {
-				//this.#checkIfDataToSendIsEmpty();
 				this.get_checkIfDataToSendIsEmpty;
 				this.#checkIfdataFormIsEmpty();
 				this.#entryTheData();
