@@ -516,19 +516,35 @@ legend.legendTitle {
     position: relative;
 }
 
-.addDiv {
+.addUttp {
     position: relative;
-    width:100px;
-    height:100px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    top : 25%;
+    gap : 10px;
+}
+
+.addDiv {
+    /*position: relative;*/
+    width:80px;
+    height:80px;
     background-color: #FFFFFF;
     border-radius: 3px;
-    margin-left:auto;
+    /*margin-left:auto;
     margin-right : auto;
-    top : 25%;
+    top : 25%;*/
     justify-content: center;
     color : #000000;
-    font-size: 70px;
+    font-size: 50px;
     font-family: 'Poppins', sans-serif;
+}
+
+.qrDiv {
+    background-image: url("img/qr-code.png");
+    background-size: contain;
 }
 
 .backBtnDiv {

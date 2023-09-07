@@ -38,7 +38,7 @@ function clickLogout() {
 	menuMsy.addEventListener("click", async () => {
 		let str = `<div class="mainContent">      
 						<div class="subContent" id="sub1">
-							<div class="title">Silahkan isi data Anda hai masyarakat</div>
+							<div class="title">Silahkan isi data</div>
 							<form>
 								<input type="text" class="form_data" name="nama" id="nama" placeholder="Masukkan nama / badan usaha">
 								<textarea  class="form_data" name="alamat" id="alamat" rows="4" cols="10" placeholder="Masukkan alamat"></textarea>  
@@ -50,7 +50,10 @@ function clickLogout() {
 						<div class="subContent" id="sub2">
 							<div class="title">Silahkan Pilih Timbangan/UTTP</div>  
 							<div class="shopChart"></div>
-							<div class="addDiv">+<p id="klik">Klik disini</p></div>
+							<div class="addUttp">
+								<div class="addDiv">+<p id="klik">Klik disini</p></div>
+								<div class="addDiv qrDiv"></div>
+							</div>
 							<div class="backBtnDiv">
 								<form><input type="button" name="back" id="back" value="Back.."></form>
 								<form><input type="button" name="sbmt" id="sbmt" value="Submit"></form>
@@ -69,7 +72,16 @@ function clickLogout() {
 		
 		const formMasyRedApp = new createFormMasyRedApp(document.querySelector(".main"), str);
 		await formMasyRedApp.generateForm();
-		
+		/*const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][3]']
+		formMasyRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]}</legend></fieldset></div>`;
+		formMasyRedApp.generateBtnHandler();
+		*/
+
+		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][0]', 'this.list[k][1]', 'this.list[k][2]']
+		formMasyRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]} ${args[4]}</legend></fieldset></div>`;
+		formMasyRedApp.generateBtnHandler();
+
+		//const sbmtHandler = new masySubmitProcessor(formMasyRedApp);		
 		/*
 		const formMasy = new createFormMasy(document.querySelector(".main"), str);
 		await formMasy.generateForm();
