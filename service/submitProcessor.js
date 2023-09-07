@@ -129,7 +129,8 @@ export class masySubmitProcessor extends submitProcessor {
 
 export class pabrikSubmitProcessor extends masySubmitProcessor {
 	setApi() {
-		this.set_api = "https://script.google.com/macros/s/AKfycbw_qgL6gQ461xKUFwXw44Si-iEzpGjszAvqOh7ofHDG53dVbzbq3qVmtMMz--Pg9qh6Tw/exec";
+		//this.set_api = "https://script.google.com/macros/s/AKfycbw_qgL6gQ461xKUFwXw44Si-iEzpGjszAvqOh7ofHDG53dVbzbq3qVmtMMz--Pg9qh6Tw/exec";
+		this.set_api = "https://script.google.com/macros/s/AKfycbzeGmp6XlXfcBukHiONXuKY6irpxH80LdnKetp9Uz4rBUGLMu_4R5aFs2j-KIwJRqa9Xg/exec";
 	}
 
 	//override method showConfirmation in parent class
