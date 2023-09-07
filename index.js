@@ -1,4 +1,5 @@
-import { createFormMasy } from './service/formMasy.js';
+//import { createFormMasy } from './service/formMasy.js';
+import { createFormMasyRedApp } from './service/formMasyRedApp.js';
 import { createFormPabrik } from './service/formPabrik.js';
 import { createFormSpbu } from './service/formSpbu.js';
 import { createFormLoko } from './service/formLoko.js';
@@ -37,7 +38,7 @@ function clickLogout() {
 	menuMsy.addEventListener("click", async () => {
 		let str = `<div class="mainContent">      
 						<div class="subContent" id="sub1">
-							<div class="title">Silahkan isi data Anda</div>
+							<div class="title">Silahkan isi data Anda hai masyarakat</div>
 							<form>
 								<input type="text" class="form_data" name="nama" id="nama" placeholder="Masukkan nama / badan usaha">
 								<textarea  class="form_data" name="alamat" id="alamat" rows="4" cols="10" placeholder="Masukkan alamat"></textarea>  
@@ -66,6 +67,10 @@ function clickLogout() {
 						<p style="text-align : right;"><a class="closeFormJml" href=#><span>x</span> Close</a></div></p>
 					</div>`;
 		
+		const formMasyRedApp = new createFormMasyRedApp(document.querySelector(".main"), str);
+		await formMasyRedApp.generateForm();
+		
+		/*
 		const formMasy = new createFormMasy(document.querySelector(".main"), str);
 		await formMasy.generateForm();
 		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][3]']
@@ -73,6 +78,7 @@ function clickLogout() {
 		formMasy.generateBtnHandler();
 		
 		const sbmtHandler = new masySubmitProcessor(formMasy);
+		*/
 	});
 
 	let menuPbrk = document.querySelector(".menu").children[0];
