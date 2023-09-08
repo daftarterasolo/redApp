@@ -399,6 +399,13 @@ legend.legendTitle {
     flex-shrink: 0;
 }
 
+#sub2 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
 .subContent .title {
     height : 10%;
     width: 100%;
@@ -523,8 +530,9 @@ legend.legendTitle {
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    top : 25%;
+    /*top : 25%;*/
     gap : 10px;
+    /*margin-bottom: 10px;*/
 }
 
 .addDiv {
@@ -548,18 +556,22 @@ legend.legendTitle {
 }
 
 .backBtnDiv {
-    position: relative;
-    width:100px;
-    height:100px;
+    /*position:relative;*/
+    /*width:100px;
+    height:100px;*/
     border-radius: 3px;
     margin-left:auto;
     margin-right : auto;
-    top : 25%;
+    /*margin-top: 40px;
+    top : 25%;*/
     justify-content: center;   
     color : #000000;
     font-size: 70px;
     font-family: 'Poppins', sans-serif;
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
 }
 
 
@@ -570,6 +582,14 @@ legend.legendTitle {
     color: #FFFFFF;
     border: 2px solid #FFFFFF;
 
+}
+
+.qrDiv:active {
+    background-color: #80471C;
+    transform: translateY(2px);
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
 }
 
 #klik {
