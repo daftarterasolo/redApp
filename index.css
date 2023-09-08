@@ -386,6 +386,10 @@ legend.legendTitle {
     margin: auto;
 }
 
+.spe input:disabled {
+    background-color: grey;
+}
+
 .subContent {
     height : 350px;
     width : 100%;

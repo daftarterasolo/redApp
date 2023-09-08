@@ -62,9 +62,16 @@ function clickLogout() {
 						<datalist id="kelurahan"></datalist>
 					</div>
 					<div class="uttpDiv hidden"></div>					
-					<div class="jmlhDiv hidden"><h1>Jumlah : </h1>
+					<div class="jmlhDiv hidden">
 						<form class="spe">
+							<input type="text" class="form_data" name="uttp" id="uttp" readonly>
+							<input type="text" class="form_data" name="kap" id="kap" readonly>
+							<input type="text" class="form_data" name="d" id="d" readonly>
 							<input type="number" class="form_data" name="jml" id="jml" placeholder="jumlah..">
+							<input type="text" class="form_data" name="merk" id="merk" placeholder="merk">
+							<input type="text" class="form_data" name="tipe" id="tipe" placeholder="tipe/model">
+							<input type="text" class="form_data" name="sn" id="sn" placeholder="no seri">
+							<input type="text" class="form_data" name="buatan" id="buatan" placeholder="buatan">
 							<input type="button" class="form_data" name="setJml" id="setJml" value="Tambahkan ke keranjang">
 						</form>
 						<p style="text-align : right;"><a class="closeFormJml" href=#><span>x</span> Close</a></div></p>
@@ -111,7 +118,9 @@ function clickLogout() {
 						<div class="subContent" id="sub2">
 							<div class="title">Silahkan Pilih Timbangan/UTTP</div>  
 							<div class="shopChart"></div>	
-							<div class="addDiv">+<p id="klik">Klik disini</p></div>
+							<div class="addUttp">
+								<div class="addDiv">+<p id="klik">Klik disini</p></div>
+							</div>
 							<div class="backBtnDiv">
 								<form><input type="button" name="back" id="back" value="Back.."></form>
 								<form><input type="button" name="sbmt" id="sbmt" value="Submit"></form>

@@ -53,8 +53,8 @@ export class createFormMasyRedApp {
 
 	//utk dijalankan pada method #pickUttpHandler
 	#changeShopChartLayout() {
-		document.querySelector(".addDiv").style.top = "15px";
-		document.querySelector(".backBtnDiv").style.top = "-25px";
+		//document.querySelector(".addDiv").style.top = "15px";
+		//document.querySelector(".backBtnDiv").style.top = "-25px";
 	}
 
 	//method utk menghapus item
@@ -92,7 +92,8 @@ export class createFormMasyRedApp {
 	//method utk reset form memasukkan jumlah uttp yg digunakan pd method pickUttpHandler()
 	#resetFormJmlh() {
 		document.getElementById("jml").placeholder = "jumlah...";
-		document.querySelector(".jmlhDiv").children[1].reset();
+		//document.querySelector(".jmlhDiv").children[1].reset();
+		document.querySelector(".jmlhDiv").children[0].reset();
 	}
 
 	//method utk memvalidasi apakah inputan jml uttp sdh diisi atau belum dan digunakan pada method #setJmlPickedUttp
@@ -112,15 +113,38 @@ export class createFormMasyRedApp {
 		});
 	}
 
+	//method utk dijalankan pd pickUttpHandler()
+	#setEmptyIfJmlMoreThanOne() {
+		document.getElementById("jml").addEventListener('keyup', e => {
+			if (e.target.value > 1) {
+				document.getElementById("sn").disabled = true;
+				document.getElementById("merk").disabled = true;
+				document.getElementById("tipe").disabled = true;
+				document.getElementById("buatan").disabled = true;
+			} else {
+				document.getElementById("sn").disabled = false;
+				document.getElementById("merk").disabled = false;
+				document.getElementById("tipe").disabled = false;
+				document.getElementById("buatan").disabled = false;
+			}	
+		});
+	}
+
 	//method utk dijalankan pada generateListUttp()
 	pickUttpHandler() {
 		document.querySelectorAll(".daftarUttp").forEach(e => e.addEventListener("click", () => {
 			this.#changeShopChartLayout();
 			document.querySelector(".uttpDiv").style.display = "none";
 			document.querySelector(".jmlhDiv").style.display = "flex";
+			this.#setEmptyIfJmlMoreThanOne();
 			this.#closeFormJmlHandler();
 			this.#resetFormJmlh();
 			this.#listIndex = e.id;
+			document.getElementById("uttp").value = `${this.list[e.id][3]} ${this.list[e.id][1]}`;
+			document.getElementById("kap").value = this.list[e.id][1];
+			document.getElementById("d").value = this.list[e.id][2];
+			//console.log(this.list[e.id]);
+			//console.log(document.getElementById(e.id).children[0].children[0].textContent);
 		}));
 	}
 
@@ -140,8 +164,12 @@ export class createFormMasyRedApp {
 			document.querySelector(".jmlhDiv").style.display = "none";
 			this.constructor.shopChartTemp.push(this.list[this.#listIndex]);
 			this.list[this.#listIndex].push(document.getElementById("jml").value);
-			document.getElementById("serial") !== null ? this.list[this.#listIndex].push(document.getElementById("serial").value) : '';
+			document.getElementById("merk") !== null ? this.list[this.#listIndex].push(document.getElementById("merk").value) : '';
+			document.getElementById("tipe") !== null ? this.list[this.#listIndex].push(document.getElementById("tipe").value) : '';
+			document.getElementById("sn") !== null ? this.list[this.#listIndex].push(document.getElementById("sn").value) : '';
+			document.getElementById("buatan") !== null ? this.list[this.#listIndex].push(document.getElementById("buatan").value) : '';
 			//console.log(`shopChartTemp ===== ${this.constructor.shopChartTemp}`);
+			console.log(this.constructor.shopChartTemp);
 			this.constructor.generateShopChartTbl(this.constructor.shopChartTemp);
 		});
 	}
