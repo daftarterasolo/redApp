@@ -213,6 +213,7 @@ function clickLogout() {
 			const formSpbuRedApp = new createFormSpbuRedApp(document.querySelector(".main"), str);
 			formSpbuRedApp.generateForm();
 			formSpbuRedApp.generateBtnHandler();
+			formSpbuRedApp.whenSpbuChange();
 
 			const sbmtHandler = new spbuSubmitProcessor(formSpbuRedApp);
 		

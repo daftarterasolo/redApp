@@ -51,6 +51,20 @@ export class createFormSpbuRedApp extends createFormPabrik {
 		document.getElementById("sbmt").style.borderColor = "rgb(67, 38, 22)";
 	}
 
+    async whenSpbuChange() {
+        let nama = document.getElementById("nama");
+        if (nama !== null) {
+            nama.addEventListener("input", async e => {
+                await fetch("https://script.google.com/macros/s/AKfycbyCpjyzGYCXOTSQSHdEZazH33t1sqGUm967ML_U2EeK0nH36rFAFm-8NxjEvvmNu6I/exec", {
+                    method : 'POST',
+                    body : JSON.stringify({'spbu' : e.target.value}) 
+                })
+                .then(e => e.json())
+                .then(e => console.log(e));
+            });    
+        }
+    }
+
 	get get_dataForm() {
 		this.#dataForm['nama'] = document.getElementById('nama').value;
 		this.#dataForm['alamat'] = document.getElementById('alamat').value;
