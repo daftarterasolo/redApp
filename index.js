@@ -1,8 +1,10 @@
 //import { createFormMasy } from './service/formMasy.js';
 import { createFormMasyRedApp } from './service/formMasyRedApp.js';
 import { createFormPabrik } from './service/formPabrik.js';
-import { createFormSpbu } from './service/formSpbu.js';
-import { createFormLoko } from './service/formLoko.js';
+//import { createFormSpbu } from './service/formSpbu.js';
+import { createFormSpbuRedApp } from './service/formSpbuRedApp.js';
+//import { createFormLoko } from './service/formLoko.js';
+import { createFormLokoRedApp } from './service/formLokoRedApp.js';
 import { masySubmitProcessor, pabrikSubmitProcessor, lokoSubmitProcessor, spbuSubmitProcessor } from './service/submitProcessor.js';
 import { checkTheLocalSession, lout } from './service/login.js';
 
@@ -88,7 +90,7 @@ function clickLogout() {
 		formMasyRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]} ${args[4]}</legend></fieldset></div>`;
 		formMasyRedApp.generateBtnHandler();
 
-		//const sbmtHandler = new masySubmitProcessor(formMasyRedApp);		
+		const sbmtHandler = new masySubmitProcessor(formMasyRedApp);
 		/*
 		const formMasy = new createFormMasy(document.querySelector(".main"), str);
 		await formMasy.generateForm();
@@ -170,10 +172,20 @@ function clickLogout() {
 							</form>
 						</div>
 						<div class="subContent" id="sub2">
-							<div class="title">Masukkan Jumlah Nozzle</div> 
-							<form>
-								<input type="number" class="form_data" name="jml_nozzle" id="jml_nozzle" placeholder="Masukkan Jumlah Nozzle">
-							</form>
+							<div class="title">Pilih Nozzle</div> 
+							<!--<form>-->
+							<!--<input type="number" class="form_data" name="jml_nozzle" id="jml_nozzle" placeholder="Masukkan Jumlah Nozzle">-->
+							<div class="nozzDiv">
+								<div>
+									<input type="checkbox" id="scales" name="scales" checked />
+									<label class="nozzLabel" for="scales">Scales</label>
+								</div>
+								<div>
+									<input type="checkbox" id="horns" name="horns" />
+									<label class="nozzLabel" for="horns">Horns</label>
+								</div>
+							</div>
+							<!--</form>-->
 							<!--							
 							<div class="title">Silahkan Pilih Timbangan/UTTP</div>  
 							<div class="shopChart"></div>	
@@ -198,12 +210,19 @@ function clickLogout() {
 							<input type="button" class="form_data" name="setJml" id="setJml" value="Tambahkan ke keranjang">
 						</form>
 					</div>`;		
+			const formSpbuRedApp = new createFormSpbuRedApp(document.querySelector(".main"), str);
+			formSpbuRedApp.generateForm();
+			formSpbuRedApp.generateBtnHandler();
 
+			const sbmtHandler = new spbuSubmitProcessor(formSpbuRedApp);
+		
+			/*
 			const formSpbu = new createFormSpbu(document.querySelector(".main"), str);
 			formSpbu.generateForm();
 			formSpbu.generateBtnHandler();
 
 			const sbmtHandler = new spbuSubmitProcessor(formSpbu);
+			*/
 	});
 
 	let menuLoko = document.querySelector(".menu").children[3];
@@ -222,7 +241,10 @@ function clickLogout() {
 						<div class="subContent" id="sub2">
 							<div class="title">Silahkan Pilih Timbangan/UTTP</div>  
 							<div class="shopChart"></div>
-							<div class="addDiv">+<p id="klik">Klik disini</p></div>
+							<div class="addUttp">
+								<div class="addDiv">+<p id="klik">Klik disini</p></div>
+								<div class="addDiv qrDivLoko"></div>
+							</div>
 							<div class="backBtnDiv">
 								<form><input type="button" name="back" id="back" value="Back.."></form>
 								<form><input type="button" name="sbmt" id="sbmt" value="Submit"></form>
@@ -232,14 +254,36 @@ function clickLogout() {
 						<datalist id="perushLoko"></datalist>
 					</div>
 					<div class="uttpDiv hidden"></div>					
-					<div class="jmlhDiv hidden"><h1>Jumlah : </h1>
+					<div class="jmlhDiv hidden">
 						<form class="spe">
+							<input type="text" class="form_data" name="uttp" id="uttp" readonly>
+							<input type="text" class="form_data" name="kap" id="kap" readonly>
+							<input type="text" class="form_data" name="d" id="d" readonly>
 							<input type="number" class="form_data" name="jml" id="jml" placeholder="jumlah..">
+							<input type="text" class="form_data" name="merk" id="merk" placeholder="merk">
+							<input type="text" class="form_data" name="tipe" id="tipe" placeholder="tipe/model">
+							<input type="text" class="form_data" name="sn" id="sn" placeholder="no seri">
+							<input type="text" class="form_data" name="buatan" id="buatan" placeholder="buatan">
 							<input type="button" class="form_data" name="setJml" id="setJml" value="Tambahkan ke keranjang">
 						</form>
 						<p style="text-align : right;"><a class="closeFormJml" href=#><span>x</span> Close</a></div></p>
 					</div>`;
-		
+
+		const formLokoRedApp = new createFormLokoRedApp(document.querySelector(".main"), str);
+		formLokoRedApp.generateForm();
+		/*
+		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][3]']
+		formLokoRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]}</legend></fieldset></div>`;
+		*/
+	
+		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][0]', 'this.list[k][1]', 'this.list[k][2]']
+		formLokoRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]} ${args[4]}</legend></fieldset></div>`;
+
+		formLokoRedApp.generateBtnHandler();
+
+		const sbmtHandler = new lokoSubmitProcessor(formLokoRedApp);
+		sbmtHandler.setApi();						
+		/*
 		const formLoko = new createFormLoko(document.querySelector(".main"), str);
 		formLoko.generateForm();
 		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][3]']
@@ -247,6 +291,7 @@ function clickLogout() {
 		formLoko.generateBtnHandler();
 
 		const sbmtHandler = new lokoSubmitProcessor(formLoko);
+		*/
 	});
 
 })();

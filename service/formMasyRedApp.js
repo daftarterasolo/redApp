@@ -143,6 +143,11 @@ export class createFormMasyRedApp {
 			document.getElementById("uttp").value = `${this.list[e.id][3]} ${this.list[e.id][1]}`;
 			document.getElementById("kap").value = this.list[e.id][1];
 			document.getElementById("d").value = this.list[e.id][2];
+			if (this.list[e.id][0] === "TE" || this.list[e.id][0] === "TP") {
+				document.getElementById("kap").removeAttribute("readonly");
+				document.getElementById("d").removeAttribute("readonly");
+
+			}
 			//console.log(this.list[e.id]);
 			//console.log(document.getElementById(e.id).children[0].children[0].textContent);
 		}));

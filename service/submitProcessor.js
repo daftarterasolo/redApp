@@ -19,7 +19,8 @@ export class masySubmitProcessor extends submitProcessor {
 		super(constructor);
 		this.#obj = obj;
 		this.#detectIfSubmitClicked();
-		this.#api = "https://script.google.com/macros/s/AKfycbxCRpIT-PAtmRHksjns4-xHEraWMc9fC8MT9dYHMEYsv9zr1jCqfmYQIB7sZYxsii-MyA/exec";
+		//this.#api = "https://script.google.com/macros/s/AKfycbxCRpIT-PAtmRHksjns4-xHEraWMc9fC8MT9dYHMEYsv9zr1jCqfmYQIB7sZYxsii-MyA/exec";
+		this.#api = "https://script.google.com/macros/s/AKfycbwIrVmzY6jI9YiNEAtlepkZijgpXM8PdeLo2tkrLmWw2Ay8QGZIimaKqC7tdqapR7KdCg/exec";
 		this.#authData = {
 			'id' : sessionStorage.getItem('id'),
 			'token' : sessionStorage.getItem('key')
@@ -53,7 +54,7 @@ export class masySubmitProcessor extends submitProcessor {
 	}
 
 	showConfirmation(msg, respon) {
-		alert(`${msg}\nNomor Daftar Ulang Anda : ${respon}\nSilahkan memperlihatkan Nomor Daftar Ulang Anda Kepada Petugas Pendaftar untuk dikonfirmasi.`);
+		alert(`${msg}\nNomor Order Anda : ${respon}`);
 	}
 
 	//#afterEntryDataSuccess(msg) 
@@ -107,6 +108,7 @@ export class masySubmitProcessor extends submitProcessor {
 
 	#detectIfSubmitClicked() {
 		document.getElementById('sbmt').addEventListener('click', e => {
+			
 			try {
 				this.get_checkIfDataToSendIsEmpty;
 				this.#checkIfdataFormIsEmpty();
@@ -130,7 +132,8 @@ export class masySubmitProcessor extends submitProcessor {
 export class pabrikSubmitProcessor extends masySubmitProcessor {
 	setApi() {
 		//this.set_api = "https://script.google.com/macros/s/AKfycbw_qgL6gQ461xKUFwXw44Si-iEzpGjszAvqOh7ofHDG53dVbzbq3qVmtMMz--Pg9qh6Tw/exec";
-		this.set_api = "https://script.google.com/macros/s/AKfycbzeGmp6XlXfcBukHiONXuKY6irpxH80LdnKetp9Uz4rBUGLMu_4R5aFs2j-KIwJRqa9Xg/exec";
+		//this.set_api = "https://script.google.com/macros/s/AKfycbzeGmp6XlXfcBukHiONXuKY6irpxH80LdnKetp9Uz4rBUGLMu_4R5aFs2j-KIwJRqa9Xg/exec";
+		this.set_api = "https://script.google.com/macros/s/AKfycbzPLcHfi-0045oSzHsqVCFV_hSft7VZOeUzCFW8NRq3U63-ez6hYt8RubUx66Pf6DfnkA/exec";
 	}
 
 	//override method showConfirmation in parent class
@@ -142,7 +145,9 @@ export class pabrikSubmitProcessor extends masySubmitProcessor {
 }
 
 export class lokoSubmitProcessor extends masySubmitProcessor {
-
+	setApi() {
+		this.set_api = "https://script.google.com/macros/s/AKfycbzCVJdosncho6zPDd-l-m4YJcCaLf6s8P5bcOtRGi3MfLHX3xBQvzXJgbb3PxIS1Qnj/exec";
+	}
 }
 
 export class spbuSubmitProcessor extends masySubmitProcessor {

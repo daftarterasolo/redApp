@@ -107,7 +107,8 @@ div.backMenu {
 }
 
 div.backMenu a {
-    color : #ed2939;
+    /*color : #ed2939;*/
+    color : #000000;
     text-decoration: none;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
@@ -165,7 +166,8 @@ div.captionMenu {
 }
 
 .credits p {
-    color: #38C;
+    /*color: #38C;*/
+    color : #000000;
     font-weight: 700;
     font-size: 11px;
     margin-bottom: 0px;
@@ -251,7 +253,8 @@ legend.legendTitle {
     font-size: 10px;
     font-weight:600;
     font-family: 'Montserrat';
-    color : #ed2939;
+    /*color : #ed2939;*/
+    color : #000000;
     /*border: 1px solid black;*/
 }
 /*
@@ -441,6 +444,25 @@ legend.legendTitle {
     border: 4px solid #92DFF3;
 }
 
+.nozzDiv {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color : #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+}
+
+/*
+.nozzLabel {
+    color : #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    size: 14px;
+}
+*/
+
 #setJml {
     background-color: #000000;
     margin-top: 10px;
@@ -557,6 +579,12 @@ legend.legendTitle {
 .qrDiv {
     background-image: url("img/qr-code.png");
     background-size: contain;
+}
+
+.qrDivLoko {
+    background-image: url("img/scan-code.png");
+    background-size: contain;
+    opacity: 1;
 }
 
 .backBtnDiv {
@@ -799,9 +827,9 @@ div.judl {
     text-align: right;
 }
 
-.shopChart table thead td {
-    
-    background-color: #ff6565;
+.shopChart table thead td { 
+    /*background-color: #ff6565;*/
+    background-color: #00A619;
     font-weight: bolder;
     color : #FFFFFF;
     text-align: center;
