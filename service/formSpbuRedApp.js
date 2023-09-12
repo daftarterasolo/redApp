@@ -1,6 +1,7 @@
 import { createFormPabrik } from './formPabrik.js';
 //import { createFormMasy } from './formMasy.js';
-import { getSpbu } from '../util/utilFunc.js';
+//import { getSpbu } from '../util/utilFunc.js';
+import { getSpbuOptions } from '../util/utilFunc.js';
 
 export class createFormSpbuRedApp extends createFormPabrik {
 	#spbuData = [];
@@ -20,7 +21,8 @@ export class createFormSpbuRedApp extends createFormPabrik {
 
 	//method load nama-nama spbu utk dijalankan pd method generateForm()
 	async #loadSpbu() {
-		document.getElementById("spbu") != null ? this.#spbuData = await getSpbu() : '';
+		//document.getElementById("spbu") != null ? this.#spbuData = await getSpbu() : '';
+		document.getElementById("nama") != null ? this.#spbuData = await getSpbuOptions() : '';
 	}
 
 	//Override setLoadingBarColor() from parent class
@@ -60,7 +62,25 @@ export class createFormSpbuRedApp extends createFormPabrik {
                     body : JSON.stringify({'spbu' : e.target.value}) 
                 })
                 .then(e => e.json())
-                .then(e => console.log(e));
+                .then(e => {
+					console.log(e);
+					switch (e.result) {
+						case 'error':
+							document.querySelector(".nozzDiv").innerHTML = "Error";		
+							break;
+						
+						default:
+							let str = '';
+							for (let k of e.uttp) {
+								str += `<div>
+								<input type="checkbox" id="scales" name="scales"/>
+								<label class="nozzLabel" for="scales">[${k[1]}.${k[3]}] [${k[4]}/${k[5]}/${k[6]}] [${k[7]}] [${k[8]}}]</label>
+								</div>`;
+							}
+							document.querySelector(".nozzDiv").innerHTML = str;			
+					}
+
+				});
             });    
         }
     }

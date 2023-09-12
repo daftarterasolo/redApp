@@ -448,11 +448,19 @@ legend.legendTitle {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content:flex-start;
+    align-items:flex-start;
     color : #FFFFFF;
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
+}
+
+.nozzDiv:nth-child(even) {
+    text-align: left;
+}
+
+.nozzDiv:nth-child(odd) {
+    text-align: left;
 }
 
 /*

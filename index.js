@@ -164,7 +164,9 @@ function clickLogout() {
 						<div class="subContent" id="sub1">
 							<div class="title">Silahkan isi data Anda</div>
 							<form>
-								<input type="text" class="form_data" name="nama" id="nama" list="spbu" placeholder="Masukkan nama SPBU">
+								<!--<input type="text" class="form_data" name="nama" id="nama" list="spbu" placeholder="Masukkan nama SPBU">-->
+								<select class="form_data" name="nama" id="nama">
+								</select>
 								<textarea  class="form_data" name="alamat" id="alamat" rows="4" cols="10" placeholder="Masukkan alamat SPBU"></textarea>  
 								<input type="text" class="form_data" name="kel" id="kel" list="kelurahan" placeholder="Masukkan kelurahan">  
 								<input type="number" class="form_data" name="wa" id="wa" placeholder="Nomor HP/Whatsapp">
@@ -176,6 +178,7 @@ function clickLogout() {
 							<!--<form>-->
 							<!--<input type="number" class="form_data" name="jml_nozzle" id="jml_nozzle" placeholder="Masukkan Jumlah Nozzle">-->
 							<div class="nozzDiv">
+								<!--
 								<div>
 									<input type="checkbox" id="scales" name="scales" checked />
 									<label class="nozzLabel" for="scales">Scales</label>
@@ -184,6 +187,7 @@ function clickLogout() {
 									<input type="checkbox" id="horns" name="horns" />
 									<label class="nozzLabel" for="horns">Horns</label>
 								</div>
+								-->
 							</div>
 							<!--</form>-->
 							<!--							
