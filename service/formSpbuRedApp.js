@@ -63,7 +63,6 @@ export class createFormSpbuRedApp extends createFormPabrik {
                 })
                 .then(e => e.json())
                 .then(e => {
-					console.log(e);
 					switch (e.result) {
 						case 'error':
 							document.querySelector(".nozzDiv").innerHTML = "Error";		
@@ -71,10 +70,11 @@ export class createFormSpbuRedApp extends createFormPabrik {
 						
 						default:
 							let str = '';
-							for (let k of e.uttp) {
+							for (let [i,k] of e.uttp.entries()) {
+								console.log(e.uttp[i]);
 								str += `<div>
-								<input type="checkbox" id="scales" name="scales"/>
-								<label class="nozzLabel" for="scales">[${k[1]}.${k[3]}] [${k[4]}/${k[5]}/${k[6]}] [${k[7]}] [${k[8]}}]</label>
+								<input type="checkbox" class="nozzCheck" id="${i}" name="${i}" value="${i}"/>
+								<label class="nozzLabel" for="${i}">[${k[1]}.${k[3]}] [${k[4]}/${k[5]}/${k[6]}] [${k[7]}] [${k[8]}}]</label>
 								</div>`;
 							}
 							document.querySelector(".nozzDiv").innerHTML = str;			
@@ -84,6 +84,15 @@ export class createFormSpbuRedApp extends createFormPabrik {
             });    
         }
     }
+
+	whenCheckBoxChecked() {
+		const elem = document.querySelectorAll(".nozzCheck");
+		if (elem !== null) {
+			elem.addEventListener("click", e => {
+				console.log("clicked");
+			});	
+		}
+	}
 
 	get get_dataForm() {
 		this.#dataForm['nama'] = document.getElementById('nama').value;

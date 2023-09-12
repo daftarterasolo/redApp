@@ -218,6 +218,7 @@ function clickLogout() {
 			formSpbuRedApp.generateForm();
 			formSpbuRedApp.generateBtnHandler();
 			formSpbuRedApp.whenSpbuChange();
+			formSpbuRedApp.whenCheckBoxChecked();
 
 			const sbmtHandler = new spbuSubmitProcessor(formSpbuRedApp);
 		
