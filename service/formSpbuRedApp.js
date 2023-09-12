@@ -6,7 +6,7 @@ import { getSpbuOptions } from '../util/utilFunc.js';
 export class createFormSpbuRedApp extends createFormPabrik {
 	#spbuData = [];
 	#dataForm = {};
-	#dataToSend = [];
+	#spbuDetails = [];
 
 	//new method
 	#setCSSSpbu() {
@@ -31,16 +31,18 @@ export class createFormSpbuRedApp extends createFormPabrik {
 		document.querySelectorAll(".lds-facebook div").forEach(el => el.style.background = "#432616");
 	}
 
+	/*
 	#setDataToSend() {
 		this.set_dataToSend = {1 : ['PUBBM','','','','','']};
 	}
+	*/
 
 	//override method generateForm() from parent class
 	async generateForm() {
 		await super.generateForm();
 		this.#setCSSSpbu();
 		await this.#loadSpbu();
-		this.#setDataToSend();
+		//this.#setDataToSend();
 	}
 
 	//override determineDataSrc() from parent class
@@ -64,6 +66,8 @@ export class createFormSpbuRedApp extends createFormPabrik {
                 })
                 .then(e => e.json())
                 .then(e => {
+					//console.log(e.uttp);
+					this.#spbuDetails = e.uttp;
 					switch (e.result) {
 						case 'error':
 							document.querySelector(".nozzDiv").innerHTML = "Error";		
@@ -72,10 +76,10 @@ export class createFormSpbuRedApp extends createFormPabrik {
 						default:
 							let str = '';
 							for (let [i,k] of e.uttp.entries()) {
-								console.log(e.uttp[i]);
+								//console.log(e.uttp[i]);
 								str += `<div>
 								<input type="checkbox" class="nozzCheck" id="${i}" name="${i}" value="${i}"/>
-								<label class="nozzLabel" for="${i}">[${k[1]}.${k[3]}] [${k[4]}/${k[5]}/${k[6]}] [${k[7]}] [${k[8]}}]</label>
+								<label class="nozzLabel" for="${i}">[${k[1]}.${k[3]}][${k[4]}/${k[5]}/${k[6]}][${k[7]}][${k[8]}]</label>
 								</div>`;
 							}
 							document.querySelector(".nozzDiv").innerHTML = str;
@@ -87,13 +91,16 @@ export class createFormSpbuRedApp extends createFormPabrik {
         }
     }
 
+	
 	#whenCheckBoxChecked() {
 		const elem = document.querySelectorAll(".nozzCheck");
 		
 		for (let k of elem) {
 			k.addEventListener("click", e => {
-				e.currentTarget.checked === true ? console.log("yes") : console.log("no");
+				e.currentTarget.checked === true ? this.constructor.dataToSend[e.currentTarget.value] = this.#spbuDetails[e.currentTarget.value] : delete this.constructor.dataToSend[e.currentTarget.value];
 
+				console.log(this.get_dataToSend);
+				console.log(this.get_dataForm);
 			});
 		}
 	}
@@ -107,10 +114,10 @@ export class createFormSpbuRedApp extends createFormPabrik {
 		return this.#dataForm;
 	}
 
-	get get_dataToSend() {
+	/*get get_dataToSend() {
 		this.constructor.dataToSend[1][5] = document.getElementById('jml_nozzle').value;
 		return this.constructor.dataToSend;
-	}
+	}*/
 
 	
 }
