@@ -174,7 +174,10 @@ function clickLogout() {
 							</form>
 						</div>
 						<div class="subContent" id="sub2">
-							<div class="title">Pilih Nozzle</div> 
+							<div class="title">
+								Pilih Nozzle<br>
+								<span>Periksa Jenis Cairan, Merk, dan No. Seri</span>
+							</div> 
 							<!--<form>-->
 							<!--<input type="number" class="form_data" name="jml_nozzle" id="jml_nozzle" placeholder="Masukkan Jumlah Nozzle">-->
 							<div class="nozzDiv">
@@ -221,6 +224,7 @@ function clickLogout() {
 			//formSpbuRedApp.whenCheckBoxChecked();
 
 			const sbmtHandler = new spbuSubmitProcessor(formSpbuRedApp);
+
 		
 			/*
 			const formSpbu = new createFormSpbu(document.querySelector(".main"), str);

@@ -108,7 +108,6 @@ export class masySubmitProcessor extends submitProcessor {
 
 	#detectIfSubmitClicked() {
 		document.getElementById('sbmt').addEventListener('click', e => {
-			
 			try {
 				this.get_checkIfDataToSendIsEmpty;
 				this.#checkIfdataFormIsEmpty();
@@ -150,16 +149,109 @@ export class lokoSubmitProcessor extends masySubmitProcessor {
 	}
 }
 
-export class spbuSubmitProcessor extends masySubmitProcessor {
-	
-	#checkIfJmlEmpty() {
-		if (document.getElementById('jml_nozzle').value === '') {
-			throw Error('Jumlah PUBBM belum diisi, silahkan isi terlebih dahulu.');
-		} 
+export class spbuSubmitProcessor extends submitProcessor {
+	#obj;
+	#api;
+	#authData;
+
+	constructor(obj) {
+		super(constructor);
+		this.#obj = obj;
+		this.#detectIfSubmitClicked();
+		this.#api = "https://script.google.com/macros/s/AKfycbwIrVmzY6jI9YiNEAtlepkZijgpXM8PdeLo2tkrLmWw2Ay8QGZIimaKqC7tdqapR7KdCg/exec";
+		this.#authData = {
+			'id' : sessionStorage.getItem('id'),
+			'token' : sessionStorage.getItem('key')
+		};
 	}
-	
-	//Override getter method in parent class
+
+	#checkIfDataToSendIsEmpty() {
+		if (Object.keys(this.#obj.get_dataToSend).length === 0) {
+			throw new Error("Anda belum memilih nozzle yang akan ditera...Silahkan pilih nozzle dahulu.");
+		}
+	}	
+
+	#checkIfdataFormIsEmpty() {
+		let dat = this.#obj.get_dataForm; 
+		if (dat['nama'] === "" || dat['alamat'] === "" || dat['kel'] === "") {
+			throw new Error("Anda belum mengisi data identitas dengan lengkap....Silahkan klik tanda tombol 'Back' untuk melengkapi data identitas.");
+		}
+
+		if (dat['wa'] === "") {
+			document.getElementById('wa').value = "62";
+		}
+
+	}
+
 	get get_checkIfDataToSendIsEmpty() {
-		return this.#checkIfJmlEmpty();
+		return this.#checkIfDataToSendIsEmpty();
 	}
-}
+
+	#resetFormIdentitas() {
+		document.getElementById('sub1').children[1].reset();
+	}
+
+	#afterEntryDataSuccess() {
+		this.#obj.set_dataToSend = {};
+		this.#obj.set_shopChartTemp = [];
+		this.#resetFormIdentitas();	
+		//this.#deleteTableShopChart();
+	}
+
+	#ifEntryDataFail(msg) {
+		alert(msg);
+	}
+	
+	async #entryTheData() {
+		
+		let dataComplete = {
+			'dataForm' : this.#obj.get_dataForm,
+			'dataToSend' : this.#obj.get_dataToSend,
+			'authData' : this.#authData 
+		}
+
+		//console.log('Melakukan entry data ... ');
+		document.querySelector('.loadingBar').style.display = "block";
+		try {
+			await fetch(this.#api, {
+				method : "POST",
+				body : JSON.stringify(dataComplete)
+			})
+			.then(e => e.json())
+			.then(e => {
+				document.querySelector('.loadingBar').style.display = "none";
+				setTimeout(() => {},1000);
+				//e.result === 'success' ? this.#afterEntryDataSuccess(e.msg) : this.#ifEntryDataFail(e.msg);
+				switch(e.result) {
+					case 'success':
+						this.#afterEntryDataSuccess();
+						this.showConfirmation(e.msg, e.data);
+						break;
+					default:
+						this.#ifEntryDataFail(e.msg);
+				}
+			});
+		}
+		catch(err) {
+			document.querySelector('.loadingBar').style.display = "none";
+			this.#ifEntryDataFail(`Entri Data Gagal. Error  :::  ${err}`);
+		}
+		
+	}
+
+	#detectIfSubmitClicked() {
+		document.getElementById('sbmt').addEventListener('click', e => {
+			console.log("submit");
+			try {
+				this.get_checkIfDataToSendIsEmpty;
+				this.#checkIfdataFormIsEmpty();
+				this.#entryTheData();
+			}
+			catch(e) {
+				alert(e);
+			}
+		});
+	}
+
+
+}	

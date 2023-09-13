@@ -77,9 +77,9 @@ export class createFormSpbuRedApp extends createFormPabrik {
 							let str = '';
 							for (let [i,k] of e.uttp.entries()) {
 								//console.log(e.uttp[i]);
-								str += `<div>
+								str += `<div class="itemNozz">
 								<input type="checkbox" class="nozzCheck" id="${i}" name="${i}" value="${i}"/>
-								<label class="nozzLabel" for="${i}">[${k[1]}.${k[3]}][${k[4]}/${k[5]}/${k[6]}][${k[7]}][${k[8]}]</label>
+								<label class="nozzLabel" for="${i}">${k[1]}.${k[3]} - ${k[7]}<br>${k[4]}<br>${k[5]}<br>${k[6]}<br>${k[8]}</label>
 								</div>`;
 							}
 							document.querySelector(".nozzDiv").innerHTML = str;
@@ -114,10 +114,10 @@ export class createFormSpbuRedApp extends createFormPabrik {
 		return this.#dataForm;
 	}
 
-	/*get get_dataToSend() {
-		this.constructor.dataToSend[1][5] = document.getElementById('jml_nozzle').value;
+	get get_dataToSend() {
+		//this.constructor.dataToSend[1][5] = document.getElementById('jml_nozzle').value;
 		return this.constructor.dataToSend;
-	}*/
+	}
 
 	
 }

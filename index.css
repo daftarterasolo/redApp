@@ -414,7 +414,7 @@ legend.legendTitle {
 }
 
 .subContent .title {
-    height : 10%;
+    height : auto;
     width: 100%;
     position: relative;
     background-color: orangered;
@@ -422,7 +422,12 @@ legend.legendTitle {
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
     padding-top: 8px;
+    padding-bottom: 8px;
     opacity: 1;
+}
+
+.subContent .title span {
+    font-size: 14px;
 }
 
 .form_data {
@@ -446,13 +451,29 @@ legend.legendTitle {
 
 .nozzDiv {
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content:flex-start;
-    align-items:flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items:center;
     color : #FFFFFF;
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
+    gap : 5px;
+}
+
+.itemNozz {
+    width : 120px;
+    height : 120px;
+    background : rgba(34,48,60, 1);
+    border : 1px solid #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items:self-start;
+    padding-left: 5px;
+}
+
+.nozzCheck {
+    display: block;
 }
 
 .nozzDiv:nth-child(even) {
