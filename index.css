@@ -463,7 +463,7 @@ legend.legendTitle {
 
 .itemNozz {
     width : 120px;
-    height : 120px;
+    height : 130px;
     background : rgba(34,48,60, 1);
     border : 1px solid #FFFFFF;
     display: flex;
@@ -485,12 +485,17 @@ legend.legendTitle {
 }
 
 /*
-.nozzLabel {
-    color : #FFFFFF;
-    font-family: 'Poppins', sans-serif;
-    size: 14px;
+.pNozz {
+    width: 100%;
+    word-wrap: break-word;
 }
 */
+
+.nozzLabel {
+    width: 100%;
+    word-wrap: break-word;
+}
+
 
 #setJml {
     background-color: #000000;

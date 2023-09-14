@@ -212,6 +212,7 @@ export class spbuSubmitProcessor extends submitProcessor {
 
 		//console.log('Melakukan entry data ... ');
 		document.querySelector('.loadingBar').style.display = "block";
+		console.log(dataComplete);
 		try {
 			await fetch(this.#api, {
 				method : "POST",

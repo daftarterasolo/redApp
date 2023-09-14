@@ -80,6 +80,7 @@ export class createFormSpbuRedApp extends createFormPabrik {
 								str += `<div class="itemNozz">
 								<input type="checkbox" class="nozzCheck" id="${i}" name="${i}" value="${i}"/>
 								<label class="nozzLabel" for="${i}">${k[1]}.${k[3]} - ${k[7]}<br>${k[4]}<br>${k[5]}<br>${k[6]}<br>${k[8]}</label>
+								<!--<p class="pNozz" id="${i}">${k[1]}.${k[3]} - ${k[7]}<br>${k[4]}<br>${k[5]}<br>${k[6]}<br>${k[8]}</p>-->
 								</div>`;
 							}
 							document.querySelector(".nozzDiv").innerHTML = str;
@@ -99,8 +100,8 @@ export class createFormSpbuRedApp extends createFormPabrik {
 			k.addEventListener("click", e => {
 				e.currentTarget.checked === true ? this.constructor.dataToSend[e.currentTarget.value] = this.#spbuDetails[e.currentTarget.value] : delete this.constructor.dataToSend[e.currentTarget.value];
 
-				console.log(this.get_dataToSend);
-				console.log(this.get_dataForm);
+				//console.log(this.get_dataToSend);
+				//console.log(this.get_dataForm);
 			});
 		}
 	}
