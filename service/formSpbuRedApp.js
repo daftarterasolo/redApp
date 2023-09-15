@@ -60,8 +60,9 @@ export class createFormSpbuRedApp extends createFormPabrik {
         let nama = document.getElementById("nama");
         if (nama !== null) {
             nama.addEventListener("input", async e => {
-                await fetch("https://script.google.com/macros/s/AKfycbyCpjyzGYCXOTSQSHdEZazH33t1sqGUm967ML_U2EeK0nH36rFAFm-8NxjEvvmNu6I/exec", {
-                    method : 'POST',
+                //await fetch("https://script.google.com/macros/s/AKfycbyCpjyzGYCXOTSQSHdEZazH33t1sqGUm967ML_U2EeK0nH36rFAFm-8NxjEvvmNu6I/exec", {
+				await fetch("https://script.google.com/macros/s/AKfycbyL17RDGB7B1QOKeyuhnj0ZjSl8Klj0pCTK0lMJSnL2rukmG-T0dUu068YavpxzGHs/exec", {
+					method : 'POST',
                     body : JSON.stringify({'spbu' : e.target.value}) 
                 })
                 .then(e => e.json())
@@ -100,7 +101,7 @@ export class createFormSpbuRedApp extends createFormPabrik {
 			k.addEventListener("click", e => {
 				e.currentTarget.checked === true ? this.constructor.dataToSend[e.currentTarget.value] = this.#spbuDetails[e.currentTarget.value] : delete this.constructor.dataToSend[e.currentTarget.value];
 
-				//console.log(this.get_dataToSend);
+				console.log(this.get_dataToSend);
 				//console.log(this.get_dataForm);
 			});
 		}

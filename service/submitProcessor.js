@@ -158,7 +158,9 @@ export class spbuSubmitProcessor extends submitProcessor {
 		super(constructor);
 		this.#obj = obj;
 		this.#detectIfSubmitClicked();
-		this.#api = "https://script.google.com/macros/s/AKfycbwIrVmzY6jI9YiNEAtlepkZijgpXM8PdeLo2tkrLmWw2Ay8QGZIimaKqC7tdqapR7KdCg/exec";
+		//this.#api = "https://script.google.com/macros/s/AKfycbwIrVmzY6jI9YiNEAtlepkZijgpXM8PdeLo2tkrLmWw2Ay8QGZIimaKqC7tdqapR7KdCg/exec";
+		this.#api = "https://script.google.com/macros/s/AKfycbzMsoxJDvgram8ioXUxz-o2T0kQz_tYzDZfNvB5MvkytZuVCOHPZoZ8yp6txYJvootK8g/exec";
+
 		this.#authData = {
 			'id' : sessionStorage.getItem('id'),
 			'token' : sessionStorage.getItem('key')
@@ -202,6 +204,10 @@ export class spbuSubmitProcessor extends submitProcessor {
 		alert(msg);
 	}
 	
+	showConfirmation(msg, respon) {
+		alert(`${msg}\nNomor Order Anda : ${respon}`);
+	}
+
 	async #entryTheData() {
 		
 		let dataComplete = {
