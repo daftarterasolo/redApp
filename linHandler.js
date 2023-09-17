@@ -28,11 +28,12 @@ function pageRedirect() {
 		const logIn = new lgin(document.getElementById("uname").value, document.getElementById("pass").value);
 		setSubmitBtn();
 		let loginResult = await logIn.doIn();
+		//console.log(loginResult);
 		if (loginResult.result === "error") {
 			document.querySelector(".alert").classList.remove("hidden");
 			document.getElementById("spanAlert").innerHTML = loginResult.data;
 		} else {
-			new setSession(loginResult.id, loginResult.data);
+			new setSession(loginResult.id, loginResult.data, loginResult.fname);
 			pageRedirect();
 		}
 		setBackSubmitBtn();

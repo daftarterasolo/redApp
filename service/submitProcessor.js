@@ -191,6 +191,11 @@ export class spbuSubmitProcessor extends submitProcessor {
 
 	#resetFormIdentitas() {
 		document.getElementById('sub1').children[1].reset();
+		//document.querySelector('nozzDiv').innerHTML = "";
+	}
+
+	#del_nozzDivContent() {
+		document.querySelector('.nozzDiv').innerHTML = "";
 	}
 
 	#afterEntryDataSuccess() {
@@ -238,6 +243,7 @@ export class spbuSubmitProcessor extends submitProcessor {
 						this.#ifEntryDataFail(e.msg);
 				}
 			});
+			this.#del_nozzDivContent();
 		}
 		catch(err) {
 			document.querySelector('.loadingBar').style.display = "none";

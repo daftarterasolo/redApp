@@ -348,6 +348,30 @@ legend.legendTitle {
     
 }
 
+.scanDiv {
+    width: 95%;
+    height : 90%;
+    position: absolute;
+    /*left : 4.25%;*/
+    background-color: #000000;
+    top : 20px;
+    border-radius: 6px;
+    opacity: 1;
+    border: 3px solid #FFFFFF;
+    padding : 5px;
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    
+    justify-content: space-between;
+    overflow : auto;
+    scrollbar-color: #38c red;
+}
+
+.scanDiv.hidden {
+    display : none;	
+}
+
 .jmlhDiv {
     width: 95%;
     height : 90%;
@@ -673,10 +697,14 @@ li {
 }
 
 a {
-    color : #afd5e2;
+    color : #38C;
     font-size: 11px;
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
+}
+
+a#logout {
+    color : #afd5e2;
 }
 
 .listFieldset {

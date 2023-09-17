@@ -37,11 +37,24 @@ export class createFormSpbuRedApp extends createFormPabrik {
 	}
 	*/
 
+	/*
+	async #showLoadingWhenSpbuSelect(logic) {
+		document.getElementById("nama").addEventListener("change", async e => {
+			console.log(e.target.value);	
+			await this.whenSpbuChange();
+			console.log("selesai");
+		});
+		//this.setLoadingBarColor();
+		//logic === true ? document.querySelector(".ld1").classList.remove("hidden") : document.querySelector(".ld1").classList.add("hidden");
+	}
+	*/
+
 	//override method generateForm() from parent class
 	async generateForm() {
 		await super.generateForm();
 		this.#setCSSSpbu();
 		await this.#loadSpbu();
+		//this.#showLoadingWhenSpbuSelect(true);
 		//this.#setDataToSend();
 	}
 
@@ -60,6 +73,7 @@ export class createFormSpbuRedApp extends createFormPabrik {
         let nama = document.getElementById("nama");
         if (nama !== null) {
             nama.addEventListener("input", async e => {
+				document.querySelector(".ld1").classList.remove("hidden");
                 //await fetch("https://script.google.com/macros/s/AKfycbyCpjyzGYCXOTSQSHdEZazH33t1sqGUm967ML_U2EeK0nH36rFAFm-8NxjEvvmNu6I/exec", {
 				await fetch("https://script.google.com/macros/s/AKfycbyL17RDGB7B1QOKeyuhnj0ZjSl8Klj0pCTK0lMJSnL2rukmG-T0dUu068YavpxzGHs/exec", {
 					method : 'POST',
@@ -89,6 +103,8 @@ export class createFormSpbuRedApp extends createFormPabrik {
 					}
 
 				});
+				document.querySelector(".ld1").classList.add("hidden")
+				//console.log('selesai');
             });    
         }
     }

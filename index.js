@@ -6,19 +6,23 @@ import { createFormSpbuRedApp } from './service/formSpbuRedApp.js';
 //import { createFormLoko } from './service/formLoko.js';
 import { createFormLokoRedApp } from './service/formLokoRedApp.js';
 import { masySubmitProcessor, pabrikSubmitProcessor, lokoSubmitProcessor, spbuSubmitProcessor } from './service/submitProcessor.js';
-import { checkTheLocalSession, lout } from './service/login.js';
+//import { checkTheLocalSession, lout } from './service/login.js';
+import { siapkanKamera } from './util/siapkanKamera.js';
 
+/*
 function pageRedirect() {
 	window.location.replace("login.html");
 }
 
 function setIdTitle() {
-	document.getElementById("idUser").innerHTML = sessionStorage.getItem('id');
+	//document.getElementById("idUser").innerHTML = sessionStorage.getItem('id');
+	document.getElementById("idUser").innerHTML = sessionStorage.getItem('fname');
 }
 
 function removeSession() {
 	sessionStorage.removeItem('id');
 	sessionStorage.removeItem('key');
+	sessionStorage.removeItem('fname');
 }
 
 function clickLogout() {
@@ -29,11 +33,13 @@ function clickLogout() {
 		pageRedirect();
 	});
 }
-
+*/
 (function main() {
+	/*
 	new checkTheLocalSession().getStatus === true ? setIdTitle() : pageRedirect();
 
 	clickLogout();
+	*/
 	
 	let menuMsy = document.querySelector(".menu").children[1];
 
@@ -64,6 +70,9 @@ function clickLogout() {
 						<datalist id="kelurahan"></datalist>
 					</div>
 					<div class="uttpDiv hidden"></div>					
+					<div class="scanDiv">
+						<video id="video" autoplay style="max-width : 100%; max-height : 100%;"></video>
+					</div>
 					<div class="jmlhDiv hidden">
 						<form class="spe">
 							<input type="text" class="form_data" name="uttp" id="uttp" readonly>

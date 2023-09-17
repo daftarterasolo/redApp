@@ -12,7 +12,8 @@ export class lgin extends signIn {
 	constructor(emanu, sapp) {
 		super(constructor);
 		//this.#api = "https://script.google.com/macros/s/AKfycbyUVM-nfIp4r0rWaAuLmN9hpQ8riac03l3XKEU5rfIzsgNM0WkVI2IHGoolo0pKNsL2/exec";
-		this.#api = "https://script.google.com/macros/s/AKfycbzLEUuVBFj8YyojHk9uCCCt7TVExmODyOE3F8GJtSmsnBvu4JDVsx2gAsylc6168H9MaQ/exec";
+		//this.#api = "https://script.google.com/macros/s/AKfycbzLEUuVBFj8YyojHk9uCCCt7TVExmODyOE3F8GJtSmsnBvu4JDVsx2gAsylc6168H9MaQ/exec";
+		this.#api = "https://script.google.com/macros/s/AKfycbzsvJbmv2qaeJDm4ROtlzyxg-ULBqHixaTjgnD74mzXHy-lPLgE9WZ-heor1MmrRI4SSg/exec";
 		this.#lData = {
 			'emanu' : emanu,
 			'sapp' : sapp
@@ -72,15 +73,18 @@ export class checkTheLocalSession {
 export class setSession {
 	#id;
 	#key;
-	constructor(id, key) {
+	#fname;
+	constructor(id, key, fname) {
 		this.#id = id;
 		this.#key = key;
+		this.#fname = fname;
 		this.#doSet();
 	}
 
 	#doSet() {
 		sessionStorage.setItem("id", this.#id);
 		sessionStorage.setItem("key", this.#key);	
+		sessionStorage.setItem("fname", this.#fname);
 	}
 }
 
