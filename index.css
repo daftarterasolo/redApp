@@ -362,10 +362,15 @@ legend.legendTitle {
     display: flex;
     flex-direction:row;
     flex-wrap: wrap;
-    
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     overflow : auto;
     scrollbar-color: #38c red;
+}
+
+#video {
+    height : 90%;
+    width: 60%;
 }
 
 .scanDiv.hidden {
