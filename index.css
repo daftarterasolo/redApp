@@ -349,13 +349,13 @@ legend.legendTitle {
 }
 
 .scanDiv {
-    width: 95%;
+    width: 96%;
     height : 90%;
-    position: absolute;
+    position:absolute;
     /*left : 4.25%;*/
     background-color: #000000;
     top : 20px;
-    border-radius: 6px;
+    /*border-radius: 6px;*/
     opacity: 1;
     border: 3px solid #FFFFFF;
     padding : 5px;
@@ -368,9 +368,14 @@ legend.legendTitle {
     scrollbar-color: #38c red;
 }
 
+.scanDiv h3 {
+    color : #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+}
+
 #video {
     height : 90%;
-    width: 60%;
+    width: 80%;
 }
 
 .scanDiv.hidden {

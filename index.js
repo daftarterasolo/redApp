@@ -71,6 +71,7 @@ function clickLogout() {
 					</div>
 					<div class="uttpDiv hidden"></div>					
 					<div class="scanDiv">
+						<h3>Scan QRCode Pada UTTP Utk Mendaftar.</h3> 
 						<video id="video" autoplay style="max-width : 100%; max-height : 100%;"></video>
 					</div>
 					<div class="jmlhDiv hidden">
@@ -100,6 +101,7 @@ function clickLogout() {
 		formMasyRedApp.generateBtnHandler();
 
 		const sbmtHandler = new masySubmitProcessor(formMasyRedApp);
+		siapkanKamera();
 		/*
 		const formMasy = new createFormMasy(document.querySelector(".main"), str);
 		await formMasy.generateForm();

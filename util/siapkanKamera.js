@@ -1,8 +1,5 @@
 export async function siapkanKamera() {
-    //cek if device has camera
-    //console.log(navigator.mediaDevices);
-    //console.log(navigator.mediaDevices.getUserMedia);
-    const video = document.querySelector("#video");
+    let video = document.getElementById("video");
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         const constrain = {
             video : {
@@ -33,4 +30,4 @@ export async function siapkanKamera() {
 */
 }
 
-siapkanKamera();
+//siapkanKamera();

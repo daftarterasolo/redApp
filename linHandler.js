@@ -17,7 +17,8 @@ function setBackSubmitBtn() {
 }
 
 function pageRedirect() {
-	window.location.replace("/redApp");
+	//window.location.replace("/redApp");
+	window.location.replace("/");
 }
 
 
