@@ -1,4 +1,5 @@
 import { getKelurahan, listOfUttpMasyRedApp } from '../util/utilFunc.js'; 
+import { siapkanKamera } from '../util/siapkanKamera.js';
 
 export class createFormMasyRedApp {
 	lsKontainer;
@@ -229,6 +230,28 @@ export class createFormMasyRedApp {
 		}
 	}
 
+	#addByQrcodeBtnHandler() {
+		let addQrBtn = document.querySelector(".qrDiv");
+		if (addQrBtn !== null) {
+			addQrBtn.addEventListener('click', async () => {
+				let scandiv = document.querySelector(".scanDiv");
+				scandiv.classList.remove("hidden");
+				let h3 = document.createElement("h3");
+				h3.setAttribute("id","qrTitle");
+				h3.innerHTML = "Tunggu sebentar.. Apps sedang menyiapkan kamera."
+				scandiv.prepend(h3);
+				await siapkanKamera();
+				scandiv.removeChild(h3);
+				h3.innerHTML = "Kamera Siap.<br>Scan QRCode Pada UTTP Utk Mendaftar";
+				scandiv.prepend(h3);
+				let p = document.createElement("h3");
+				p.innerHTML = "Ini paragraf";
+				scandiv.inserBefore(p,document.getElementById("qrTitle"));
+
+			});
+		}
+	}
+
 	//method utk dijalankan pd generateBtnHandler()
 	#nextBtnHandler() {
 		let nextBtn = document.getElementById("next");
@@ -254,6 +277,7 @@ export class createFormMasyRedApp {
 		this.#nextBtnHandler();
 		this.#backBtnHandler();
 		this.#addBtnHandler();
+		this.#addByQrcodeBtnHandler();
 	}
 
 	get get_changeShopChartLayout() {

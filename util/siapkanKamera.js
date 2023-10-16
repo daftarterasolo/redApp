@@ -9,8 +9,9 @@ export async function siapkanKamera() {
             },
             audio : false   
         }
+        
         //start video stream
-        navigator.mediaDevices.getUserMedia(constrain).then(stream => {
+        await navigator.mediaDevices.getUserMedia(constrain).then(stream => {
             video.srcObject = stream;
         });
 

@@ -7,7 +7,6 @@ import { createFormSpbuRedApp } from './service/formSpbuRedApp.js';
 import { createFormLokoRedApp } from './service/formLokoRedApp.js';
 import { masySubmitProcessor, pabrikSubmitProcessor, lokoSubmitProcessor, spbuSubmitProcessor } from './service/submitProcessor.js';
 //import { checkTheLocalSession, lout } from './service/login.js';
-import { siapkanKamera } from './util/siapkanKamera.js';
 
 /*
 function pageRedirect() {
@@ -70,8 +69,8 @@ function clickLogout() {
 						<datalist id="kelurahan"></datalist>
 					</div>
 					<div class="uttpDiv hidden"></div>					
-					<div class="scanDiv">
-						<h3>Scan QRCode Pada UTTP Utk Mendaftar.</h3> 
+					<div class="scanDiv hidden">
+						<!--<h3></h3>--> 
 						<video id="video" autoplay style="max-width : 100%; max-height : 100%;"></video>
 					</div>
 					<div class="jmlhDiv hidden">
@@ -101,7 +100,6 @@ function clickLogout() {
 		formMasyRedApp.generateBtnHandler();
 
 		const sbmtHandler = new masySubmitProcessor(formMasyRedApp);
-		siapkanKamera();
 		/*
 		const formMasy = new createFormMasy(document.querySelector(".main"), str);
 		await formMasy.generateForm();
