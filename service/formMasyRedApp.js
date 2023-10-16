@@ -242,11 +242,13 @@ export class createFormMasyRedApp {
 				scandiv.prepend(h3);
 				await siapkanKamera();
 				scandiv.removeChild(h3);
+				h3.setAttribute("id","qrTitle");
 				h3.innerHTML = "Kamera Siap.<br>Scan QRCode Pada UTTP Utk Mendaftar";
 				scandiv.prepend(h3);
-				let p = document.createElement("h3");
-				p.innerHTML = "Ini paragraf";
-				scandiv.inserBefore(p,document.getElementById("qrTitle"));
+				let p = document.createElement("a");
+				p.setAttribute("class", "qrCloseHref");
+				p.innerHTML = "Close";
+				scandiv.insertBefore(p,scandiv.firstElementChild);
 
 			});
 		}

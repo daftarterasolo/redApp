@@ -360,12 +360,13 @@ legend.legendTitle {
     border: 3px solid #FFFFFF;
     padding : 5px;
     display: flex;
-    flex-direction:row;
-    flex-wrap: wrap;
+    flex-direction:column;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     overflow : auto;
     scrollbar-color: #38c red;
+    padding-top: 5px;
 }
 
 .scanDiv h3 {
@@ -374,8 +375,8 @@ legend.legendTitle {
 }
 
 #video {
-    height : 85%;
-    width: 95%;
+    height : 80%;
+    width: 100%;
 }
 
 .scanDiv.hidden {
