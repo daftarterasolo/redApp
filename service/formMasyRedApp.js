@@ -217,6 +217,12 @@ export class createFormMasyRedApp {
 		}, 100);		
 	}
 
+	//method utk dijalankan pd #addByQrcodeBtnHamdler()
+	#closeQrBtnHandler() {
+		let closeBtn = document.querySelector(".qrCloseHref");
+		closeBtn.addEventListener('click',() => document.querySelector(".scanDiv").classList.add("hidden"));
+	}
+
 	//method utk dijalankan pd generateBtnHandler()
 	#addBtnHandler() {
 		let addBtn = document.querySelector(".addDiv");
@@ -230,6 +236,7 @@ export class createFormMasyRedApp {
 		}
 	}
 
+	//method utk dijalankan pd generateBtnHandler()
 	#addByQrcodeBtnHandler() {
 		let addQrBtn = document.querySelector(".qrDiv");
 		if (addQrBtn !== null) {
@@ -244,12 +251,18 @@ export class createFormMasyRedApp {
 				scandiv.removeChild(h3);
 				h3.setAttribute("id","qrTitle");
 				h3.innerHTML = "Kamera Siap.<br>Scan QRCode Pada UTTP Utk Mendaftar";
+
+				scandiv.contains(document.getElementById('qrTitle')) ? scandiv.removeChild(h3) : '';
+
 				scandiv.prepend(h3);
 				let p = document.createElement("a");
 				p.setAttribute("class", "qrCloseHref");
 				p.innerHTML = "Close";
-				scandiv.insertBefore(p,scandiv.firstElementChild);
 
+				scandiv.contains(document.querySelector('.qrCloseHref')) ? scandiv.removeChild(p) : '';				
+
+				scandiv.insertBefore(p,scandiv.firstElementChild);
+				this.#closeQrBtnHandler();
 			});
 		}
 	}

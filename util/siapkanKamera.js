@@ -15,20 +15,26 @@ export async function siapkanKamera() {
             video.srcObject = stream;
         });
 
-    }
-    
-/*
-    navigator.mediaDevices.enumerateDevices().then(devices => {
-        //console.log(devices);
-        const videoDev = devices.filter(device => device.kind === 'videoinput');
-        if (videoDev.length !== 0) {
-            alert("Device has camera");
-        } else {
-            alert("Device does not have camera");
-        }
-        //console.log(videoDev);
-    });
-*/
+
+        const qrcodeDetector = new BarcodeDetector({ formats : ['qr_code']});
+
+        const deteksiKode = () => {
+            qrcodeDetector.detect(video)
+            .then(codes => {
+                if (codes.length === 0) return;
+
+                for (const qrcode of codes) {
+                    alert(qrcode.rawValue);
+                }
+
+                clearInterval(setIntervalID);
+            })
+            .catch(err => {
+                clearInterval(setIntervalID);
+            });
+        } 
+
+        var setIntervalID = setInterval(deteksiKode, 1000);
+    }    
 }
 
-//siapkanKamera();
