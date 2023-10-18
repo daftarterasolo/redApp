@@ -1,5 +1,5 @@
 import { getKelurahan, listOfUttpMasyRedApp } from '../util/utilFunc.js'; 
-import { siapkanKamera } from '../util/siapkanKamera.js';
+import { lakukanScan } from '../util/siapkanKamera.js';
 
 export class createFormMasyRedApp {
 	lsKontainer;
@@ -218,10 +218,12 @@ export class createFormMasyRedApp {
 	}
 
 	//method utk dijalankan pd #addByQrcodeBtnHamdler()
+	/*
 	#closeQrBtnHandler() {
 		let closeBtn = document.querySelector(".qrCloseHref");
 		closeBtn.addEventListener('click',() => document.querySelector(".scanDiv").classList.add("hidden"));
 	}
+	*/
 
 	//method utk dijalankan pd generateBtnHandler()
 	#addBtnHandler() {
@@ -241,14 +243,15 @@ export class createFormMasyRedApp {
 		let addQrBtn = document.querySelector(".qrDiv");
 		if (addQrBtn !== null) {
 			addQrBtn.addEventListener('click', async () => {
-				let scandiv = document.querySelector(".scanDiv");
+				/*let scandiv = document.querySelector(".scanDiv");
 				scandiv.classList.remove("hidden");
 				let h3 = document.createElement("h3");
 				h3.setAttribute("id","qrTitle");
 				h3.innerHTML = "Tunggu sebentar.. Apps sedang menyiapkan kamera."
-				scandiv.prepend(h3);
-				await siapkanKamera();
-				scandiv.removeChild(h3);
+				scandiv.prepend(h3);*/
+				//await siapkanKamera();
+				lakukanScan();
+				/*scandiv.removeChild(h3);
 				h3.setAttribute("id","qrTitle");
 				h3.innerHTML = "Kamera Siap.<br>Scan QRCode Pada UTTP Utk Mendaftar";
 
@@ -262,7 +265,8 @@ export class createFormMasyRedApp {
 				scandiv.contains(document.querySelector('.qrCloseHref')) ? scandiv.removeChild(p) : '';				
 
 				scandiv.insertBefore(p,scandiv.firstElementChild);
-				this.#closeQrBtnHandler();
+				*/
+				//this.#closeQrBtnHandler();
 			});
 		}
 	}
