@@ -369,6 +369,29 @@ legend.legendTitle {
     padding-top: 5px;
 }
 
+.hasilKueriDiv {
+    width: 96%;
+    height : 90%;
+    position:absolute;
+    /*left : 4.25%;*/
+    background-color: #AF9781;
+    top : 20px;
+    /*border-radius: 6px;*/
+    opacity: 1;
+    border: 3px solid #FFFFFF;
+    padding : 5px;
+    display: flex;
+    flex-direction:column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    overflow : auto;
+    scrollbar-color: #38c red;
+    padding-top: 5px;
+    color : #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+}
+
 .scanDiv h3 {
     color : #FFFFFF;
     font-family: 'Poppins', sans-serif;
@@ -553,7 +576,7 @@ legend.legendTitle {
     transform: translateY(2px);
 }
 
-#next {
+#next, #sbBtn, #clBtn {
     background-color: #1E3F66;
     margin-top: 10px;
     padding-top: 5px;
@@ -568,7 +591,23 @@ legend.legendTitle {
     font-weight: 300;
 }
 
-#next:active {
+#sbBtn, #clBtn {
+    background-color: #1E3F66;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width : 30%;
+    color : #FFFFFF;
+    outline: none;
+    border: 2px solid #FFFFFF;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    display: inline;
+}
+
+#next:active, #sbBtn:active, #clBtn:active  {
     background-color: orangered;
     transform : translateY(2px);
 }

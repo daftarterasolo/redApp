@@ -76,8 +76,8 @@ function clickLogout() {
 					<div class="jmlhDiv hidden">
 						<form class="spe">
 							<input type="text" class="form_data" name="uttp" id="uttp" readonly>
-							<input type="text" class="form_data" name="kap" id="kap" readonly>
-							<input type="text" class="form_data" name="d" id="d" readonly>
+							<input type="text" class="form_data" name="kap" id="kap" readonly placeholder="kapasitas">
+							<input type="text" class="form_data" name="d" id="d" readonly placeholder="dayabaca">
 							<input type="number" class="form_data" name="jml" id="jml" placeholder="jumlah..">
 							<input type="text" class="form_data" name="merk" id="merk" placeholder="merk">
 							<input type="text" class="form_data" name="tipe" id="tipe" placeholder="tipe/model">
@@ -276,8 +276,8 @@ function clickLogout() {
 					<div class="jmlhDiv hidden">
 						<form class="spe">
 							<input type="text" class="form_data" name="uttp" id="uttp" readonly>
-							<input type="text" class="form_data" name="kap" id="kap" readonly>
-							<input type="text" class="form_data" name="d" id="d" readonly>
+							<input type="text" class="form_data" name="kap" id="kap" readonly placeholder="kapasitas">
+							<input type="text" class="form_data" name="d" id="d" readonly placeholder="dayabaca">
 							<input type="number" class="form_data" name="jml" id="jml" placeholder="jumlah..">
 							<input type="text" class="form_data" name="merk" id="merk" placeholder="merk">
 							<input type="text" class="form_data" name="tipe" id="tipe" placeholder="tipe/model">
