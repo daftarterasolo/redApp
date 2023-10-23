@@ -23,18 +23,20 @@ async function siapkanKamera() {
             .then(codes => {
                 if (codes.length === 0) return;
 
+                let kode = "";
                 for (const qrcode of codes) {
+                    kode = qrcode.rawValue;
                     //alert(qrcode.rawValue);
                 }
 
                 clearInterval(setIntervalID);
-                closeScanDiv();
-                buatHasilQueryDiv();
+                buatHasilQueryDiv(kode);
+                //closeScanDiv();
             })
             .catch(err => {
                 clearInterval(setIntervalID);
-                closeScanDiv();
                 buatHasilQueryDiv();
+                //closeScanDiv();
             });
         } 
 
@@ -52,7 +54,20 @@ function closeQrBtnHandler() {
     closeBtn.addEventListener('click',() => document.querySelector(".scanDiv").classList.add("hidden"));
 }
 
-function buatHasilQueryDiv() {
+async function readData(qrCode) {
+    const apiUrl = "https://script.google.com/macros/s/AKfycbzjWdF6PAi-7nMSvEPxWdJab4ZwI51aSdoccyQzriwKq9W6hM-lWkHvwcqPMyY-sIrOnw/exec"; 
+    await fetch(apiUrl, {
+        method : 'POST',
+        body : JSON.stringify({'keyword' : qrCode})
+    })
+    .then(e => e.json())
+    .then(e => {
+        alert(e.readData);
+    });
+
+}
+
+async function buatHasilQueryDiv(kode) {
     let kueriDiv = document.createElement("div");
     kueriDiv.setAttribute("class", "hasilKueriDiv");
     let submitBtn = document.createElement("input");
@@ -63,10 +78,12 @@ function buatHasilQueryDiv() {
     cancelBtn.setAttribute("id","clBtn");
     cancelBtn.setAttribute("value", "Cancel");
     cancelBtn.setAttribute("type", "button");
+    await readData(kode);
     kueriDiv.append(submitBtn);
     kueriDiv.append(cancelBtn);
     let mainDiv = document.querySelector(".main");
     mainDiv.insertBefore(kueriDiv, mainDiv.querySelector(".scanDiv"));
+    closeScanDiv();
 }
 
 export async function lakukanScan() {
