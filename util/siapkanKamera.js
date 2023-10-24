@@ -62,7 +62,7 @@ async function readData(qrCode) {
     })
     .then(e => e.json())
     .then(e => {
-        alert(e.readData);
+        return e.readData;
     });
 
 }
@@ -70,6 +70,18 @@ async function readData(qrCode) {
 async function buatHasilQueryDiv(kode) {
     let kueriDiv = document.createElement("div");
     kueriDiv.setAttribute("class", "hasilKueriDiv");
+    let formQR = document.createElement("form");
+    formQR.setAttribute("id","formQR");
+    formQR.innerHTML = `
+        <input type="text" class="form_data" name="kode_qr" id="kode_qr" placeholder="qr_code">
+        <input type="text" class="form_data" name="nama" id="nama" placeholder="nama">
+        <input type="text" class="form_data" name="alamat" id="alamat" placeholder="alamat">
+        <input type="button" id="sbBtn" value="submit">
+        <input type="button" id="clBtn" value="cancel">    
+    `;
+
+    kueriDiv.append(formQR);
+    /*
     let submitBtn = document.createElement("input");
     submitBtn.setAttribute("value", "Submit")
     submitBtn.setAttribute("id","sbBtn");
@@ -78,9 +90,10 @@ async function buatHasilQueryDiv(kode) {
     cancelBtn.setAttribute("id","clBtn");
     cancelBtn.setAttribute("value", "Cancel");
     cancelBtn.setAttribute("type", "button");
+    */
     await readData(kode);
-    kueriDiv.append(submitBtn);
-    kueriDiv.append(cancelBtn);
+    //kueriDiv.append(submitBtn);
+    //kueriDiv.append(cancelBtn);
     let mainDiv = document.querySelector(".main");
     mainDiv.insertBefore(kueriDiv, mainDiv.querySelector(".scanDiv"));
     closeScanDiv();
