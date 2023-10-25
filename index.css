@@ -576,7 +576,7 @@ legend.legendTitle {
     transform: translateY(2px);
 }
 
-#next, #sbBtn, #clBtn {
+#next {
     background-color: #1E3F66;
     margin-top: 10px;
     padding-top: 5px;
@@ -591,12 +591,29 @@ legend.legendTitle {
     font-weight: 300;
 }
 
-#sbBtn, #clBtn {
+#sbBtn {
     background-color: #1E3F66;
     margin-top: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    width : 30%;
+    width : 90px;
+    color : #FFFFFF;
+    outline: none;
+    border: 2px solid #FFFFFF;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    margin-right: 5px;
+    display: inline;
+}
+
+#clBtn {
+    background-color: #ff6565;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width : 90px;
     color : #FFFFFF;
     outline: none;
     border: 2px solid #FFFFFF;

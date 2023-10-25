@@ -55,6 +55,7 @@ function closeQrBtnHandler() {
 }
 
 async function readData(qrCode) {
+    let theData;
     const apiUrl = "https://script.google.com/macros/s/AKfycbzjWdF6PAi-7nMSvEPxWdJab4ZwI51aSdoccyQzriwKq9W6hM-lWkHvwcqPMyY-sIrOnw/exec"; 
     await fetch(apiUrl, {
         method : 'POST',
@@ -62,9 +63,11 @@ async function readData(qrCode) {
     })
     .then(e => e.json())
     .then(e => {
-        return e.readData;
+        //alert(e.readData[0]);
+        theData = e.readData;
     });
 
+    return theData;
 }
 
 async function buatHasilQueryDiv(kode) {
@@ -73,14 +76,24 @@ async function buatHasilQueryDiv(kode) {
     let formQR = document.createElement("form");
     formQR.setAttribute("id","formQR");
     formQR.innerHTML = `
-        <input type="text" class="form_data" name="kode_qr" id="kode_qr" placeholder="qr_code">
-        <input type="text" class="form_data" name="nama" id="nama" placeholder="nama">
-        <input type="text" class="form_data" name="alamat" id="alamat" placeholder="alamat">
-        <input type="button" id="sbBtn" value="submit">
-        <input type="button" id="clBtn" value="cancel">    
+        <input type="text" class="form_data" name="qrNama" id="qrNama" placeholder="nama">
+        <input type="text" class="form_data" name="qrHp" id="qrHp" placeholder="hp">
+        <input type="text" class="form_data" name="qrAlamat" id="qrAlamat" placeholder="alamat">
+        <input type="text" class="form_data" name="qrKel" id="qrKel" placeholder="kelurahan">
+        <input type="text" class="form_data" name="qrUttp" id="qrUttp" placeholder="uttp">
+        <input type="text" class="form_data" name="qrSn" id="qrSn" placeholder="serial">
+        <input type="text" class="form_data" name="qrJenisUsaha" id="qrJenisUsaha" placeholder="jenisUsaha">
     `;
 
+    let formSb = document.createElement("form");
+    formSb.innerHTML = `<input type="button" id="sbBtn" value="submit">`;
+    let formCnl = document.createElement("form");
+    formCnl.innerHTML = `<input type="button" id="clBtn" value="cancel">`;
+
     kueriDiv.append(formQR);
+    kueriDiv.append(formSb);
+    kueriDiv.append(formCnl);
+    
     /*
     let submitBtn = document.createElement("input");
     submitBtn.setAttribute("value", "Submit")
@@ -91,12 +104,20 @@ async function buatHasilQueryDiv(kode) {
     cancelBtn.setAttribute("value", "Cancel");
     cancelBtn.setAttribute("type", "button");
     */
-    await readData(kode);
+    let theData = await readData(kode);
+    alert(theData);
     //kueriDiv.append(submitBtn);
     //kueriDiv.append(cancelBtn);
     let mainDiv = document.querySelector(".main");
     mainDiv.insertBefore(kueriDiv, mainDiv.querySelector(".scanDiv"));
     closeScanDiv();
+    document.getElementById("qrNama").setAttribute('value', theData[3]);
+    document.getElementById("qrHp").setAttribute('value', theData[5]);
+    document.getElementById("qrAlamat").setAttribute('value', theData[4]);
+    document.getElementById("qrKel").setAttribute('value', theData[2]);
+    document.getElementById("qrUttp").setAttribute('value', `${theData[8]} ${theData[9]} / ${theData[10]}`);
+    document.getElementById("qrSn").setAttribute('value', theData[15]);
+    document.getElementById("qrJenisUsaha").setAttribute('value', theData[16]);
 }
 
 export async function lakukanScan() {
