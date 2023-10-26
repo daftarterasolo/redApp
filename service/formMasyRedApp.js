@@ -81,8 +81,11 @@ export class createFormMasyRedApp {
 	static generateShopChartTbl(arr) {
 		let str = `<table><thead><tr><td>No.</td><td>UTTP</td><td>Keterangan</td><td>Jumlah</td><td>Del?</td></tr></thead>`;
 		arr.forEach((e,i) => {
-			str += `<tr><td>${i+1}</td><td>${e[0]}</td><td>${e[3]}</td><td>${e[5]}</td><td id="${i+1}" class="icon"></td></tr>`;
+			//console.log(e);
+			str += `<tr><td>${i+1}</td><td>${e[0]} ${e[1]}</td><td>${e[3]}</td><td>${e[5]}</td><td id="${i+1}" class="icon"></td></tr>`;
+			//console.log(this.dataToSend);
 			this.dataToSend[`${i+1}`] = e; 
+			//console.log(this.dataToSend);
 		});
 		str += `</table>`;		
 		document.querySelector(".shopChart").innerHTML = str;
@@ -186,14 +189,22 @@ export class createFormMasyRedApp {
 			*/
 			this.constructor.showUncompleteMsg(this.constructor.isJmlEmpty("jml"));
 			document.querySelector(".jmlhDiv").style.display = "none";
+
 			let listTampung = [].concat(this.list[this.#listIndex]);
+
+			if (listTampung[0] === "TE" || listTampung[0] === "TP") {
+				listTampung[1] = document.getElementById("kap").value;
+				listTampung[2] = document.getElementById("d").value;
+			}
+			
+			console.log(listTampung);
 			this.constructor.shopChartTemp.push(listTampung);
 			listTampung.push(document.getElementById("jml").value);
 			document.getElementById("merk") !== null ? listTampung.push(document.getElementById("merk").value) : '';
 			document.getElementById("tipe") !== null ? listTampung.push(document.getElementById("tipe").value) : '';
 			document.getElementById("sn") !== null ? listTampung.push(document.getElementById("sn").value) : '';
 			document.getElementById("buatan") !== null ? listTampung.push(document.getElementById("buatan").value) : '';
-			//console.log(`shopChartTemp ===== ${this.constructor.shopChartTemp}`);
+			
 			console.log(this.constructor.shopChartTemp);
 			this.constructor.generateShopChartTbl(this.constructor.shopChartTemp);
 
