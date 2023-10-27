@@ -49,9 +49,19 @@ function closeScanDiv() {
     document.querySelector(".scanDiv").classList.add("hidden");
 }
 
+function closeKueriDiv() {
+    document.getElementById("clBtn").addEventListener("click", () => document.querySelector(".hasilKueriDiv").remove());
+}
+
 function closeQrBtnHandler() {
     let closeBtn = document.querySelector(".qrCloseHref");
     closeBtn.addEventListener('click',() => document.querySelector(".scanDiv").classList.add("hidden"));
+}
+
+function sbmtBtnHandler() {
+    document.getElementById("sbBtn").addEventListener("click", () => {
+        alert("Btn Clicked");
+    });
 }
 
 async function readData(qrCode) {
@@ -64,7 +74,7 @@ async function readData(qrCode) {
     .then(e => e.json())
     .then(e => {
         //alert(e.readData[0]);
-        theData = e.readData;
+        theData = e;
     });
 
     return theData;
@@ -105,19 +115,27 @@ async function buatHasilQueryDiv(kode) {
     cancelBtn.setAttribute("type", "button");
     */
     let theData = await readData(kode);
-    alert(theData);
+    
     //kueriDiv.append(submitBtn);
     //kueriDiv.append(cancelBtn);
     let mainDiv = document.querySelector(".main");
     mainDiv.insertBefore(kueriDiv, mainDiv.querySelector(".scanDiv"));
+
+    if (theData.result === "error") {
+        alert(theData.result);
+        document.querySelector(".hasilKueriDiv").remove();    
+    }
+
     closeScanDiv();
-    document.getElementById("qrNama").setAttribute('value', theData[3]);
-    document.getElementById("qrHp").setAttribute('value', theData[5]);
-    document.getElementById("qrAlamat").setAttribute('value', theData[4]);
-    document.getElementById("qrKel").setAttribute('value', theData[2]);
-    document.getElementById("qrUttp").setAttribute('value', `${theData[8]} ${theData[9]} / ${theData[10]}`);
-    document.getElementById("qrSn").setAttribute('value', theData[15]);
-    document.getElementById("qrJenisUsaha").setAttribute('value', theData[16]);
+    document.getElementById("qrNama").setAttribute('value', theData.readData[3]);
+    document.getElementById("qrHp").setAttribute('value', theData.readData[5]);
+    document.getElementById("qrAlamat").setAttribute('value', theData.readData[4]);
+    document.getElementById("qrKel").setAttribute('value', theData.readData[2]);
+    document.getElementById("qrUttp").setAttribute('value', `${theData.readData[8]} ${theData.readData[9]} / ${theData.readData[10]}`);
+    document.getElementById("qrSn").setAttribute('value', theData.readData[15]);
+    document.getElementById("qrJenisUsaha").setAttribute('value', theData.readData[16]);
+    closeKueriDiv();
+    sbmtBtnHandler();
 }
 
 export async function lakukanScan() {
@@ -125,7 +143,7 @@ export async function lakukanScan() {
     scandiv.classList.remove("hidden");
     let h3 = document.createElement("h3");
     h3.setAttribute("id","qrTitle");
-    h3.innerHTML = "Tunggu sebentar.. Apps sedang menyiapkan kamera."
+    h3.innerHTML = "Tunggu sebentar.. Apps sedang menyiapkan kamera.";
     scandiv.prepend(h3);    
     await siapkanKamera();
     scandiv.removeChild(h3);

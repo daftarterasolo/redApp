@@ -211,6 +211,12 @@ export class createFormMasyRedApp {
 		});
 	}
 
+	/*setJmlPickedUttpQrCode() {
+		document.getElementById("sbBtn").addEventListener("click", () => {
+			alert("clicked");
+		});	
+	}*/
+
 	//method utk dijalankan pada #addBtnHandler
 	async generateListUttp() {
 		if (document.querySelectorAll(".daftarUttp").length === 0) { // cek jika elemen .daftarUttp sdh ada atau belum
@@ -222,6 +228,7 @@ export class createFormMasyRedApp {
 			this.lsKontainer.innerHTML = str;		
 			this.pickUttpHandler();
 			this.setJmlPickedUttp();
+			//this.setJmlPickedUttpQrCode();
 		} 
 	}
 
