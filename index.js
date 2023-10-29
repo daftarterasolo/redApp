@@ -6,6 +6,7 @@ import { createFormSpbuRedApp } from './service/formSpbuRedApp.js';
 //import { createFormLoko } from './service/formLoko.js';
 import { createFormLokoRedApp } from './service/formLokoRedApp.js';
 import { masySubmitProcessor, pabrikSubmitProcessor, lokoSubmitProcessor, spbuSubmitProcessor } from './service/submitProcessor.js';
+import { masyPrepareCam } from './util/siapkanKamera.js';
 //import { checkTheLocalSession, lout } from './service/login.js';
 
 /*
@@ -100,6 +101,7 @@ function clickLogout() {
 		formMasyRedApp.generateBtnHandler();
 
 		const sbmtHandler = new masySubmitProcessor(formMasyRedApp);
+		const scanHandler = new masyPrepareCam(formMasyRedApp);
 		/*
 		const formMasy = new createFormMasy(document.querySelector(".main"), str);
 		await formMasy.generateForm();

@@ -70,7 +70,7 @@ export class masySubmitProcessor extends submitProcessor {
 	}
 
 	async #entryTheData() {
-		
+		console.log(this.#obj.get_dataForm);
 		let dataComplete = {
 			'dataForm' : this.#obj.get_dataForm,
 			'dataToSend' : this.#obj.get_dataToSend,

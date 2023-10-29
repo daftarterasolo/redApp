@@ -1,5 +1,5 @@
 import { getKelurahan, listOfUttpMasyRedApp } from '../util/utilFunc.js'; 
-import { lakukanScan } from '../util/siapkanKamera.js';
+/*import { lakukanScan } from '../util/siapkanKamera.js';*/
 
 export class createFormMasyRedApp {
 	lsKontainer;
@@ -83,9 +83,9 @@ export class createFormMasyRedApp {
 		arr.forEach((e,i) => {
 			//console.log(e);
 			str += `<tr><td>${i+1}</td><td>${e[0]} ${e[1]}</td><td>${e[3]}</td><td>${e[5]}</td><td id="${i+1}" class="icon"></td></tr>`;
-			//console.log(this.dataToSend);
+			console.log(this.dataToSend);
 			this.dataToSend[`${i+1}`] = e; 
-			//console.log(this.dataToSend);
+			console.log(this.dataToSend);
 		});
 		str += `</table>`;		
 		document.querySelector(".shopChart").innerHTML = str;
@@ -277,38 +277,16 @@ export class createFormMasyRedApp {
 	}
 
 	//method utk dijalankan pd generateBtnHandler()
+	/*
 	#addByQrcodeBtnHandler() {
 		let addQrBtn = document.querySelector(".qrDiv");
 		if (addQrBtn !== null) {
 			addQrBtn.addEventListener('click', async () => {
-				/*let scandiv = document.querySelector(".scanDiv");
-				scandiv.classList.remove("hidden");
-				let h3 = document.createElement("h3");
-				h3.setAttribute("id","qrTitle");
-				h3.innerHTML = "Tunggu sebentar.. Apps sedang menyiapkan kamera."
-				scandiv.prepend(h3);*/
-				//await siapkanKamera();
 				lakukanScan();
-				/*scandiv.removeChild(h3);
-				h3.setAttribute("id","qrTitle");
-				h3.innerHTML = "Kamera Siap.<br>Scan QRCode Pada UTTP Utk Mendaftar";
-
-				scandiv.contains(document.getElementById('qrTitle')) ? scandiv.removeChild(h3) : '';
-
-				scandiv.prepend(h3);
-				let p = document.createElement("a");
-				p.setAttribute("class", "qrCloseHref");
-				p.innerHTML = "Close";
-
-				scandiv.contains(document.querySelector('.qrCloseHref')) ? scandiv.removeChild(p) : '';				
-
-				scandiv.insertBefore(p,scandiv.firstElementChild);
-				*/
-				//this.#closeQrBtnHandler();
 			});
 		}
 	}
-
+	*/
 	//method utk dijalankan pd generateBtnHandler()
 	#nextBtnHandler() {
 		let nextBtn = document.getElementById("next");
@@ -334,7 +312,7 @@ export class createFormMasyRedApp {
 		this.#nextBtnHandler();
 		this.#backBtnHandler();
 		this.#addBtnHandler();
-		this.#addByQrcodeBtnHandler();
+		//this.#addByQrcodeBtnHandler();
 	}
 
 	get get_changeShopChartLayout() {
