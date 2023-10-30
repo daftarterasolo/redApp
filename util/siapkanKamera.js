@@ -1,3 +1,5 @@
+import { listOfUttpMasyRedApp } from './utilFunc.js'; 
+
 class prepareCam {
     constructor() {
         if (this.constructor === "prepareCam") {
@@ -80,23 +82,22 @@ export class masyPrepareCam extends prepareCam {
     }
     
     #addToChartBtnHandler() {
-        document.getElementById("sbBtn").addEventListener("click", () => {
-            //alert("Btn Clicked");
-            //alert(document.getElementById("addr").checked); 
-            let dat = this.#obj.get_dataToSend;
+        document.getElementById("sbBtn").addEventListener("click", async () => {
+            let dat = [].concat(this.#obj.get_dataToSend);
             let arr = this.qrData.readData;
-            let nama_uttp = "test";
-            /*for (let x of this.#obj.list) {
-                if (x[0] === arr[8]) {
+            let nama_uttp = "";
+            let objList = await listOfUttpMasyRedApp();
+
+            for (let x of objList) {
+                if (x[0].trim() === arr[8].trim()) {
                     nama_uttp = x[3];
-                    dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],arr[8],"Timbangan Meja","","1",arr[11],arr[12],arr[15],"China"];
-                    alert(JSON.stringify(dat));
-                    
+                    //alert(nama_uttp);
+                    break;
                 }
-                
-                
-            }*/
-            dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],arr[8],"Timbangan Meja","","1",arr[11],arr[12],arr[15],"China"];
+            }
+            
+            //alert(JSON.stringify(objList));
+            dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],arr[8],nama_uttp,"","1",`${arr[11] === "" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`];
             alert(JSON.stringify(dat));
         });
     }
@@ -128,8 +129,11 @@ export class masyPrepareCam extends prepareCam {
             <input type="text" class="form_data" name="qrAlamat" id="qrAlamat" placeholder="alamat">
             <input type="text" class="form_data" name="qrKel" id="qrKel" placeholder="kelurahan">
             <input type="text" class="form_data" name="qrUttp" id="qrUttp" placeholder="uttp">
+            <input type="text" class="form_data" name="qrMerk" id="qrMerk" placeholder="merk">
+            <input type="text" class="form_data" name="qrModel" id="qrModel" placeholder="model">
             <input type="text" class="form_data" name="qrSn" id="qrSn" placeholder="serial">
             <input type="text" class="form_data" name="qrJenisUsaha" id="qrJenisUsaha" placeholder="jenisUsaha">
+            <input type="text" class="form_data" name="qrBuatan" id="qrBuatan" placeholder="buatan">
             <!--<input type="checkbox" id="addr" name="addr" value="ya">
             <label id="addrLabel" for="addr">Apakah ingin menggunakan alamat ssi QrCode?</label><br>-->
             <label class="addrLabel" for="addr">Apakah ingin menggunakan alamat ssi QrCode?
@@ -163,6 +167,8 @@ export class masyPrepareCam extends prepareCam {
         document.getElementById("qrAlamat").setAttribute('value', this.qrData.readData[4]);
         document.getElementById("qrKel").setAttribute('value', this.qrData.readData[2]);
         document.getElementById("qrUttp").setAttribute('value', `${this.qrData.readData[8]} ${this.qrData.readData[9]} / ${this.qrData.readData[10]}`);
+        document.getElementById("qrMerk").setAttribute('value', this.qrData.readData[11]);
+        document.getElementById("qrModel").setAttribute('value', this.qrData.readData[12]);
         document.getElementById("qrSn").setAttribute('value', this.qrData.readData[15]);
         document.getElementById("qrJenisUsaha").setAttribute('value', this.qrData.readData[16]);
         this.#closeKueriDiv();
