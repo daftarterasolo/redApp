@@ -390,6 +390,7 @@ legend.legendTitle {
     padding-top: 5px;
     color : #FFFFFF;
     font-family: 'Poppins', sans-serif;
+    overflow-y: auto;
 }
 
 .scanDiv h3 {
@@ -1128,3 +1129,27 @@ td.icon {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   } 
+
+.form_data2 {
+    display: block;
+    margin-top: 4px;
+    width : 90%;
+    background-color : #000000;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 10px;
+    outline: none;
+    border: 2px solid orange;
+    border-radius: 3px;
+    color: #FFFFFF;
+    font-size: 15px;
+}
+
+.form_data2:focus {
+    outline: none;
+    border: 4px solid #92DFF3;
+}
+
+.loading {
+    background-color: lightblue;
+    color : #dddddd;
+}

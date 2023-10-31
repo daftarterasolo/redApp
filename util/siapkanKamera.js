@@ -75,6 +75,10 @@ export class masyPrepareCam extends prepareCam {
     #closeKueriDiv() {
         document.getElementById("clBtn").addEventListener("click", () => document.querySelector(".hasilKueriDiv").remove());
     }
+
+    #closeKueriDivLive() {
+        document.querySelector(".hasilKueriDiv").remove();    
+    }
     
     #closeQrBtnHandler() {
         let closeBtn = document.querySelector(".qrCloseHref");
@@ -83,7 +87,22 @@ export class masyPrepareCam extends prepareCam {
     
     #addToChartBtnHandler() {
         document.getElementById("sbBtn").addEventListener("click", async () => {
-            let dat = [].concat(this.#obj.get_dataToSend);
+
+            alert(JSON.stringify(this.#obj.get_shopChartTemp));
+            alert("jeda");
+            this.#setLoadingBtn();
+
+            let dat = {"0" : [1,2,3]};
+
+            for (const name in dat) {
+                if (dat.hasOwnProperty(name)) {
+                    delete dat[name];
+                }
+            }
+
+            //dat = this.#obj.get_dataToSend;
+            dat = Object.assign({}, this.#obj.get_dataToSend);
+            //alert(JSON.stringify(dat));
             let arr = this.qrData.readData;
             let nama_uttp = "";
             let objList = await listOfUttpMasyRedApp();
@@ -91,14 +110,19 @@ export class masyPrepareCam extends prepareCam {
             for (let x of objList) {
                 if (x[0].trim() === arr[8].trim()) {
                     nama_uttp = x[3];
-                    //alert(nama_uttp);
                     break;
                 }
             }
             
             //alert(JSON.stringify(objList));
             dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],arr[8],nama_uttp,"","1",`${arr[11] === "" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`];
-            alert(JSON.stringify(dat));
+            
+            //alert(JSON.stringify(dat));            
+            this.#obj.set_dataToSend = Object.assign({}, dat);
+            alert(JSON.stringify(this.#obj.get_dataToSend));
+
+            this.#setBackLoadingBtn();
+            this.#closeKueriDivLive();
         });
     }
     
@@ -118,22 +142,39 @@ export class masyPrepareCam extends prepareCam {
         return theData;
     }
     
+    #setLoadingBtn() {
+        const lin = document.getElementById("sbBtn");
+        lin.style.backgroundColor = "#879EBF";
+        lin.style.fontWeight = "100";
+        lin.style.color = "#dddddd";
+        lin.value = "Wait..Still Processing";  
+    }
+
+    #setBackLoadingBtn() {
+        const lin = document.getElementById("sbBtn");
+        lin.style.backgroundColor = "#1E3F66";
+        lin.value = "Tambahkan ke Keranjang";  
+        lin.style.fontWeight = "300";
+        lin.style.color = "#FFFFFF";
+    }
+
+
     async #buatHasilQueryDiv(kode) {
         let kueriDiv = document.createElement("div");
         kueriDiv.setAttribute("class", "hasilKueriDiv");
         let formQR = document.createElement("form");
         formQR.setAttribute("id","formQR");
         formQR.innerHTML = `
-            <input type="text" class="form_data" name="qrNama" id="qrNama" placeholder="nama">
-            <input type="text" class="form_data" name="qrHp" id="qrHp" placeholder="hp">
-            <input type="text" class="form_data" name="qrAlamat" id="qrAlamat" placeholder="alamat">
-            <input type="text" class="form_data" name="qrKel" id="qrKel" placeholder="kelurahan">
-            <input type="text" class="form_data" name="qrUttp" id="qrUttp" placeholder="uttp">
-            <input type="text" class="form_data" name="qrMerk" id="qrMerk" placeholder="merk">
-            <input type="text" class="form_data" name="qrModel" id="qrModel" placeholder="model">
-            <input type="text" class="form_data" name="qrSn" id="qrSn" placeholder="serial">
-            <input type="text" class="form_data" name="qrJenisUsaha" id="qrJenisUsaha" placeholder="jenisUsaha">
-            <input type="text" class="form_data" name="qrBuatan" id="qrBuatan" placeholder="buatan">
+            <input type="text" class="form_data2" name="qrNama" id="qrNama" placeholder="nama">
+            <!--<input type="text" class="form_data2" name="qrHp" id="qrHp" placeholder="hp">-->
+            <input type="text" class="form_data2" name="qrAlamat" id="qrAlamat" placeholder="alamat">
+            <input type="text" class="form_data2" name="qrKel" id="qrKel" placeholder="kelurahan">
+            <input type="text" class="form_data2" name="qrUttp" id="qrUttp" placeholder="uttp">
+            <input type="text" class="form_data2" name="qrMerk" id="qrMerk" placeholder="merk">
+            <input type="text" class="form_data2" name="qrModel" id="qrModel" placeholder="model">
+            <input type="text" class="form_data2" name="qrSn" id="qrSn" placeholder="serial">
+            <input type="text" class="form_data2" name="qrJenisUsaha" id="qrJenisUsaha" placeholder="jenisUsaha">
+            <input type="text" class="form_data2" name="qrBuatan" id="qrBuatan" placeholder="buatan">
             <!--<input type="checkbox" id="addr" name="addr" value="ya">
             <label id="addrLabel" for="addr">Apakah ingin menggunakan alamat ssi QrCode?</label><br>-->
             <label class="addrLabel" for="addr">Apakah ingin menggunakan alamat ssi QrCode?
@@ -163,7 +204,7 @@ export class masyPrepareCam extends prepareCam {
     
         this.#closeScanDiv();
         document.getElementById("qrNama").setAttribute('value', this.qrData.readData[3]);
-        document.getElementById("qrHp").setAttribute('value', this.qrData.readData[5]);
+        //document.getElementById("qrHp").setAttribute('value', this.qrData.readData[5]);
         document.getElementById("qrAlamat").setAttribute('value', this.qrData.readData[4]);
         document.getElementById("qrKel").setAttribute('value', this.qrData.readData[2]);
         document.getElementById("qrUttp").setAttribute('value', `${this.qrData.readData[8]} ${this.qrData.readData[9]} / ${this.qrData.readData[10]}`);

@@ -344,6 +344,10 @@ export class createFormMasyRedApp {
 		return this.#listIndex;
 	}
 
+	get get_shopChartTemp() {
+		return this.constructor.shopChartTemp;
+	}
+
 	set set_listIndex(idx) {
 		this.#listIndex = idx;
 	}
