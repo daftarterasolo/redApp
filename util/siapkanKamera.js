@@ -87,14 +87,21 @@ export class masyPrepareCam extends prepareCam {
     
     #addToChartBtnHandler() {
         document.getElementById("sbBtn").addEventListener("click", async () => {
-
-            alert(JSON.stringify(this.#obj.get_shopChartTemp));
-    
+            /*if (document.getElementById("addr").checked) {
+                alert("checked");
+            } else {
+                alert("un-checked");
+            }
+            */
+            
+            this.#setLoadingBtn();
+            //alert(JSON.stringify(this.#obj.get_shopChartTemp));
+            
             this.#setLoadingBtn();
 
             let shopChart = [].concat(this.#obj.get_shopChartTemp);
 
-            alert(JSON.stringify(shopChart));
+            //alert(JSON.stringify(shopChart));
 
             let dat = {"0" : [1,2,3]};
 
@@ -117,18 +124,27 @@ export class masyPrepareCam extends prepareCam {
                 }
             }
             
-            shopChart.push([arr[8],arr[9],arr[10],arr[8],nama_uttp,"","1",`${arr[11] === "" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`]);
+            shopChart.push([arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`]);
 
-            alert(JSON.stringify(shopChart));
+            this.#obj.set_shopChartTemp = [].concat(shopChart);
+            //alert(JSON.stringify(this.#obj.get_shopChartTemp));
+            //alert(JSON.stringify(shopChart));
 
-            dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],arr[8],nama_uttp,"","1",`${arr[11] === "" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`];
+            if (document.getElementById("addr").checked) {
+                dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`,`${document.getElementById("qrAlamat").value}`];
+            } else {
+                dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`];                
+            }
             
             this.#obj.set_dataToSend = Object.assign({}, dat);
             alert(JSON.stringify(this.#obj.get_dataToSend));
 
             this.#setBackLoadingBtn();
             this.#closeKueriDivLive();
+            this.#obj.run_generateShopChartTbl(this.#obj.get_shopChartTemp);
+            
         });
+        
     }
     
     async #readData(qrCode) {

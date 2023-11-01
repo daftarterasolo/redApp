@@ -315,6 +315,10 @@ export class createFormMasyRedApp {
 		//this.#addByQrcodeBtnHandler();
 	}
 
+	run_generateShopChartTbl(senarai) {
+		this.constructor.generateShopChartTbl(senarai);
+	}
+
 	get get_changeShopChartLayout() {
 		return this.#changeShopChartLayout();
 	}
@@ -347,6 +351,7 @@ export class createFormMasyRedApp {
 	get get_shopChartTemp() {
 		return this.constructor.shopChartTemp;
 	}
+
 
 	set set_listIndex(idx) {
 		this.#listIndex = idx;
