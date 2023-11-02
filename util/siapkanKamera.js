@@ -87,12 +87,6 @@ export class masyPrepareCam extends prepareCam {
     
     #addToChartBtnHandler() {
         document.getElementById("sbBtn").addEventListener("click", async () => {
-            /*if (document.getElementById("addr").checked) {
-                alert("checked");
-            } else {
-                alert("un-checked");
-            }
-            */
             
             this.#setLoadingBtn();
             //alert(JSON.stringify(this.#obj.get_shopChartTemp));
@@ -114,6 +108,7 @@ export class masyPrepareCam extends prepareCam {
             dat = Object.assign({}, this.#obj.get_dataToSend);
 
             let arr = this.qrData.readData;
+            //alert(JSON.stringify(arr));
             let nama_uttp = "";
             let objList = await listOfUttpMasyRedApp();
 
@@ -124,22 +119,38 @@ export class masyPrepareCam extends prepareCam {
                 }
             }
             
-            shopChart.push([arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`]);
+            /*
+            shopChart.push([arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" || arr[11] === "-" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" || arr[12] === "-" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" || arr[15] === "-" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`]);
 
             this.#obj.set_shopChartTemp = [].concat(shopChart);
+            */
+
             //alert(JSON.stringify(this.#obj.get_shopChartTemp));
             //alert(JSON.stringify(shopChart));
 
             if (document.getElementById("addr").checked) {
-                dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`,`${document.getElementById("qrAlamat").value}`];
+                let alamatArray = [arr[3], arr[4], arr[2], arr[5], "tera kantor"];
+
+                shopChart.push([arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" || arr[11] === "-" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" || arr[12] === "-" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" || arr[15] === "-" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`, alamatArray]);
+
+                dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" || arr[11] === "-" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" || arr[12] === "-" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" || arr[15] === "-" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`, alamatArray];
+                
             } else {
-                dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`];                
+                shopChart.push([arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" || arr[11] === "-" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" || arr[12] === "-" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" || arr[15] === "-" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`]);
+
+                dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" || arr[11] === "-" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" || arr[12] === "-" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" || arr[15] === "-" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`];
+                                
             }
-            
+
+            //dat[Object.keys(dat).length + 1] = [arr[8],arr[9],arr[10],nama_uttp,"","1",`${arr[11] === "" ? document.getElementById("qrMerk").value : arr[11]}`,`${arr[12] === "" ? document.getElementById("qrModel").value : arr[12]}`,`${arr[15] === "" ? document.getElementById("qrSn").value : arr[15]}`,`${document.getElementById("qrBuatan").value}`];
+
+            this.#obj.set_shopChartTemp = [].concat(shopChart);
             this.#obj.set_dataToSend = Object.assign({}, dat);
+            
             alert(JSON.stringify(this.#obj.get_dataToSend));
 
             this.#setBackLoadingBtn();
+
             this.#closeKueriDivLive();
             this.#obj.run_generateShopChartTbl(this.#obj.get_shopChartTemp);
             

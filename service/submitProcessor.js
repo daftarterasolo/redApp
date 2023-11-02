@@ -34,6 +34,7 @@ export class masySubmitProcessor extends submitProcessor {
 	}
 
 	#checkIfdataFormIsEmpty() {
+		this.#checkIfdataToSendIsUsedAlamatQr();
 		let dat = this.#obj.get_dataForm; 
 		if (dat['nama'] === "" || dat['alamat'] === "" || dat['kel'] === "") {
 			throw new Error("Anda belum mengisi data identitas dengan lengkap....Silahkan klik tanda tombol 'Back' untuk melengkapi data identitas.");
@@ -43,6 +44,16 @@ export class masySubmitProcessor extends submitProcessor {
 			document.getElementById('wa').value = "62";
 		}
 
+	}
+
+	#checkIfdataToSendIsUsedAlamatQr() {
+		let status;
+
+		for (let elem in this.#obj.get_dataToSend) {
+			this.#obj.get_dataToSend[elem].length < 11 ? status = false : status = true;
+		}
+
+		alert(status);
 	}
 
 	#resetFormIdentitas() {
@@ -70,7 +81,9 @@ export class masySubmitProcessor extends submitProcessor {
 	}
 
 	async #entryTheData() {
-		console.log(this.#obj.get_dataForm);
+		//console.log(this.#obj.get_dataForm);
+		//alert(JSON.stringify(this.#obj.get_dataToSend));
+		
 		let dataComplete = {
 			'dataForm' : this.#obj.get_dataForm,
 			'dataToSend' : this.#obj.get_dataToSend,
@@ -109,6 +122,7 @@ export class masySubmitProcessor extends submitProcessor {
 	#detectIfSubmitClicked() {
 		document.getElementById('sbmt').addEventListener('click', e => {
 			try {
+				//this.#checkIfdataToSendIsUsedAlamatQr();
 				this.get_checkIfDataToSendIsEmpty;
 				this.#checkIfdataFormIsEmpty();
 				this.#entryTheData();

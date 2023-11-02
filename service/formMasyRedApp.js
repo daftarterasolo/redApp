@@ -83,9 +83,21 @@ export class createFormMasyRedApp {
 		arr.forEach((e,i) => {
 			//console.log(e);
 			str += `<tr><td>${i+1}</td><td>${e[0]} ${e[1]}</td><td>${e[3]}</td><td>${e[5]}</td><td id="${i+1}" class="icon"></td></tr>`;
-			console.log(this.dataToSend);
+			//console.log(this.dataToSend);
+			
 			this.dataToSend[`${i+1}`] = e; 
-			console.log(this.dataToSend);
+
+			/*
+			this.#dataForm[`${i+1}`] = {
+				'nama' : document.getElementById('nama').value,
+				'alamat' : document.getElementById('alamat').value,
+				'kel' : document.getElementById('kel').value,
+				'wa' : document.getElementById('wa').value,
+				'jenisTera' : 'tuk'
+			};
+			*/
+			//console.log(this.dataToSend);
+			
 		});
 		str += `</table>`;		
 		document.querySelector(".shopChart").innerHTML = str;
@@ -335,6 +347,7 @@ export class createFormMasyRedApp {
 		return this.constructor.dataToSend;
 	}
 
+	
 	get get_dataForm() {
 		this.#dataForm['nama'] = document.getElementById('nama').value;
 		this.#dataForm['alamat'] = document.getElementById('alamat').value;
@@ -343,6 +356,21 @@ export class createFormMasyRedApp {
 		this.#dataForm['jenisTera'] = "tuk"; 
 		return this.#dataForm;
 	}
+	
+
+	/*
+	get get_dataForm() {
+		for (let k of this.dataToSend) {
+			this.#dataForm[`${k+1}`] = {
+				'nama' : document.getElementById('nama').value,
+				'alamat' : document.getElementById('alamat').value,
+				'kel' :
+				'wa' :
+				'jenisTera' :
+			}
+		}
+	}
+	*/
 
 	get get_listIndex() {
 		return this.#listIndex;

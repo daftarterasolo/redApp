@@ -100,8 +100,9 @@ function clickLogout() {
 		formMasyRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]} ${args[4]}</legend></fieldset></div>`;
 		formMasyRedApp.generateBtnHandler();
 
-		const sbmtHandler = new masySubmitProcessor(formMasyRedApp);
 		const scanHandler = new masyPrepareCam(formMasyRedApp);
+		const sbmtHandler = new masySubmitProcessor(formMasyRedApp);
+
 		/*
 		const formMasy = new createFormMasy(document.querySelector(".main"), str);
 		await formMasy.generateForm();
