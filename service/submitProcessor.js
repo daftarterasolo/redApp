@@ -20,7 +20,8 @@ export class masySubmitProcessor extends submitProcessor {
 		this.#obj = obj;
 		this.#detectIfSubmitClicked();
 		//this.#api = "https://script.google.com/macros/s/AKfycbxCRpIT-PAtmRHksjns4-xHEraWMc9fC8MT9dYHMEYsv9zr1jCqfmYQIB7sZYxsii-MyA/exec";
-		this.#api = "https://script.google.com/macros/s/AKfycbwIrVmzY6jI9YiNEAtlepkZijgpXM8PdeLo2tkrLmWw2Ay8QGZIimaKqC7tdqapR7KdCg/exec";
+		//this.#api = "https://script.google.com/macros/s/AKfycbwIrVmzY6jI9YiNEAtlepkZijgpXM8PdeLo2tkrLmWw2Ay8QGZIimaKqC7tdqapR7KdCg/exec";
+		this.#api = "https://script.google.com/macros/s/AKfycbzYB8Wcz-grCuoWPbkHHbyNfyAeNoDVH34Y4P-3ANv9DjwiJ6zep7bRTl2doNbkZI5SQw/exec";
 		this.#authData = {
 			'id' : sessionStorage.getItem('id'),
 			'token' : sessionStorage.getItem('key')
@@ -34,9 +35,9 @@ export class masySubmitProcessor extends submitProcessor {
 	}
 
 	#checkIfdataFormIsEmpty() {
-		this.#checkIfdataToSendIsUsedAlamatQr();
+		let useQrAddr = this.#checkIfdataToSendIsUsedAlamatQr();
 		let dat = this.#obj.get_dataForm; 
-		if (dat['nama'] === "" || dat['alamat'] === "" || dat['kel'] === "") {
+		if ((dat['nama'] === "" || dat['alamat'] === "" || dat['kel'] === "") && useQrAddr === false ) {
 			throw new Error("Anda belum mengisi data identitas dengan lengkap....Silahkan klik tanda tombol 'Back' untuk melengkapi data identitas.");
 		}
 
@@ -47,13 +48,14 @@ export class masySubmitProcessor extends submitProcessor {
 	}
 
 	#checkIfdataToSendIsUsedAlamatQr() {
-		let status;
+		let status = true;
 
 		for (let elem in this.#obj.get_dataToSend) {
-			this.#obj.get_dataToSend[elem].length < 11 ? status = false : status = true;
+			this.#obj.get_dataToSend[elem].length < 11 ? status = status && false : status = status && true;
 		}
 
-		alert(status);
+		//alert(status);
+		return status;
 	}
 
 	#resetFormIdentitas() {
