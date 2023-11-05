@@ -6,7 +6,8 @@ import { createFormSpbuRedApp } from './service/formSpbuRedApp.js';
 //import { createFormLoko } from './service/formLoko.js';
 import { createFormLokoRedApp } from './service/formLokoRedApp.js';
 import { masySubmitProcessor, pabrikSubmitProcessor, lokoSubmitProcessor, spbuSubmitProcessor } from './service/submitProcessor.js';
-import { masyPrepareCam } from './util/siapkanKamera.js';
+import { masyPrepareCam, lokoPrepareCam } from './util/siapkanKamera.js';
+import { createFormScanOnly } from './service/formScanOnly.js';
 //import { checkTheLocalSession, lout } from './service/login.js';
 
 /*
@@ -91,10 +92,6 @@ function clickLogout() {
 		
 		const formMasyRedApp = new createFormMasyRedApp(document.querySelector(".main"), str);
 		await formMasyRedApp.generateForm();
-		/*const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][3]']
-		formMasyRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]}</legend></fieldset></div>`;
-		formMasyRedApp.generateBtnHandler();
-		*/
 
 		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][0]', 'this.list[k][1]', 'this.list[k][2]']
 		formMasyRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]} ${args[4]}</legend></fieldset></div>`;
@@ -103,15 +100,6 @@ function clickLogout() {
 		const scanHandler = new masyPrepareCam(formMasyRedApp);
 		const sbmtHandler = new masySubmitProcessor(formMasyRedApp);
 
-		/*
-		const formMasy = new createFormMasy(document.querySelector(".main"), str);
-		await formMasy.generateForm();
-		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][3]']
-		formMasy.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]}</legend></fieldset></div>`;
-		formMasy.generateBtnHandler();
-		
-		const sbmtHandler = new masySubmitProcessor(formMasy);
-		*/
 	});
 
 	let menuPbrk = document.querySelector(".menu").children[0];
@@ -238,13 +226,6 @@ function clickLogout() {
 			const sbmtHandler = new spbuSubmitProcessor(formSpbuRedApp);
 
 		
-			/*
-			const formSpbu = new createFormSpbu(document.querySelector(".main"), str);
-			formSpbu.generateForm();
-			formSpbu.generateBtnHandler();
-
-			const sbmtHandler = new spbuSubmitProcessor(formSpbu);
-			*/
 	});
 
 	let menuLoko = document.querySelector(".menu").children[3];
@@ -275,7 +256,10 @@ function clickLogout() {
 						<datalist id="kelurahan"></datalist>
 						<datalist id="perushLoko"></datalist>
 					</div>
-					<div class="uttpDiv hidden"></div>					
+					<div class="uttpDiv hidden"></div>		
+					<div class="scanDiv hidden">
+						<video id="video" autoplay style="max-width : 100%; max-height : 100%;"></video>
+					</div>			
 					<div class="jmlhDiv hidden">
 						<form class="spe">
 							<input type="text" class="form_data" name="uttp" id="uttp" readonly>
@@ -293,27 +277,39 @@ function clickLogout() {
 
 		const formLokoRedApp = new createFormLokoRedApp(document.querySelector(".main"), str);
 		formLokoRedApp.generateForm();
-		/*
-		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][3]']
-		formLokoRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]}</legend></fieldset></div>`;
-		*/
 	
 		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][0]', 'this.list[k][1]', 'this.list[k][2]']
 		formLokoRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]} ${args[4]}</legend></fieldset></div>`;
 
 		formLokoRedApp.generateBtnHandler();
-
+		
+		const scanHandler = new lokoPrepareCam(formLokoRedApp);
 		const sbmtHandler = new lokoSubmitProcessor(formLokoRedApp);
 		sbmtHandler.setApi();						
-		/*
-		const formLoko = new createFormLoko(document.querySelector(".main"), str);
-		formLoko.generateForm();
-		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][3]']
-		formLoko.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]}</legend></fieldset></div>`;
-		formLoko.generateBtnHandler();
+	});
 
-		const sbmtHandler = new lokoSubmitProcessor(formLoko);
-		*/
+	let menuScanOnly = document.querySelector('.menu2').children[0];
+	menuScanOnly.addEventListener("click",() => {
+		let str = `<div class="mainContent">      
+						<div class="subContent" id="sub2">
+							<div class="title">Silahkan Scan QRCode</div>  
+							<div class="shopChart"></div>
+							<div class="addUttp">
+								<div class="addDiv qrDiv"></div>
+							</div>
+							<div class="backBtnDiv">
+								<form><input type="button" name="sbmt" id="sbmt" value="Submit"></form>
+							</div>                  
+						</div>
+					</div>
+					<div class="uttpDiv hidden"></div>					
+					<div class="scanDiv hidden">
+						<!--<h3></h3>--> 
+						<video id="video" autoplay style="max-width : 100%; max-height : 100%;"></video>
+					</div>`;		
+
+		const formScanOnly = new createFormScanOnly(document.querySelector(".main"), str);
+		formScanOnly.generateForm();
 	});
 
 })();

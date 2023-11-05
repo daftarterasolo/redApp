@@ -161,7 +161,8 @@ export class pabrikSubmitProcessor extends masySubmitProcessor {
 
 export class lokoSubmitProcessor extends masySubmitProcessor {
 	setApi() {
-		this.set_api = "https://script.google.com/macros/s/AKfycbzCVJdosncho6zPDd-l-m4YJcCaLf6s8P5bcOtRGi3MfLHX3xBQvzXJgbb3PxIS1Qnj/exec";
+		//this.set_api = "https://script.google.com/macros/s/AKfycbzCVJdosncho6zPDd-l-m4YJcCaLf6s8P5bcOtRGi3MfLHX3xBQvzXJgbb3PxIS1Qnj/exec";
+		this.set_api = "https://script.google.com/macros/s/AKfycbzDL8BFUy1xRZhIB2A2YcvLD91tov8AvGj-ncM_wEIthhr6BlKiJcrEmzwmnwY52II/exec";
 	}
 }
 

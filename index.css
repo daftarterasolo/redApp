@@ -776,9 +776,8 @@ legend.legendTitle {
 }
 
 .qrDivLoko {
-    background-image: url("img/scan-code.png");
+    background-image: url("img/qr-code.png");
     background-size: contain;
-    opacity: 1;
 }
 
 .backBtnDiv {
@@ -812,6 +811,14 @@ legend.legendTitle {
 
 .qrDiv:active {
     background-color: #80471C;
+    transform: translateY(2px);
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}
+
+.qrDivLoko:active {
+    background-color: #4682B4;
     transform: translateY(2px);
     font-family: 'Poppins', sans-serif;
     color: #FFFFFF;
