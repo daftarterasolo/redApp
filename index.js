@@ -6,7 +6,7 @@ import { createFormSpbuRedApp } from './service/formSpbuRedApp.js';
 //import { createFormLoko } from './service/formLoko.js';
 import { createFormLokoRedApp } from './service/formLokoRedApp.js';
 import { masySubmitProcessor, pabrikSubmitProcessor, lokoSubmitProcessor, spbuSubmitProcessor } from './service/submitProcessor.js';
-import { masyPrepareCam, lokoPrepareCam } from './util/siapkanKamera.js';
+import { masyPrepareCam, lokoPrepareCam, scanOnlyPrepareCam } from './util/siapkanKamera.js';
 import { createFormScanOnly } from './service/formScanOnly.js';
 //import { checkTheLocalSession, lout } from './service/login.js';
 
@@ -295,7 +295,7 @@ function clickLogout() {
 							<div class="title">Silahkan Scan QRCode</div>  
 							<div class="shopChart"></div>
 							<div class="addUttp">
-								<div class="addDiv qrDiv"></div>
+								<div class="addDiv qrDivScanOnly"></div>
 							</div>
 							<div class="backBtnDiv">
 								<form><input type="button" name="sbmt" id="sbmt" value="Submit"></form>
@@ -310,6 +310,7 @@ function clickLogout() {
 
 		const formScanOnly = new createFormScanOnly(document.querySelector(".main"), str);
 		formScanOnly.generateForm();
+		const scanHandler = new scanOnlyPrepareCam(formScanOnly);
 	});
 
 })();

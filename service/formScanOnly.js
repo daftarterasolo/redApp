@@ -1,6 +1,8 @@
+import { createFormMasyRedApp } from './formMasyRedApp.js';
 //import { masyPrepareCam, lokoPrepareCam } from './util/siapkanKamera.js';
 
-export class createFormScanOnly {
+export class createFormScanOnly extends createFormMasyRedApp {
+	/*
 	static shopChartTemp = [];
 	static dataToSend = {};
 
@@ -10,7 +12,8 @@ export class createFormScanOnly {
 		this.constructor.shopChartTemp = [];
 		this.constructor.dataToSend = {};
 	}
-
+	*/
+	
 	//method yg dijalankan pd #generateLoadingBar()
 	setLoadingBarColor() {
 		document.querySelectorAll(".lds-facebook div").forEach(el => el.style.background = "#4682b4");
@@ -39,9 +42,9 @@ export class createFormScanOnly {
 		});
 		document.querySelectorAll(".subContent").forEach(e => e.style.borderTop = "3px solid #4682b4");
 		document.querySelectorAll(".subContent").forEach(e => e.style.borderBottom = "3px solid #4682b4");
-		document.querySelector("#sbmt").style.backgroundColor = "#FFFFFF";
-		document.querySelector("#sbmt").style.borderColor = "#4682b4";
-		document.querySelector("#sbmt").style.color = "#4682b4";
+		document.querySelector("#sbmt").style.backgroundColor = "#098586";
+		document.querySelector("#sbmt").style.borderColor = "#FFFFFF";
+		document.querySelector("#sbmt").style.color = "#FFFFFF";
 	}
 
 	async generateForm() {
@@ -51,5 +54,11 @@ export class createFormScanOnly {
 		this.#setCSSScanOnly();
 		setTimeout(() => this.#generateLoadingBar(false), 1000);
 	}
+
+	//override method generateShopChartTbl() pd parent class
+	static generateShopChartTbl(arr) {
+		super.generateShopChartTbl(arr);
+		document.querySelector("table").setAttribute('id', 'tabelLoko');
+	} 
 
 } 

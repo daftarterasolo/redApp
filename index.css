@@ -780,6 +780,11 @@ legend.legendTitle {
     background-size: contain;
 }
 
+.qrDivScanOnly {
+    background-image: url("img/qr-code.png");
+    background-size: contain;    
+}
+
 .backBtnDiv {
     /*position:relative;*/
     /*width:100px;
@@ -823,6 +828,14 @@ legend.legendTitle {
     font-family: 'Poppins', sans-serif;
     color: #FFFFFF;
     border: 2px solid #FFFFFF;
+}
+
+.qrDivScanOnly:active {
+    background-color: #F97272;
+    transform: translateY(2px);
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;    
 }
 
 #klik {
