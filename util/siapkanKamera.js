@@ -728,10 +728,9 @@ export class scanOnlyPrepareCam extends prepareCam {
             <input type="text" class="form_data2" name="qrSn" id="qrSn" placeholder="serial">
             <input type="text" class="form_data2" name="qrJenisUsaha" id="qrJenisUsaha" placeholder="jenisUsaha">
             <input type="text" class="form_data2" name="qrBuatan" id="qrBuatan" placeholder="buatan">
-            <!--<input type="checkbox" id="addr" name="addr" value="ya">
-            <label id="addrLabel" for="addr">Apakah ingin menggunakan alamat ssi QrCode?</label><br>-->
-            <label class="addrLabel" for="addr">Apakah ingin menggunakan alamat ssi QrCode?
-                <input type="checkbox" id="addr" name="addr" value="ya">
+
+            <label for="addr" hidden>Apakah ingin menggunakan alamat ssi QrCode?
+                <input type="checkbox" id="addr" name="addr" value="ya" checked>
                 <span class="checkmark"></span>
             </label>
         `;

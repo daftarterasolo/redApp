@@ -5,7 +5,7 @@ import { createFormPabrik } from './service/formPabrik.js';
 import { createFormSpbuRedApp } from './service/formSpbuRedApp.js';
 //import { createFormLoko } from './service/formLoko.js';
 import { createFormLokoRedApp } from './service/formLokoRedApp.js';
-import { masySubmitProcessor, pabrikSubmitProcessor, lokoSubmitProcessor, spbuSubmitProcessor } from './service/submitProcessor.js';
+import { masySubmitProcessor, pabrikSubmitProcessor, lokoSubmitProcessor, spbuSubmitProcessor, scanOnlySubmitProcessor } from './service/submitProcessor.js';
 import { masyPrepareCam, lokoPrepareCam, scanOnlyPrepareCam } from './util/siapkanKamera.js';
 import { createFormScanOnly } from './service/formScanOnly.js';
 //import { checkTheLocalSession, lout } from './service/login.js';
@@ -311,6 +311,8 @@ function clickLogout() {
 		const formScanOnly = new createFormScanOnly(document.querySelector(".main"), str);
 		formScanOnly.generateForm();
 		const scanHandler = new scanOnlyPrepareCam(formScanOnly);
+		const sbmtHandler = new scanOnlySubmitProcessor(formScanOnly);
+		sbmtHandler.setApi();
 	});
 
 })();

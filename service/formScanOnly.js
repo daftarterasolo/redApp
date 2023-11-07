@@ -2,17 +2,6 @@ import { createFormMasyRedApp } from './formMasyRedApp.js';
 //import { masyPrepareCam, lokoPrepareCam } from './util/siapkanKamera.js';
 
 export class createFormScanOnly extends createFormMasyRedApp {
-	/*
-	static shopChartTemp = [];
-	static dataToSend = {};
-
-	constructor(formKontainer, str) {
-		this.formKontainer = formKontainer;
-		this.str = str;
-		this.constructor.shopChartTemp = [];
-		this.constructor.dataToSend = {};
-	}
-	*/
 	
 	//method yg dijalankan pd #generateLoadingBar()
 	setLoadingBarColor() {

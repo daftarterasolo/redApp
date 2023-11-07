@@ -1084,6 +1084,10 @@ td.icon {
     margin-right: 10px;
 }
 
+.addrLabel_qronly {
+    visibility: hidden;
+}
+
 .closeFormJml span {
     color : red;
 }
