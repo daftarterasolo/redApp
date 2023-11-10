@@ -1,19 +1,103 @@
 <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <link rel="stylesheet" href="registration.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    </style>
+    <title>RedApp Metrologi Surakarta</title>
+
+</head>
+<body>
+
+<button class="tablink" onclick="openPage('tera', this, '#6879D0')">Tera</button>
+<button class="tablink" onclick="openPage('tuk', this, '#6879D0')" id="defaultOpen">TUK</button>
+<button class="tablink" onclick="openPage('spbu', this, '#6879D0')">SPBU</button>
+<button class="tablink" onclick="openPage('loko', this, '#6879D0')">Loko</button>
+
+<div id="tera" class="tabcontent">
+  <h3>Tera</h3>
+  <p>Home is where the heart is..</p>
+</div>
+
+<div id="tuk" class="tabcontent">
+  <h3>Tera Ulang Kantor</h3>
+  <p>Some news this fine day!</p> 
+</div>
+
+<div id="spbu" class="tabcontent">
+  <h3>SPBU</h3>
+  <p>Get in touch, or swing by for a cup of coffee.</p>
+</div>
+
+<div id="loko" class="tabcontent">
+  <h3>Tera Di Tempat Pakai</h3>
+  <p>Get in touch, or swing by for a cup of coffee.</p>
+</div>
+
+
+<script>
+function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+   
+</body>
+</html> 
+
+
+<!--
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 
-        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="registration.css">
         
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
         </style>
         <title>RedApp Metrologi Surakarta</title>
-        <!--<script type="module" src="registration.js"></script>-->
     </head>
     <body bgcolor="#F5F5F5">
+        <button class="tablink" onclick="openPage('Home', this, 'red')">Home</button>
+        <button class="tablink" onclick="openPage('News', this, 'green')" id="defaultOpen">News</button>
+        <button class="tablink" onclick="openPage('Contact', this, 'blue')">Contact</button>     
+
+        <div id="Home" class="tabcontent">
+          <h3>Home</h3>
+          <p>Home is where the heart is..</p>
+        </div>
+
+        <div id="News" class="tabcontent">
+          <h3>News</h3>
+          <p>Some news this fine day!</p>
+        </div>
+
+        <div id="Contact" class="tabcontent">
+          <h3>Contact</h3>
+          <p>Get in touch, or swing by for a cup of coffee.</p>
+        </div>           
+        
         <form id="tglForm">
             <input type="date" name="tgl" id="tgl" value="2023-11-08">        
         </form>
@@ -29,6 +113,34 @@
             <div class="item"></div>
             <div class="item"></div>
         </div>
+        
     </body>
+
+    <script type="text/javascript">
+        function openPage(pageName, elmnt, color) {
+          // Hide all elements with class="tabcontent" by default */
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+
+          // Remove the background color of all tablinks/buttons
+          tablinks = document.getElementsByClassName("tablink");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+          }
+
+          // Show the specific tab content
+          document.getElementById(pageName).style.display = "block";
+
+          // Add the specific color to the button used to open the tab content
+          elmnt.style.backgroundColor = color;
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();         
+    </script>
     
 </html>
+-->
