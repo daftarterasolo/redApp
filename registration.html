@@ -13,46 +13,101 @@
 
 </head>
 <body>
+<div class="kontainerMain">
+    <button class="tablink" onclick="openPage('tera', this, '#6879D0')">Tera</button>
+    <button class="tablink" onclick="openPage('tuk', this, '#6879D0')" id="defaultOpen">TUK</button>
+    <button class="tablink" onclick="openPage('spbu', this, '#6879D0')">SPBU</button>
+    <button class="tablink" onclick="openPage('loko', this, '#6879D0')">Loko</button>
 
-<button class="tablink" onclick="openPage('tera', this, '#6879D0')">Tera</button>
-<button class="tablink" onclick="openPage('tuk', this, '#6879D0')" id="defaultOpen">TUK</button>
-<button class="tablink" onclick="openPage('spbu', this, '#6879D0')">SPBU</button>
-<button class="tablink" onclick="openPage('loko', this, '#6879D0')">Loko</button>
+    <div id="tera" class="tabcontent">
+        <form id="tglForm">
+            <input type="date" name="tgl_tera" id="tgl_tera" class="tgl" value="2023-11-08">        
+        </form>
+        <div class="kontainer k_tera">
+            <div class="item">
+                <div class="inner">
+                    Nomor Order : 127/TM/X/2023
+                </div>
+            </div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
 
-<div id="tera" class="tabcontent">
-  <h3>Tera</h3>
-  <p>Home is where the heart is..</p>
+    </div>
+
+    <div id="tuk" class="tabcontent">
+        <form id="tglForm">
+            <input type="date" name="tgl_tuk" id="tgl_tuk" class="tgl" value="2023-11-08">        
+        </form>
+        <div class="kontainer k_tuk">
+            <div class="item">
+                <div class="inner">
+                    Nomor Order : 127/TM/X/2023
+                </div>
+            </div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+
+    <div id="spbu" class="tabcontent">
+        <form id="tglForm">
+            <input type="date" name="tgl_spbu" id="tgl_spbu" class="tgl" value="2023-11-08">        
+        </form>
+        <div class="kontainer k_spbu">
+            <div class="item">
+                <div class="inner">
+                    Nomor Order : 127/TM/X/2023
+                </div>
+            </div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+
+    <div id="loko" class="tabcontent">
+        <form id="tglForm">
+            <input type="date" name="tgl_loko" id="tgl_loko" class="tgl" value="2023-11-08">        
+        </form>
+        <div class="kontainer k_loko">
+            <div class="item">
+                <div class="inner">
+                    Nomor Order : 127/TM/X/2023
+                </div>
+            </div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+    </div>
+    
 </div>
 
-<div id="tuk" class="tabcontent">
-  <h3>Tera Ulang Kantor</h3>
-  <p>Some news this fine day!</p> 
-</div>
-
-<div id="spbu" class="tabcontent">
-  <h3>SPBU</h3>
-  <p>Get in touch, or swing by for a cup of coffee.</p>
-</div>
-
-<div id="loko" class="tabcontent">
-  <h3>Tera Di Tempat Pakai</h3>
-  <p>Get in touch, or swing by for a cup of coffee.</p>
-</div>
-
-
-<script>
-function openPage(pageName,elmnt,color) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].style.backgroundColor = "";
-  }
-  document.getElementById(pageName).style.display = "block";
-  elmnt.style.backgroundColor = color;
+<script type="module" src="registration.js"></script>
+<script type="text/javascript">
+    function openPage(pageName,elmnt,color) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].style.backgroundColor = "";
+    }
+    document.getElementById(pageName).style.display = "block";
+    elmnt.style.backgroundColor = color;
 }
 
 // Get the element with id="defaultOpen" and click on it
