@@ -8,7 +8,7 @@
 
 .item {
     border-radius: 7px;
-    width : 45%;
+    width : 90%;
     height: 200px;
     margin-bottom: 10px;
     /*background-image: url("img/pallete_edit.png");*/
@@ -110,4 +110,21 @@ body, html {
     width: 98%;
     margin-left : auto;
     margin-right : auto;
+}
+
+.innerOfInner {
+    background : rgba(227, 61, 148, 0.6);
+    border-radius: 2px;
+    width : 99%;
+    margin-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 3px;
+}
+
+.innerOfInner:nth-child(odd) {
+    background : rgba(227, 61, 148, 0.6);    
+}
+
+.innerOfInner:nth-child(even) {
+    background : rgba(137, 196, 244, 0.6);    
 }
