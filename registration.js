@@ -1,9 +1,27 @@
 function detailItem(arr) {
-  let detailStr = "";
-
-  for (let ar of arr) {
-    detailStr += ` ${ar} |`;
+  let detailStr = ``;
+  let uttp = ``;
+  let arrLabel = ['WTU', 'Alamat', 'Uttp', 'Merek', 'SN', 'Tipe', 'Jml', 'Buatan', ''];
+  let i = 0;
+  detailStr +=`<table>`;
+  
+  for (let [idx,ar] of arr.entries()) {
+    //detailStr += ` ${ar} |`;
+    if (idx != 0 && idx != 1 && idx != 15 && idx != 16 && idx != 5 && idx != 4) {
+      if (idx === 6 || idx === 7 || idx === 8) {
+        uttp += `${ar} / `;
+        if (idx === 8) {
+          detailStr += `<tr><td>${arrLabel[i]}</td><td>${uttp}</td></tr>`;
+          i++;
+        }
+      } else {
+        detailStr += `<tr><td>${arrLabel[i]}</td><td>${ar}</td></tr>`;
+        i++;
+      }
+    }
   }
+
+  detailStr += `</table>`;
 
   return detailStr;
 }
@@ -49,7 +67,7 @@ function changeDate() {
 
               lastOrder = l[1];
               //str += `<div class="item"><div class="inner">${l}</div></div>`;
-              //document.querySelector("k_tuk").append()
+              //document.querySelector(".k_tuk").append()
 
             }
           } else {
