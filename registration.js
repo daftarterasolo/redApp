@@ -1,27 +1,32 @@
-function detailItem(arr) {
+function detailItem(arr, jenisTera) {
   let detailStr = ``;
   let uttp = ``;
-  let arrLabel = ['WTU', 'Alamat', 'Uttp', 'Merek', 'SN', 'Tipe', 'Jml', 'Buatan', ''];
+  let arrLabel = ['WTU', 'Alamat', 'Uttp', 'Merek', 'SN', 'Tipe', 'Jml', 'Buatan'];
   let i = 0;
-  detailStr +=`<table>`;
+  detailStr +=`<table class="wadah">`;
   
+  console.log(arr);
+
   for (let [idx,ar] of arr.entries()) {
     //detailStr += ` ${ar} |`;
     if (idx != 0 && idx != 1 && idx != 15 && idx != 16 && idx != 5 && idx != 4) {
       if (idx === 6 || idx === 7 || idx === 8) {
         uttp += `${ar} / `;
         if (idx === 8) {
-          detailStr += `<tr><td>${arrLabel[i]}</td><td>${uttp}</td></tr>`;
+          detailStr += `<tr><td class="label">${arrLabel[i]}</td><td>${uttp}</td></tr>`;
           i++;
         }
       } else {
-        detailStr += `<tr><td>${arrLabel[i]}</td><td>${ar}</td></tr>`;
+        detailStr += `<tr><td class="label">${arrLabel[i]}</td><td>${ar}</td></tr>`;
         i++;
       }
     }
   }
 
-  detailStr += `</table>`;
+  detailStr += `
+    <tr><td colspan=2 align="center"><input type="button" name="cert" id="cert" value = "Sertifikat"></td></tr>
+    </table>
+  `;
 
   return detailStr;
 }
@@ -29,11 +34,33 @@ function detailItem(arr) {
 
 function changeDate() {
   let tgl = document.querySelectorAll('.tgl');
+
   for (let k of tgl) {
     k.addEventListener("change", async () => {
-      //alert(k.value);
+      //console.log(k.id);
 
-      const urlApi = "https://script.google.com/macros/s/AKfycbwOdKdXcTkSTcFlBRW_KjdQdvMs3OdGwbXpeDe3KjcgYTFTwbaj3niE8BEE8QOoWG3WzA/exec";
+      let obj = {
+        "tgl_tuk" : {
+          "urlApi" : "https://script.google.com/macros/s/AKfycbwOdKdXcTkSTcFlBRW_KjdQdvMs3OdGwbXpeDe3KjcgYTFTwbaj3niE8BEE8QOoWG3WzA/exec",
+          "layoutPos" : ".k_tuk"
+        },
+        "tgl_tera" : {
+          "urlApi" : "https://script.google.com/macros/s/AKfycbwwcsuTOwtj-SNAvZRXIQXXS2aBHN44D-d7oGiZ2WC-8BpNgY8K3mMEU5p5H2_RcF8Hww/exec",
+          "layoutPos" : ".k_tera"          
+        },
+        "tgl_spbu" : {
+          "urlApi" : "https://script.google.com/macros/s/AKfycbx-SWs7QFx19uB_dHVsrUK8Wwiu_W_2kKLYcFt5JJpjcDcruUEMvXMJsVljRfWIllcnKw/exec",
+          "layoutPos" : ".k_spbu"          
+        },
+        "tgl_loko" : {
+          "urlApi" : "https://script.google.com/macros/s/AKfycbyLm3QRkA7sYj-KZC_CSK5NB4YXibuZLjFUymU3_GOe6cviUYZCp0QTr1E4qk-dNUZa/exec",
+          "layoutPos" : ".k_loko"          
+        }        
+      };
+
+      const urlApi = obj[k.id]["urlApi"];
+
+      //console.log(k.value);
 
       const postData = {
         'tanggal' : k.value,
@@ -52,29 +79,25 @@ function changeDate() {
           if (e.result !== "error") {
             let lastOrder = 0;
             for (let l of e.data) {
-              console.log(l);
+              //console.log(l);
               if (l[1] !== lastOrder) {
                 str += `</div></div>`;
-                str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l)}</div>`;
+                if (l.length === 18) {
+                  str += `<div class="item"><div class="inner">Nomor Order : ${l[17]}<div class="innerOfInner">${detailItem(l)}</div>`;
+                } else {
+                  str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l)}</div>`;                  
+                }
               } else {
                 str += `<div class="innerOfInner">${detailItem(l)}</div>`;
               }
 
-              /*for (let m of l) {
-                //console.log(m);
-                str += `${m}`;
-              }*/
-
               lastOrder = l[1];
-              //str += `<div class="item"><div class="inner">${l}</div></div>`;
-              //document.querySelector(".k_tuk").append()
-
             }
           } else {
             return;
           }
           //console.log(str);
-          document.querySelector(".k_tuk").innerHTML = str; 
+          document.querySelector(obj[k.id]["layoutPos"]).innerHTML = str; 
       });
     });
 
@@ -90,6 +113,82 @@ function getNowDate() {
   }
 }
 
+function chooseMenu() {
+  let tab = document.querySelectorAll(".tablink");
+
+  for (let tb of tab) {
+    tb.addEventListener("click", async () => {
+   
+      let obj = {
+        "defaultOpen" : {
+          "urlApi" : "https://script.google.com/macros/s/AKfycbwOdKdXcTkSTcFlBRW_KjdQdvMs3OdGwbXpeDe3KjcgYTFTwbaj3niE8BEE8QOoWG3WzA/exec",
+          "layoutPos" : ".k_tuk"
+        },
+        "tabTera" : {
+          "urlApi" : "https://script.google.com/macros/s/AKfycbwwcsuTOwtj-SNAvZRXIQXXS2aBHN44D-d7oGiZ2WC-8BpNgY8K3mMEU5p5H2_RcF8Hww/exec",
+          "layoutPos" : ".k_tera"          
+        },
+        "tabSpbu" : {
+          "urlApi" : "https://script.google.com/macros/s/AKfycbx-SWs7QFx19uB_dHVsrUK8Wwiu_W_2kKLYcFt5JJpjcDcruUEMvXMJsVljRfWIllcnKw/exec",
+          "layoutPos" : ".k_spbu"          
+        },
+        "tabLoko" : {
+          "urlApi" : "https://script.google.com/macros/s/AKfycbyLm3QRkA7sYj-KZC_CSK5NB4YXibuZLjFUymU3_GOe6cviUYZCp0QTr1E4qk-dNUZa/exec",
+          "layoutPos" : ".k_loko"          
+        }        
+      };
+
+      const urlApi = obj[tb.id]["urlApi"];
+
+      let d = new Date();
+      let nowDate = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+
+      //console.log(urlApi);
+
+      const postData = {
+        'tanggal' : nowDate,
+        'authData' : {
+              'token' : sessionStorage.getItem('key') 
+        }
+      };
+
+      await fetch(urlApi, {
+          method : 'POST',
+          body : JSON.stringify(postData) 
+      })
+      .then(e => e.json())
+      .then(e => {
+          let str = '';
+          if (e.result !== "error") {
+            let lastOrder = 0;
+            for (let l of e.data) {
+              //console.log(l);
+              if (l[1] !== lastOrder) {
+                str += `</div></div>`;
+                if (l.length === 18) {
+                  str += `<div class="item"><div class="inner">Nomor Order : ${l[17]}<div class="innerOfInner">${detailItem(l)}</div>`;
+                } else {
+                  str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l)}</div>`;                  
+                }
+              } else {
+                str += `<div class="innerOfInner">${detailItem(l)}</div>`;
+              }
+
+              lastOrder = l[1];
+            }
+          } else {
+            return;
+          }
+          //console.log(str);
+          document.querySelector(obj[tb.id]["layoutPos"]).innerHTML = str; 
+      });
+
+
+    });
+  } 
+}
+
+chooseMenu();
 getNowDate();
 changeDate();
 

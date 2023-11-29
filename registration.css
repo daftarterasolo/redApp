@@ -12,26 +12,27 @@
     height: auto;
     margin-bottom: 10px;
     /*background-image: url("img/pallete_edit.png");*/
-    background-size :contain;
+    background-size : cover;
 }
 
 .k_tera .item {
-    background-image: url("img/pallete5.jpeg");
+    background-image: url("img/AT.jpg");
+    background-size: cover;
 }
 
 .k_tuk .item {
     background-image: url("img/AT.jpg");
+    background-size: cover;
 }
 
 .k_loko .item {
-    background-image: url("img/digital_balance.jpg");
+    background-image: url("img/AT.jpg");
     background-size: cover;
 }
 
 .k_spbu .item {
-    background-image: url("img/dispenser.jpg");
+    background-image: url("img/AT.jpg");
     background-size: cover;
-    border : 1px solid orange;
 }
 
 .k_loko .item .inner {
@@ -115,7 +116,7 @@ body, html {
 .innerOfInner {
     background : rgba(227, 61, 148, 0.6);
     border-radius: 2px;
-    width : 100%;
+    width : 99%;
     margin-bottom: 3px;
     padding-left: 3px;
     padding-right: 3px;
@@ -127,4 +128,13 @@ body, html {
 
 .innerOfInner:nth-child(even) {
     background : rgba(137, 196, 244, 0.6);    
+}
+
+.label {
+  background-color: steelblue;
+}
+
+.wadah {
+  width : 100%;
+  //border-collapse: collapse;
 }
