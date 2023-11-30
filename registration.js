@@ -1,7 +1,13 @@
 function detailItem(arr, jenisTera) {
   let detailStr = ``;
   let uttp = ``;
-  let arrLabel = ['WTU', 'Alamat', 'Uttp', 'Merek', 'SN', 'Tipe', 'Jml', 'Buatan'];
+  let arrLabel = [];
+  if (jenisTera === "tera") {
+    arrLabel = ['WTU', 'Alamat', 'Uttp', 'Merek', 'SN', '', 'Tipe', 'Jml', 'Buatan', ''];
+  } else {
+    arrLabel = ['WTU', 'Alamat', 'Uttp', 'Merek', 'SN', 'Tipe', 'Jml', 'Buatan', ''];
+  }
+
   let i = 0;
   detailStr +=`<table class="wadah">`;
   
@@ -9,7 +15,7 @@ function detailItem(arr, jenisTera) {
 
   for (let [idx,ar] of arr.entries()) {
     //detailStr += ` ${ar} |`;
-    if (idx != 0 && idx != 1 && idx != 15 && idx != 16 && idx != 5 && idx != 4) {
+    if (idx != 0 && idx != 1 && idx != 15 && idx != 16 && idx != 5 && idx != 4 && idx != 17) {
       if (idx === 6 || idx === 7 || idx === 8) {
         uttp += `${ar} / `;
         if (idx === 8) {
@@ -42,19 +48,23 @@ function changeDate() {
       let obj = {
         "tgl_tuk" : {
           "urlApi" : "https://script.google.com/macros/s/AKfycbwOdKdXcTkSTcFlBRW_KjdQdvMs3OdGwbXpeDe3KjcgYTFTwbaj3niE8BEE8QOoWG3WzA/exec",
-          "layoutPos" : ".k_tuk"
+          "layoutPos" : ".k_tuk",
+          "jenisTera" : "tuk"
         },
         "tgl_tera" : {
           "urlApi" : "https://script.google.com/macros/s/AKfycbwwcsuTOwtj-SNAvZRXIQXXS2aBHN44D-d7oGiZ2WC-8BpNgY8K3mMEU5p5H2_RcF8Hww/exec",
-          "layoutPos" : ".k_tera"          
+          "layoutPos" : ".k_tera",
+          "jenisTera" : "tera"          
         },
         "tgl_spbu" : {
           "urlApi" : "https://script.google.com/macros/s/AKfycbx-SWs7QFx19uB_dHVsrUK8Wwiu_W_2kKLYcFt5JJpjcDcruUEMvXMJsVljRfWIllcnKw/exec",
-          "layoutPos" : ".k_spbu"          
+          "layoutPos" : ".k_spbu",
+          "jenisTera" : "spbu"          
         },
         "tgl_loko" : {
           "urlApi" : "https://script.google.com/macros/s/AKfycbyLm3QRkA7sYj-KZC_CSK5NB4YXibuZLjFUymU3_GOe6cviUYZCp0QTr1E4qk-dNUZa/exec",
-          "layoutPos" : ".k_loko"          
+          "layoutPos" : ".k_loko",
+          "jenisTera" : "loko"          
         }        
       };
 
@@ -83,12 +93,12 @@ function changeDate() {
               if (l[1] !== lastOrder) {
                 str += `</div></div>`;
                 if (l.length === 18) {
-                  str += `<div class="item"><div class="inner">Nomor Order : ${l[17]}<div class="innerOfInner">${detailItem(l)}</div>`;
+                  str += `<div class="item"><div class="inner">Nomor Order : ${l[17]}<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"])}</div>`;
                 } else {
-                  str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l)}</div>`;                  
+                  str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"])}</div>`;                  
                 }
               } else {
-                str += `<div class="innerOfInner">${detailItem(l)}</div>`;
+                str += `<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"])}</div>`;
               }
 
               lastOrder = l[1];
