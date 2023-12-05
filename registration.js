@@ -79,6 +79,8 @@ function changeDate() {
         }
       };
 
+      clearTemplate(obj[k.id]["layoutPos"]);
+
       await fetch(urlApi, {
           method : 'POST',
           body : JSON.stringify(postData) 
@@ -112,6 +114,10 @@ function changeDate() {
     });
 
   }
+}
+
+function clearTemplate(layout) {
+  document.querySelector(layout).innerHTML = `<pre style="color : #0D98BA; font-family: 'Poppins', sans-serif;">Loading ......</pre>`; 
 }
 
 function getNowDate() {
@@ -161,6 +167,8 @@ function chooseMenu() {
               'token' : sessionStorage.getItem('key') 
         }
       };
+
+      clearTemplate(obj[tb.id]["layoutPos"]);
 
       await fetch(urlApi, {
           method : 'POST',
