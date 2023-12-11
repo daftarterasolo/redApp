@@ -1,4 +1,4 @@
-#/var/www/html/redApp/sertifikat/sertifikat-env/bin/python3
+#/home/metskasrv/.nix-profile/htdocs/redApp/sertifikat/sertifikat-env/bin/python3
 import cgi
 import cgitb
 import json
@@ -23,4 +23,19 @@ print("Content-Type: text/html\n")
 
 doc = docx.Document('master.docx')
 
-print(doc.paragraphs[2])
+"""
+fulltext = []
+k = 0
+for para in doc.paragraphs:
+	for run in para:
+		print(str(k)+run)
+"""
+
+print(doc.paragraphs[6].runs[0].text)
+#print(doc.paragraphs[6].runs[1].text)
+#for tbl in doc.tables:
+	#print(tbl.rows[0].cells[0].text)	
+#print(doc.paragraphs[6].runs[0].text)
+#print(doc.paragraphs[6].runs[1].text)
+#print(doc.paragraphs[6].runs[2].text)
+#print(fulltext[2])
