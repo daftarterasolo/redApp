@@ -23,6 +23,7 @@ print("Content-Type: text/html\n")
 
 doc = docx.Document('master.docx')
 
+
 """
 fulltext = []
 k = 0
@@ -31,7 +32,12 @@ for para in doc.paragraphs:
 		print(str(k)+run)
 """
 
-print(doc.paragraphs[6].runs[0].text)
+"""
+for baris in doc.tables[1]:
+	print(baris)	 
+"""
+
+print(doc.tables[0].rows[0].cells[0].text)
 #print(doc.paragraphs[6].runs[1].text)
 #for tbl in doc.tables:
 	#print(tbl.rows[0].cells[0].text)	
