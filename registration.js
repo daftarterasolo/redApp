@@ -1,4 +1,4 @@
-function detailItem(arr, jenisTera) {
+function detailItem(arr, jenisTera, iter) {
   let detailStr = ``;
   let uttp = ``;
   let arrLabel = [];
@@ -30,7 +30,7 @@ function detailItem(arr, jenisTera) {
   }
 
   detailStr += `
-    <tr><td colspan=2 align="center"><input type="button" name="cert" id="cert" value = "Sertifikat"></td></tr>
+    <tr><td colspan=2 align="center"><input type="button" name="${arr[1]}-${iter}" id="${arr[1]}-${iter}" value = "Sertifikat"></td></tr>
     </table>
   `;
 
@@ -90,20 +90,22 @@ function changeDate() {
           let str = '';
           if (e.result !== "error") {
             let lastOrder = 0;
+            let iterator = 0;
             for (let l of e.data) {
               //console.log(l);
               if (l[1] !== lastOrder) {
                 str += `</div></div>`;
                 if (l.length === 18) {
-                  str += `<div class="item"><div class="inner">Nomor Order : ${l[17]}<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"])}</div>`;
+                  str += `<div class="item"><div class="inner">Nomor Order : ${l[17]}<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator)}</div>`;
                 } else {
-                  str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"])}</div>`;                  
+                  str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator)}</div>`;                  
                 }
               } else {
-                str += `<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"])}</div>`;
+                str += `<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator)}</div>`;
               }
 
               lastOrder = l[1];
+              iterator++;
             }
           } else {
             return;
@@ -179,20 +181,22 @@ function chooseMenu() {
           let str = '';
           if (e.result !== "error") {
             let lastOrder = 0;
+            let iterator = 0
             for (let l of e.data) {
               //console.log(l);
               if (l[1] !== lastOrder) {
                 str += `</div></div>`;
                 if (l.length === 18) {
-                  str += `<div class="item"><div class="inner">Nomor Order : ${l[17]}<div class="innerOfInner">${detailItem(l)}</div>`;
+                  str += `<div class="item"><div class="inner">Nomor Order : ${l[17]}<div class="innerOfInner">${detailItem(l,obj[tb.id]["jenisTera"], iterator)}</div>`;
                 } else {
-                  str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l)}</div>`;                  
+                  str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l,obj[tb.id]["jenisTera"], iterator)}</div>`;                  
                 }
               } else {
-                str += `<div class="innerOfInner">${detailItem(l)}</div>`;
+                str += `<div class="innerOfInner">${detailItem(l,obj[k.id]["jenisTera"], iterator)}</div>`;
               }
 
               lastOrder = l[1];
+              iterator++;
             }
           } else {
             return;
