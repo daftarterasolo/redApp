@@ -206,6 +206,11 @@ function chooseMenu() {
   } 
 }
 
+let backToMain = document.getElementById('backToMain');
+backToMain.addEventListener("click", () => {
+  window.location.replace("/");
+});
+
 chooseMenu();
 getNowDate();
 changeDate();

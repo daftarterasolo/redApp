@@ -1,4 +1,33 @@
-#/home/metskasrv/.nix-profile/htdocs/redApp/sertifikat/sertifikat-env/bin/python3
+#!/usr/bin/python3
+
+import cgi
+import cgitb
+import json
+import math
+import statistics as stat
+from datetime import datetime
+
+# import library utk membuat file doc 
+# import docx
+#from docx.enum.text import WD_ALIGN_PARAGRAPH
+#from docx.shared import Pt
+#from docx.shared import Inches
+
+# Import library utk membuat file excel
+import xlsxwriter
+
+# Import doc to pdf converter
+#from docx2pdf import convert
+
+cgitb.enable()
+
+print("Content-type: text/html\n\n")
+print("<html>\n<body>")
+print("<div style=\"width: 100%; font-size: 40px; font-weight: bold; text-align: center;\">")
+print("Python Script Test Page")
+print("</div>\n</body>\n</html>")
+
+"""
 import cgi
 import cgitb
 import json
@@ -22,7 +51,7 @@ cgitb.enable()
 print("Content-Type: text/html\n")
 
 doc = docx.Document('master.docx')
-
+"""
 
 """
 fulltext = []
@@ -37,7 +66,9 @@ for baris in doc.tables[1]:
 	print(baris)	 
 """
 
-print(doc.tables[0].rows[0].cells[0].text)
+
+#print(doc.tables[0].rows[0].cells[0].text)
+
 #print(doc.paragraphs[6].runs[1].text)
 #for tbl in doc.tables:
 	#print(tbl.rows[0].cells[0].text)	

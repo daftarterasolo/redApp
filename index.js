@@ -315,6 +315,16 @@ function clickLogout() {
 		sbmtHandler.setApi();
 	});
 
+	let menuManage = document.querySelector('.menu2').children[2];
+	menuManage.addEventListener("click", () => {
+		window.location.replace("registration.html");
+	});
+
+	let menuVerif = document.querySelector('.menu2').children[1];
+	menuVerif.addEventListener("click", () => {
+		alert("Mohon maaf belum bisa diakses, Menu ini masih dalam pengembangan...");
+	});
+ 
 })();
 
 

@@ -138,3 +138,8 @@ body, html {
   width : 100%;
   //border-collapse: collapse;
 }
+
+#backToMain {
+    font-family:  'Poppins', sans-serif;
+    font-size: 12px;
+}
