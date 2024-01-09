@@ -21,7 +21,8 @@ export class masySubmitProcessor extends submitProcessor {
 		this.#detectIfSubmitClicked();
 		//this.#api = "https://script.google.com/macros/s/AKfycbxCRpIT-PAtmRHksjns4-xHEraWMc9fC8MT9dYHMEYsv9zr1jCqfmYQIB7sZYxsii-MyA/exec";
 		//this.#api = "https://script.google.com/macros/s/AKfycbwIrVmzY6jI9YiNEAtlepkZijgpXM8PdeLo2tkrLmWw2Ay8QGZIimaKqC7tdqapR7KdCg/exec";
-		this.#api = "https://script.google.com/macros/s/AKfycbzYB8Wcz-grCuoWPbkHHbyNfyAeNoDVH34Y4P-3ANv9DjwiJ6zep7bRTl2doNbkZI5SQw/exec";
+		//this.#api = "https://script.google.com/macros/s/AKfycbzYB8Wcz-grCuoWPbkHHbyNfyAeNoDVH34Y4P-3ANv9DjwiJ6zep7bRTl2doNbkZI5SQw/exec";
+		this.#api = "https://script.google.com/macros/s/AKfycbyj0rK_oOiaf-kTEKjlBlutF39wXHHaVsWrddSuqxfgnHWrU9s7EecWYef1vTNRQWLP4w/exec";
 		this.#authData = {
 			'id' : sessionStorage.getItem('id'),
 			'token' : sessionStorage.getItem('key')
@@ -149,7 +150,7 @@ export class pabrikSubmitProcessor extends masySubmitProcessor {
 		//this.set_api = "https://script.google.com/macros/s/AKfycbw_qgL6gQ461xKUFwXw44Si-iEzpGjszAvqOh7ofHDG53dVbzbq3qVmtMMz--Pg9qh6Tw/exec";
 		//this.set_api = "https://script.google.com/macros/s/AKfycbzeGmp6XlXfcBukHiONXuKY6irpxH80LdnKetp9Uz4rBUGLMu_4R5aFs2j-KIwJRqa9Xg/exec";
 		//this.set_api = "https://script.google.com/macros/s/AKfycbzPLcHfi-0045oSzHsqVCFV_hSft7VZOeUzCFW8NRq3U63-ez6hYt8RubUx66Pf6DfnkA/exec";
-		this.set_api = "https://script.google.com/macros/s/AKfycbyVopd9qjFzKRxl6upZ-QZbTpzdz3d2txtDQkdhW2T4arMkVnpRN_90LuzMiELvdexW/exec";
+		this.set_api = "https://script.google.com/macros/s/AKfycbxyk6QnJtaXfQkNLrBHDhIMGJKYsk2FL0yTP7TlUT2bsKprUgUg1gbZmyCPth8Z1Y3v/exec";
 	}
 
 	//override method showConfirmation in parent class
@@ -163,7 +164,9 @@ export class pabrikSubmitProcessor extends masySubmitProcessor {
 export class lokoSubmitProcessor extends masySubmitProcessor {
 	setApi() {
 		//this.set_api = "https://script.google.com/macros/s/AKfycbzCVJdosncho6zPDd-l-m4YJcCaLf6s8P5bcOtRGi3MfLHX3xBQvzXJgbb3PxIS1Qnj/exec";
-		this.set_api = "https://script.google.com/macros/s/AKfycbzDL8BFUy1xRZhIB2A2YcvLD91tov8AvGj-ncM_wEIthhr6BlKiJcrEmzwmnwY52II/exec";
+		//this.set_api = "https://script.google.com/macros/s/AKfycbzDL8BFUy1xRZhIB2A2YcvLD91tov8AvGj-ncM_wEIthhr6BlKiJcrEmzwmnwY52II/exec";
+		//this.set_api = "https://script.google.com/macros/s/AKfycbwJcJX6Nt0ziTF_ZegxJ1JGtyrTDKlFkN0FDdHHkC0fIejQmL7ONjc3s1ZC8S7THAMfWw/exec";
+		this.set_api = "https://script.google.com/macros/s/AKfycbxqIZ9pnX8lkkuBxt_JuKyZHL4NME0PiqF06cWju8q_XM-Ah0fVHn_ot1gwrKs_7Ani/exec";
 	}
 }
 
@@ -177,8 +180,8 @@ export class spbuSubmitProcessor extends submitProcessor {
 		this.#obj = obj;
 		this.#detectIfSubmitClicked();
 		//this.#api = "https://script.google.com/macros/s/AKfycbwIrVmzY6jI9YiNEAtlepkZijgpXM8PdeLo2tkrLmWw2Ay8QGZIimaKqC7tdqapR7KdCg/exec";
-		this.#api = "https://script.google.com/macros/s/AKfycbzMsoxJDvgram8ioXUxz-o2T0kQz_tYzDZfNvB5MvkytZuVCOHPZoZ8yp6txYJvootK8g/exec";
-
+		//this.#api = "https://script.google.com/macros/s/AKfycbzMsoxJDvgram8ioXUxz-o2T0kQz_tYzDZfNvB5MvkytZuVCOHPZoZ8yp6txYJvootK8g/exec";
+		this.#api = "https://script.google.com/macros/s/AKfycbwOpnGxursw8Z8kLW-9bGa7uhufAleNJfSx0yP7pNLDSAYhEE3q_-XtMmogxR7j48PUXQ/exec";
 		this.#authData = {
 			'id' : sessionStorage.getItem('id'),
 			'token' : sessionStorage.getItem('key')
@@ -294,7 +297,8 @@ export class scanOnlySubmitProcessor {
 		//super(constructor);
 		this.#obj = obj;
 		this.#detectIfSubmitClicked();
-		this.#api = "https://script.google.com/macros/s/AKfycbxbZ2qkNEjmSfSPxlrh-ip5GNcNd3W4YL0makoveOjwbgI3p4D3kyNzlQxRYDlvpoDeTw/exec";
+		//this.#api = "https://script.google.com/macros/s/AKfycbxbZ2qkNEjmSfSPxlrh-ip5GNcNd3W4YL0makoveOjwbgI3p4D3kyNzlQxRYDlvpoDeTw/exec";
+		this.#api = "https://script.google.com/macros/s/AKfycbzWUV00cB9_ZKj2l8xebq30ptR_th03A88pHILkF9hx0cHpSMcNoKreGv0ExnQ7aSgOjQ/exec";
 		this.#authData = {
 			'id' : sessionStorage.getItem('id'),
 			'token' : sessionStorage.getItem('key')
