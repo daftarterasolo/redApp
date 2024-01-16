@@ -166,3 +166,13 @@ body, html {
     border : 2px solid steelblue;
     margin-bottom: 3px;
 }
+
+.pilihPenera {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    background-color: #FFFFFF;
+}
+
+.pilihPenera option {
+    background-color: #FFFFFF;   
+}

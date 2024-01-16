@@ -1,19 +1,4 @@
-/*class loadRegisterData {
-    constructor() {
-      if (this.constructor === "loadRegisterData") {
-          throw new Error("Object cannot be made..");
-      }  
-    }
-}
-
-class loadRegisterDataTuk extends loadRegisterData {
-  constructor() {
-    super(constructor);
-  }  
-}
-*/
-
-function detailItem(arr, jenisTera, iter) {
+function detailItem(arr, jenisTera, iter, penera) {
   let detailStr = ``;
   let uttp = ``;
   let arrLabel = [];
@@ -21,13 +6,23 @@ function detailItem(arr, jenisTera, iter) {
   let i = 0;
   detailStr += `<table class="wadah">`;
   
-  console.log(arr);
+  //console.log(arr);
+  //console.log(penera);
+
+  let strPenera = `<select class="pilihPenera" id=""><option></option>`;
+
+  for (let [i,k] of penera.entries()) {
+    i !== 0 ? strPenera += `<option>${k[2]}</option>` : '';
+  }
+
+  strPenera += `</select>`;
+
   if (jenisTera === "tera") {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
-    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[13]}</td><td>${arr[14]}</td></tr></tbody>`;
+    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[13]}</td><td>${arr[14]}</td><td>${strPenera}</td></tr></tbody>`;
   } else {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
-    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td></tr></tbody>`;
+    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td><td>${strPenera}</td></tr></tbody>`;
   }
 
   detailStr += `</table>`;
@@ -59,8 +54,34 @@ function detailItem(arr, jenisTera, iter) {
 }
 
 
-function changeDate() {
+function detectIfPeneraSelected() {
+  let peneraSelect = document.querySelectorAll(".pilihPenera");
+  
+  for (let k of peneraSelect) {
+    k.addEventListener("change", () => {
+      console.log(k.options[k.selectedIndex].text);
+    });
+
+  }
+}
+
+async function getPenera() {
+  let url = "https://script.google.com/macros/s/AKfycbwVWS2_MAlA828n87BkKf4rkBHScPSxlAvPbKNiFtgMah2sZeGOUhrFguoVu7SJDtM/exec";
+  let dataPenera;
+  
+  await fetch(url)
+        .then(data => data.json())
+        .then(data => {
+          dataPenera = data;
+        });
+
+  return dataPenera;
+}
+
+async function changeDate() {
   let tgl = document.querySelectorAll('.tgl');
+
+  let dataPenera = await getPenera();
 
   for (let k of tgl) {
     k.addEventListener("change", async () => {
@@ -118,14 +139,14 @@ function changeDate() {
                 str += `</div></div>`;
                 
                 if (l.length === 18) {
-                  str += `<div class="item"><div class="inner"><button id="printSKRD">Nomor Order : ${l[17]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator)}</div>`;
+                  str += `<div class="item"><div class="inner"><button id="printSKRD">Nomor Order : ${l[17]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
                 } else {
-                  str += `<div class="item"><div class="inner"><button id="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator)}</div>`;                  
+                  str += `<div class="item"><div class="inner"><button id="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
                 }
                 
                 //str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator)}</div>`;
               } else {
-                str += `<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator)}</div>`;
+                str += `<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
               }
 
               lastOrder = l[1];
@@ -137,10 +158,12 @@ function changeDate() {
           //console.log(str);
 
           document.querySelector(obj[k.id]["layoutPos"]).innerHTML = str; 
+          detectIfPeneraSelected();
       });
     });
 
   }
+  
 }
 
 function clearTemplate(layout) {
@@ -156,8 +179,11 @@ function getNowDate() {
   }
 }
 
-function chooseMenu() {
+/*
+async function chooseMenu() {
   let tab = document.querySelectorAll(".tablink");
+
+  let dataPenera = await getPenera();
 
   for (let tb of tab) {
     tb.addEventListener("click", async () => {
@@ -234,14 +260,18 @@ function chooseMenu() {
     });
   } 
 }
+*/
 
 let backToMain = document.getElementById('backToMain');
 backToMain.addEventListener("click", () => {
   window.location.replace("/");
 });
 
-chooseMenu();
+//console.log(await getPenera());
+
+//chooseMenu();
 getNowDate();
 changeDate();
+
 
 
