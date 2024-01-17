@@ -9,7 +9,7 @@ function detailItem(arr, jenisTera, iter, penera) {
   //console.log(arr);
   //console.log(penera);
 
-  let strPenera = `<select class="pilihPenera" id=""><option></option>`;
+  let strPenera = `<select class="pilihPenera" id="${arr[17]}"><option></option>`;
 
   for (let [i,k] of penera.entries()) {
     i !== 0 ? strPenera += `<option>${k[2]}</option>` : '';
@@ -60,6 +60,7 @@ function detectIfPeneraSelected() {
   for (let k of peneraSelect) {
     k.addEventListener("change", () => {
       console.log(k.options[k.selectedIndex].text);
+      console.log(k.id);
     });
 
   }
@@ -89,7 +90,8 @@ async function changeDate() {
 
       let obj = {
         "tgl_tuk" : {
-          "urlApi" : "https://script.google.com/macros/s/AKfycbwOdKdXcTkSTcFlBRW_KjdQdvMs3OdGwbXpeDe3KjcgYTFTwbaj3niE8BEE8QOoWG3WzA/exec",
+          //"urlApi" : "https://script.google.com/macros/s/AKfycbwOdKdXcTkSTcFlBRW_KjdQdvMs3OdGwbXpeDe3KjcgYTFTwbaj3niE8BEE8QOoWG3WzA/exec",
+          "urlApi" : "https://script.google.com/macros/s/AKfycbxQ0Df1SBipq1v2wqkSlbxyQNjI3e2wcJr3wLKgRoiRiRsXBe4RgYOhIGx01gBUGRjJJw/exec",
           "layoutPos" : ".k_tuk",
           "jenisTera" : "tuk"
         },
