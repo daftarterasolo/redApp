@@ -6,10 +6,15 @@ function detailItem(arr, jenisTera, iter, penera) {
   let i = 0;
   detailStr += `<table class="wadah">`;
   
-  //console.log(arr);
+  console.log(arr);
   //console.log(penera);
 
-  let strPenera = `<select class="pilihPenera" id="${arr[17]}"><option></option>`;
+  let strPenera = ``;
+  if (arr.length === 19) {
+    strPenera = `<select class="pilihPenera" id="${arr[18]}"><option></option>`;
+  } else {
+    strPenera = `<select class="pilihPenera" id="${arr[17]}"><option></option>`;    
+  }
 
   for (let [i,k] of penera.entries()) {
     i !== 0 ? strPenera += `<option>${k[2]}</option>` : '';
@@ -96,17 +101,20 @@ async function changeDate() {
           "jenisTera" : "tuk"
         },
         "tgl_tera" : {
-          "urlApi" : "https://script.google.com/macros/s/AKfycbwwcsuTOwtj-SNAvZRXIQXXS2aBHN44D-d7oGiZ2WC-8BpNgY8K3mMEU5p5H2_RcF8Hww/exec",
+          //"urlApi" : "https://script.google.com/macros/s/AKfycbwwcsuTOwtj-SNAvZRXIQXXS2aBHN44D-d7oGiZ2WC-8BpNgY8K3mMEU5p5H2_RcF8Hww/exec",
+          "urlApi" : "https://script.google.com/macros/s/AKfycby_EIGGqCHpnGBqshXzS1_cGZ_zMz1OgaWZVBX7bJCxlDCUm29tBC_du1PnEdohGkEMXw/exec",
           "layoutPos" : ".k_tera",
           "jenisTera" : "tera"          
         },
         "tgl_spbu" : {
-          "urlApi" : "https://script.google.com/macros/s/AKfycbx-SWs7QFx19uB_dHVsrUK8Wwiu_W_2kKLYcFt5JJpjcDcruUEMvXMJsVljRfWIllcnKw/exec",
+          //"urlApi" : "https://script.google.com/macros/s/AKfycbx-SWs7QFx19uB_dHVsrUK8Wwiu_W_2kKLYcFt5JJpjcDcruUEMvXMJsVljRfWIllcnKw/exec",
+          "urlApi" : "https://script.google.com/macros/s/AKfycbyDkQgrJbZvMQY86zOflYAYmC31DPEffdxFH3mutX6Gv0EFmJQotvEgVa7P1pnaijt87A/exec",
           "layoutPos" : ".k_spbu",
           "jenisTera" : "spbu"          
         },
         "tgl_loko" : {
-          "urlApi" : "https://script.google.com/macros/s/AKfycbyLm3QRkA7sYj-KZC_CSK5NB4YXibuZLjFUymU3_GOe6cviUYZCp0QTr1E4qk-dNUZa/exec",
+          //"urlApi" : "https://script.google.com/macros/s/AKfycbyLm3QRkA7sYj-KZC_CSK5NB4YXibuZLjFUymU3_GOe6cviUYZCp0QTr1E4qk-dNUZa/exec",
+          "urlApi" : "https://script.google.com/macros/s/AKfycbwASU7suSjjiAm2Fg_BJFqdRF03tOQ09V1ZvyBV-03NyTVj-UUrHPRa2HnPO3E_2Ti1Hw/exec",
           "layoutPos" : ".k_loko",
           "jenisTera" : "loko"          
         }        
@@ -141,9 +149,9 @@ async function changeDate() {
                 str += `</div></div>`;
                 
                 if (l.length === 18) {
-                  str += `<div class="item"><div class="inner"><button id="printSKRD">Nomor Order : ${l[17]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
+                  str += `<div class="item"><div class="inner"><button id="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
                 } else {
-                  str += `<div class="item"><div class="inner"><button id="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
+                  str += `<div class="item"><div class="inner"><button id="printSKRD">Nomor Order : ${l[17]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
                 }
                 
                 //str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator)}</div>`;
