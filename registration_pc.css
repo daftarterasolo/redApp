@@ -168,12 +168,12 @@ body, html {
     margin-bottom: 3px;
 }
 
-.pilihPenera {
+.pilihPenera, .pilihPenera2 {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
     background-color: #FFFFFF;
 }
 
-.pilihPenera option {
+.pilihPenera option, .pilihPenera2 option {
     background-color: #FFFFFF;   
 }

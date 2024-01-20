@@ -10,24 +10,30 @@ function detailItem(arr, jenisTera, iter, penera) {
   //console.log(penera);
 
   let strPenera = ``;
+  let strPenera2 = ``;
+
   if (arr.length === 19) {
     strPenera = `<select class="pilihPenera" id="${arr[18]}"><option></option>`;
+    strPenera2 = `<select class="pilihPenera2" id="${arr[18]}"><option></option>`;
   } else {
     strPenera = `<select class="pilihPenera" id="${arr[17]}"><option></option>`;    
+    strPenera2 = `<select class="pilihPenera2" id="${arr[17]}"><option></option>`;    
   }
 
   for (let [i,k] of penera.entries()) {
     i !== 0 ? strPenera += `<option>${k[2]}</option>` : '';
+    i !== 0 ? strPenera2 += `<option>${k[2]}</option>` : '';
   }
 
   strPenera += `</select>`;
 
   if (jenisTera === "tera") {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
-    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[13]}</td><td>${arr[14]}</td><td>${strPenera}</td></tr></tbody>`;
+    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[13]}</td><td>${arr[14]}</td><td>${arr[15] === ""? `${strPenera} & ${strPenera2}` : arr[15]}</td></tr></tbody>`;    
+
   } else {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
-    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td><td>${strPenera}</td></tr></tbody>`;
+    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td><td>${arr[14] === ""? `${strPenera} & ${strPenera2}` : arr[14]}</td></tr></tbody>`;
   }
 
   detailStr += `</table>`;
@@ -70,6 +76,19 @@ function detectIfPeneraSelected() {
 
   }
 }
+
+function detectIfPeneraDuaSelected() {
+  let peneraSelect = document.querySelectorAll(".pilihPenera2");
+  
+  for (let k of peneraSelect) {
+    k.addEventListener("change", () => {
+      console.log(k.options[k.selectedIndex].text);
+      console.log(k.id);
+    });
+
+  }
+}
+
 
 async function getPenera() {
   let url = "https://script.google.com/macros/s/AKfycbwVWS2_MAlA828n87BkKf4rkBHScPSxlAvPbKNiFtgMah2sZeGOUhrFguoVu7SJDtM/exec";
@@ -169,6 +188,7 @@ async function changeDate() {
 
           document.querySelector(obj[k.id]["layoutPos"]).innerHTML = str; 
           detectIfPeneraSelected();
+          detectIfPeneraDuaSelected();
       });
     });
 
