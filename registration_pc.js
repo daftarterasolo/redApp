@@ -21,8 +21,8 @@ function detailItem(arr, jenisTera, iter, penera) {
   }
 
   for (let [i,k] of penera.entries()) {
-    i !== 0 ? strPenera += `<option>${k[2]}</option>` : '';
-    i !== 0 ? strPenera2 += `<option>${k[2]}</option>` : '';
+    i !== 0 ? strPenera += `<option value="${jenisTera}">${k[2]}</option>` : '';
+    i !== 0 ? strPenera2 += `<option value="${jenisTera}">${k[2]}</option>` : '';
   }
 
   strPenera += `</select>`;
@@ -71,6 +71,7 @@ function detectIfPeneraSelected() {
   for (let k of peneraSelect) {
     k.addEventListener("change", () => {
       console.log(k.options[k.selectedIndex].text);
+      console.log(k.options[k.selectedIndex].value);
       console.log(k.id);
     });
 
@@ -83,6 +84,7 @@ function detectIfPeneraDuaSelected() {
   for (let k of peneraSelect) {
     k.addEventListener("change", () => {
       console.log(k.options[k.selectedIndex].text);
+      console.log(k.options[k.selectedIndex].value);
       console.log(k.id);
     });
 
