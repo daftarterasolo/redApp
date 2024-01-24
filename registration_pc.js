@@ -1,3 +1,25 @@
+function tempAlert(duration) {
+  let wadah = document.querySelector(".wadah");
+
+  if (wadah !== null) {
+    wadah.addEventListener("change", function() {
+      console.log("test");
+    });
+
+  }
+  /*let el = document.createElement("div");
+  el.setAttribute("class", "alertUpdatePenera");
+  el.setAttribute("style","position:absolute;top:40%;left:20%;background-color:white;");
+  el.innerHTML = "Tunggu sebentar ya..";
+  setTimeout(function(){
+    el.parentNode.removeChild(el);
+  },duration);
+  document.body.appendChild(el);
+  */
+}
+
+//tempAlert(5000);
+
 function detailItem(arr, jenisTera, iter, penera) {
   let detailStr = ``;
   let uttp = ``;
@@ -69,10 +91,41 @@ function detectIfPeneraSelected() {
   let peneraSelect = document.querySelectorAll(".pilihPenera");
   
   for (let k of peneraSelect) {
-    k.addEventListener("change", () => {
-      console.log(k.options[k.selectedIndex].text);
-      console.log(k.options[k.selectedIndex].value);
-      console.log(k.id);
+    k.addEventListener("change", async function() {
+      let el = document.createElement("div");
+      el.setAttribute("class", "alertUpdatePenera");
+      el.innerHTML = "Tunggu sebentar ya..";
+
+      const data = {
+          'baris' : k.id,
+          'penera' : k.options[k.selectedIndex].text,
+          'jenisTera' : k.options[k.selectedIndex].value,
+          'authData' : {
+            'token' : sessionStorage.getItem('key')
+          }
+      };
+
+      this.parentElement.appendChild(el);
+      
+
+      let url = "https://script.google.com/macros/s/AKfycbxM3w_o36FS0giKTKchPjM84XMRxTqorCVqq5XU_TBi7_IZDDoTVx8ZOacYcgzpT3oqxw/exec";
+      await fetch(url, {
+        method : 'POST',
+        body : JSON.stringify(data)
+      })
+      .then(e => e.json())
+      .then(e => {
+        if (e.result === "success") {
+          el.innerHTML = "Data Penera Berhasil Diupdate";
+        } else {
+          el.innerHTML = "Update data gagal";
+        }
+        
+        setTimeout(() => {
+          this.parentElement.removeChild(el);
+        },1000);
+
+      });
     });
 
   }
@@ -82,10 +135,41 @@ function detectIfPeneraDuaSelected() {
   let peneraSelect = document.querySelectorAll(".pilihPenera2");
   
   for (let k of peneraSelect) {
-    k.addEventListener("change", () => {
-      console.log(k.options[k.selectedIndex].text);
-      console.log(k.options[k.selectedIndex].value);
-      console.log(k.id);
+    k.addEventListener("change", async function() {
+      let el = document.createElement("div");
+      el.setAttribute("class", "alertUpdatePenera");
+      el.innerHTML = "Tunggu sebentar ya..";
+
+      const data = {
+          'baris' : k.id,
+          'penera' : k.options[k.selectedIndex].text,
+          'jenisTera' : k.options[k.selectedIndex].value,
+          'authData' : {
+            'token' : sessionStorage.getItem('key')
+          }
+      };
+
+      this.parentElement.appendChild(el);
+      
+
+      let url = "https://script.google.com/macros/s/AKfycbxM3w_o36FS0giKTKchPjM84XMRxTqorCVqq5XU_TBi7_IZDDoTVx8ZOacYcgzpT3oqxw/exec";
+      await fetch(url, {
+        method : 'POST',
+        body : JSON.stringify(data)
+      })
+      .then(e => e.json())
+      .then(e => {
+        if (e.result === "success") {
+          el.innerHTML = "Data Penera Berhasil Diupdate";
+        } else {
+          el.innerHTML = "Update data gagal";
+        }
+        
+        setTimeout(() => {
+          this.parentElement.removeChild(el);
+        },1000);
+
+      });
     });
 
   }

@@ -177,3 +177,15 @@ body, html {
 .pilihPenera option, .pilihPenera2 option {
     background-color: #FFFFFF;   
 }
+
+.alertUpdatePenera {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color : steelblue;
+    padding: 3px 3px 3px 3px;
+    font-weight: bold;
+    display: inline-block;
+    z-index: 10;
+    position: relative;
+    background-color: #FFFFFF;
+}
