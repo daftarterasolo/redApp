@@ -51,11 +51,11 @@ function detailItem(arr, jenisTera, iter, penera) {
 
   if (jenisTera === "tera") {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
-    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[13]}</td><td>${arr[14]}</td><td>${arr[15] === ""? `${strPenera} & ${strPenera2}` : arr[15]}</td></tr></tbody>`;    
+    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[13]}</td><td>${arr[14]}</td><td>${arr[15] === ""? `${strPenera} & ${strPenera2}` : arr[15]}</td><td><input type="button" name="${arr[1]}-${iter}" id="${arr[1]}-${iter}" value = "Sertifikat"></td></tr></tbody>`;    
 
   } else {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
-    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td><td>${arr[14] === ""? `${strPenera} & ${strPenera2}` : arr[14]}</td></tr></tbody>`;
+    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td><td>${arr[14] === ""? `${strPenera} & ${strPenera2}` : arr[14]}</td><td><input type="button" name="${arr[1]}-${iter}" id="${arr[1]}-${iter}" value = "Sertifikat"></td></tr></tbody>`;
   }
 
   detailStr += `</table>`;
@@ -254,9 +254,9 @@ async function changeDate() {
                 str += `</div></div>`;
                 
                 if (l.length === 18) {
-                  str += `<div class="item"><div class="inner"><button id="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
+                  str += `<div class="item"><div class="inner"><button class="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
                 } else {
-                  str += `<div class="item"><div class="inner"><button id="printSKRD">Nomor Order : ${l[17]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
+                  str += `<div class="item"><div class="inner"><button class="printSKRD">Nomor Order : ${l[17]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
                 }
                 
                 //str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator)}</div>`;
@@ -275,6 +275,7 @@ async function changeDate() {
           document.querySelector(obj[k.id]["layoutPos"]).innerHTML = str; 
           detectIfPeneraSelected();
           detectIfPeneraDuaSelected();
+          printSKRD();
       });
     });
 
@@ -292,6 +293,22 @@ function getNowDate() {
   
   for (let k of document.querySelectorAll('.tgl')) {
     k.value = nowDate;
+  }
+}
+
+
+function printSKRD() {
+  let prtTombol = document.querySelectorAll('.printSKRD');
+  for (let k of prtTombol) {
+    k.addEventListener('click', async function() {
+      console.log(this.parentElement);
+      let el = document.createElement("div");
+      el.setAttribute("class", "alertCetakBukti");
+      el.innerHTML = "Tunggu sebentar...Sedang membuat bukti pendaftaran";
+      this.parentElement.insertBefore(el, this);
+      setTimeout(() => this.parentElement.removeChild(el),2000);
+    });
+
   }
 }
 
@@ -388,6 +405,7 @@ backToMain.addEventListener("click", () => {
 //chooseMenu();
 getNowDate();
 changeDate();
+
 
 
 

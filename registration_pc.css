@@ -162,11 +162,19 @@ body, html {
     color: #FFFFFF;
 }
 
-#printSKRD {
+.printSKRD {
     background-color: #FFFFFF;
     border : 2px solid steelblue;
     margin-bottom: 3px;
 }
+
+.printSKRD:active {
+    background-color: #000000;
+    border : 2px solid steelblue;
+    margin-bottom: 3px;
+    color: #FFFFFF;
+}
+
 
 .pilihPenera, .pilihPenera2 {
     font-family: 'Poppins', sans-serif;
@@ -188,4 +196,17 @@ body, html {
     z-index: 10;
     position: relative;
     background-color: #FFFFFF;
+}
+
+.alertCetakBukti {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color : steelblue;
+    padding: 3px 3px 3px 3px;
+    font-weight: bold;
+    display: inline-block;
+    z-index: 10;
+    position: relative;
+    background-color: #FFFFFF;
+    position:absolute;    
 }
