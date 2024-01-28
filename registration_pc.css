@@ -115,8 +115,13 @@ body, html {
 .kontainerMain {
     margin-top: 10px;
     width: 98%;
-    margin-left : auto;
-    margin-right : auto;
+    /*margin-left : auto;
+    margin-right : auto;*/
+    position: absolute;
+    z-index: 1;
+    margin: auto;
+    left : 0;
+    right : 0;
 }
 
 .innerOfInner {
@@ -209,4 +214,85 @@ body, html {
     position: relative;
     background-color: #FFFFFF;
     position:absolute;    
+}
+
+.sertifikatBtn {
+    background-color: #FFFFFF;
+    border : 2px solid steelblue;
+    margin-bottom: 3px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.sertifikatBtn:active {
+    background-color: #000000;
+    border : 2px solid steelblue;
+    margin-bottom: 3px;
+    color: #FFFFFF;
+}
+
+.sertContainer {
+    width: 89%;
+    height: 700px;
+    background-color: #FFFFFF;
+    position: absolute;
+    z-index: 10;
+    opacity: 0.94;
+    border-radius: 5px;
+    left : 0;
+    right : 0;
+    margin: auto;
+    top : 10px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.closeSertSpan {
+    font-family: 'Poppins', sans-serif;   
+    font-size: 14px;
+    color : steelblue;
+    font-weight: bolder;
+}
+
+.certHeader {
+    font-family: 'Poppins', sans-serif;   
+    color : steelblue;
+    font-weight: bolder;
+    background: 
+    linear-gradient(to right, steelblue , rgba(227, 61, 148, 0.6));
+    /*linear-gradient(rgba(192,192,192,0.4) 0 0),
+    linear-gradient(rgba(227, 61, 148, 0.6) 20%, transparent 16%), 
+    linear-gradient(rgba(227, 61, 148, 0.6) 15%, transparent 16%) 30px 30px,
+    steelblue;*/
+    color : #FFFFFF;
+    text-align: center;
+}
+
+.tableForm {
+    font-family: 'Poppins', sans-serif;   
+    color : steelblue;
+    font-weight: bolder;
+    font-size: 14px;
+    border : 3px solid steelblue;
+    width: 100%;    
+}
+
+.tableForm td {
+    padding: 5px 2px 5px 2px;
+}
+
+.inputSert {
+    color : rgba(227, 61, 148);
+    font-size: 14px;
+    width: 100%;
+    border: 2px solid rgba(227, 61, 148);
+    outline: none;
+}
+
+.inputSert:focus {
+    border: 3px solid steelblue;
+}
+
+.hanyabaca {
+    background-color: lightgray;
 }

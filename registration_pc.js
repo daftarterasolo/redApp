@@ -51,11 +51,11 @@ function detailItem(arr, jenisTera, iter, penera) {
 
   if (jenisTera === "tera") {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
-    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[13]}</td><td>${arr[14]}</td><td>${arr[15] === ""? `${strPenera} & ${strPenera2}` : arr[15]}</td><td><input type="button" name="${arr[1]}-${iter}" id="${arr[1]}-${iter}" value = "Sertifikat"></td></tr></tbody>`;    
+    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[13]}</td><td>${arr[14]}</td><td>${arr[15] === ""? `${strPenera} & ${strPenera2}` : arr[15]}</td><td><input type="button" class="sertifikatBtn" name="${arr[1]}-${iter}" id="${arr[1]}-${iter}" value = "Sertifikat"></td></tr></tbody>`;    
 
   } else {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
-    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td><td>${arr[14] === ""? `${strPenera} & ${strPenera2}` : arr[14]}</td><td><input type="button" name="${arr[1]}-${iter}" id="${arr[1]}-${iter}" value = "Sertifikat"></td></tr></tbody>`;
+    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td><td>${arr[14] === ""? `${strPenera} & ${strPenera2}` : arr[14]}</td><td><input type="button" class="sertifikatBtn" name="${arr[1]}-${iter}" id="${arr[1]}-${iter}" value = "Sertifikat"></td></tr></tbody>`;
   }
 
   detailStr += `</table>`;
@@ -189,10 +189,12 @@ async function getPenera() {
   return dataPenera;
 }
 
+let dataPenera;
+
 async function changeDate() {
   let tgl = document.querySelectorAll('.tgl');
 
-  let dataPenera = await getPenera();
+  dataPenera = await getPenera();
 
   for (let k of tgl) {
     k.addEventListener("change", async () => {
@@ -248,15 +250,18 @@ async function changeDate() {
           if (e.result !== "error") {
             let lastOrder = 0;
             let iterator = 0;
+            //console.log(e.data);
+            arrayData = e.data;
+
             for (let l of e.data) {
               //console.log(l);
               if (l[1] !== lastOrder) {
                 str += `</div></div>`;
                 
                 if (l.length === 18) {
-                  str += `<div class="item"><div class="inner"><button class="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
+                  str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
                 } else {
-                  str += `<div class="item"><div class="inner"><button class="printSKRD">Nomor Order : ${l[17]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
+                  str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[17]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
                 }
                 
                 //str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator)}</div>`;
@@ -276,6 +281,7 @@ async function changeDate() {
           detectIfPeneraSelected();
           detectIfPeneraDuaSelected();
           printSKRD();
+          printSertifikat();
       });
     });
 
@@ -296,12 +302,30 @@ function getNowDate() {
   }
 }
 
+function  getArrayData() {
+  return arrayData;
+}
+
+function filterTheArray(arr, id) {
+    let arrayToSend = [];
+
+    for (let k of arr) {
+      if (k[1] === parseInt(id)) {
+        arrayToSend.push(k);
+      }
+    }
+    return arrayToSend;    
+}
 
 function printSKRD() {
+
   let prtTombol = document.querySelectorAll('.printSKRD');
   for (let k of prtTombol) {
     k.addEventListener('click', async function() {
-      console.log(this.parentElement);
+
+      console.log(filterTheArray(getArrayData(), this.id));
+      //console.log(this.id);
+
       let el = document.createElement("div");
       el.setAttribute("class", "alertCetakBukti");
       el.innerHTML = "Tunggu sebentar...Sedang membuat bukti pendaftaran";
@@ -312,6 +336,45 @@ function printSKRD() {
   }
 }
 
+function closeSertDialog(el) {
+  document.querySelector('.closeSertSpan').addEventListener('click', () => document.querySelector('body').removeChild(el));
+}
+
+function printSertifikat() {
+  let sertTombol = document.querySelectorAll('.sertifikatBtn');
+
+  for (let k of sertTombol) {
+    k.addEventListener('click', function() {
+      console.log(getArrayData()[this.id.split("-")[1]]);
+      let el = document.createElement("div");
+      el.setAttribute("class", "sertContainer");
+      document.querySelector('body').appendChild(el);
+      let elSpan = document.createElement("span");
+      elSpan.setAttribute("class", "closeSertSpan");
+      elSpan.innerHTML = "X Close";
+      el.appendChild(elSpan);
+      let elHeader = document.createElement("h2");
+      elHeader.setAttribute("class", "certHeader");
+      elHeader.innerHTML = "Cek Kembali Data Sertifikat";
+      let tableForm = document.createElement("table");
+      tableForm.setAttribute("class","tableForm");
+      let arrai = getArrayData()[this.id.split("-")[1]];
+      tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${arrai[16]}" readonly></td></tr>
+        <tr><td>WTU</td><td><input type="text" class="inputSert" name="wtu" id="wtu" value="${arrai[2]}"></td></tr>
+        <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
+        <tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>
+        <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
+        <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[10]}"></td></tr>
+        <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${arrai[11]}"></td></tr>
+        <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${console.log(dataPenera.data)}"></td></tr>
+        `;
+      el.appendChild(elHeader);
+      el.appendChild(tableForm);
+
+      closeSertDialog(el);
+    });
+  }
+}
 /*
 async function chooseMenu() {
   let tab = document.querySelectorAll(".tablink");
@@ -403,6 +466,7 @@ backToMain.addEventListener("click", () => {
 //console.log(await getPenera());
 
 //chooseMenu();
+let arrayData = [];
 getNowDate();
 changeDate();
 
