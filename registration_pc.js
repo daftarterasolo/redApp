@@ -176,6 +176,8 @@ function detectIfPeneraDuaSelected() {
 }
 
 
+let dataPeneraDetail = {};
+
 async function getPenera() {
   let url = "https://script.google.com/macros/s/AKfycbwVWS2_MAlA828n87BkKf4rkBHScPSxlAvPbKNiFtgMah2sZeGOUhrFguoVu7SJDtM/exec";
   let dataPenera;
@@ -186,10 +188,17 @@ async function getPenera() {
           dataPenera = data;
         });
 
+  for (let i of dataPenera.data) {
+    //console.log(i);
+    dataPeneraDetail[i[2]] = i[1];
+  }      
+  console.log(dataPeneraDetail);
+
   return dataPenera;
 }
 
 let dataPenera;
+
 
 async function changeDate() {
   let tgl = document.querySelectorAll('.tgl');
@@ -340,6 +349,12 @@ function closeSertDialog(el) {
   document.querySelector('.closeSertSpan').addEventListener('click', () => document.querySelector('body').removeChild(el));
 }
 
+function parsePenera(inisial) {
+  let ar = inisial.split("-");
+
+  return `${dataPeneraDetail[ar[0]]} - ${dataPeneraDetail[ar[1]]}`;
+}
+
 function printSertifikat() {
   let sertTombol = document.querySelectorAll('.sertifikatBtn');
 
@@ -366,7 +381,7 @@ function printSertifikat() {
         <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
         <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[10]}"></td></tr>
         <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${arrai[11]}"></td></tr>
-        <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${console.log(dataPenera.data)}"></td></tr>
+        <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${arrai[14].split("-").length < 2 ? dataPeneraDetail[arrai[14]] : parsePenera(arrai[14])}"></td></tr>
         `;
       el.appendChild(elHeader);
       el.appendChild(tableForm);
