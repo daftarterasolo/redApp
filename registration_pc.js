@@ -379,8 +379,8 @@ function printSertifikat() {
         <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
         <tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>
         <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
-        <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[10]}"></td></tr>
-        <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${arrai[11]}"></td></tr>
+        <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${arrai[10]}"></td></tr>
+        <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[11]}"></td></tr>
         <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${arrai[14].split("-").length < 2 ? dataPeneraDetail[arrai[14]] : parsePenera(arrai[14])}"></td></tr>
         `;
       el.appendChild(elHeader);
