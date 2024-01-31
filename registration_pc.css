@@ -296,3 +296,25 @@ body, html {
 .hanyabaca {
     background-color: lightgray;
 }
+
+#submitTd {
+    text-align: center;
+}
+
+#submitSert {
+    font-family: 'Poppins', sans-serif;   
+    color : #FFFFFF;
+    font-weight: bolder;
+    font-size: 14px;
+    border : 2px solid rgba(227, 61, 148);
+    background-color: steelblue;    
+}
+
+#submitSert:active {
+    font-family: 'Poppins', sans-serif;   
+    color : #FFFFFF;
+    font-weight: bolder;
+    font-size: 14px;
+    border : 2px solid steelblue;
+    background-color: rgba(227, 61, 148);    
+}

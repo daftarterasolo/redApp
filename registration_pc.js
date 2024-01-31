@@ -51,7 +51,7 @@ function detailItem(arr, jenisTera, iter, penera) {
 
   if (jenisTera === "tera") {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
-    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[13]}</td><td>${arr[14]}</td><td>${arr[15] === ""? `${strPenera} & ${strPenera2}` : arr[15]}</td><td><input type="button" class="sertifikatBtn" name="${arr[1]}-${iter}-${jenisTera}" id="${arr[1]}-${iter}-${jenisTera}" value = "Sertifikat"></td></tr></tbody>`;    
+    detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]} - ${arr[10]+arr[13]-1}</td><td>${arr[11]}</td><td>${arr[13]}</td><td>${arr[14]}</td><td>${arr[15] === ""? `${strPenera} & ${strPenera2}` : arr[15]}</td><td><input type="button" class="sertifikatBtn" name="${arr[1]}-${iter}-${jenisTera}" id="${arr[1]}-${iter}-${jenisTera}" value = "Sertifikat"></td></tr></tbody>`;    
 
   } else {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
@@ -189,10 +189,9 @@ async function getPenera() {
         });
 
   for (let i of dataPenera.data) {
-    //console.log(i);
-    dataPeneraDetail[i[2]] = i[1];
+    dataPeneraDetail[i[2]] = `${i[1]} / ${i[3]}`;
   }      
-  console.log(dataPeneraDetail);
+  //console.log(dataPeneraDetail);
 
   return dataPenera;
 }
@@ -355,6 +354,17 @@ function parsePenera(inisial) {
   return `${dataPeneraDetail[ar[0]]} - ${dataPeneraDetail[ar[1]]}`;
 }
 
+function parseTglTera(rawTgl) {
+  const tglToText = (tgl) => {
+    let bln = {"01" : "Januari","02" : "Februari","03" : "Maret","04" : "April","05" : "Mei","06" : "Juni","07" : "Juli","08" : "Agustus","09" : "September","10" : "Oktober","11" : "November","12" : "Desember"};
+
+    return `${tgl[0]} ${bln[tgl[1]]} ${tgl[2]}`;
+  }
+
+  //console.log(rawTgl.split("T")[0].split("-").reverse());
+  return tglToText(rawTgl.split("T")[0].split("-").reverse());
+}
+
 function printSertifikat() {
   let sertTombol = document.querySelectorAll('.sertifikatBtn');
 
@@ -377,14 +387,19 @@ function printSertifikat() {
       let tableForm = document.createElement("table");
       tableForm.setAttribute("class","tableForm");
       let arrai = getArrayData()[this.id.split("-")[1]];
+      let serialNum = "";
+      j_tera === "tera" ? serialNum = `${arrai[10]} - ${arrai[10]+arrai[13]-1}` : serialNum = arrai[10];
+
       tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${arrai[16]}" readonly></td></tr>
+        <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="wtu" id="wtu" value="${parseTglTera(arrai[0])}" readonly></td></tr>
         <tr><td>WTU</td><td><input type="text" class="inputSert" name="wtu" id="wtu" value="${arrai[2]}"></td></tr>
         <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
         <tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>
         <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
-        <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${arrai[10]}"></td></tr>
+        <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${serialNum}"></td></tr>
         <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[11]}"></td></tr>
         <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${arrai[idx_penera].split("-").length < 2 ? dataPeneraDetail[arrai[idx_penera]] : parsePenera(arrai[idx_penera])}"></td></tr>
+        <tr><td colspan=2 id="submitTd"><input type="button" name="submitSert" id="submitSert" value = "Buat Sertifikat"></tr>
         `;
       el.appendChild(elHeader);
       el.appendChild(tableForm);
