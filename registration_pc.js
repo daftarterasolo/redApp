@@ -281,6 +281,8 @@ async function changeDate() {
               iterator++;
             }
           } else {
+            alert(`Loading data tidak berhasil. Error Message : ${e.data}`);
+            clearLoading(obj[k.id]["layoutPos"]);
             return;
           }
           //console.log(str);
@@ -300,6 +302,11 @@ async function changeDate() {
 function clearTemplate(layout) {
   document.querySelector(layout).innerHTML = `<pre style="color : #0D98BA; font-family: 'Poppins', sans-serif;">Loading ......</pre>`; 
 }
+
+function clearLoading(layout) {
+  document.querySelector(layout).innerHTML = ``; 
+}
+
 
 function getNowDate() {
   let d = new Date();
@@ -365,6 +372,24 @@ function parseTglTera(rawTgl) {
   return tglToText(rawTgl.split("T")[0].split("-").reverse());
 }
 
+function serializedFormSertData() {
+  let formData = new FormData(document.getElementById('sertForm'));
+  let serializedData = {};
+
+  for (let[name, value] of formData) {
+    serializedData[name] = value;
+  }
+
+  return serializedData;   
+}
+
+function SertBtnClickedHandler() {
+  let submitSert = document.getElementById('submitSert');
+  submitSert.addEventListener('click', async function() {
+    console.log(serializedFormSertData());
+  });
+}
+
 function printSertifikat() {
   let sertTombol = document.querySelectorAll('.sertifikatBtn');
 
@@ -384,6 +409,10 @@ function printSertifikat() {
       let elHeader = document.createElement("h2");
       elHeader.setAttribute("class", "certHeader");
       elHeader.innerHTML = "Cek Kembali Data Sertifikat";
+
+      let sertForm = document.createElement("form");
+      sertForm.setAttribute("id","sertForm");
+
       let tableForm = document.createElement("table");
       tableForm.setAttribute("class","tableForm");
       let arrai = getArrayData()[this.id.split("-")[1]];
@@ -402,11 +431,15 @@ function printSertifikat() {
         <tr><td colspan=2 id="submitTd"><input type="button" name="submitSert" id="submitSert" value = "Buat Sertifikat"></tr>
         `;
       el.appendChild(elHeader);
-      el.appendChild(tableForm);
+      el.appendChild(sertForm);
+      document.getElementById("sertForm").appendChild(tableForm);
 
+      SertBtnClickedHandler();  
       closeSertDialog(el);
+
     });
   }
+
 }
 /*
 async function chooseMenu() {
