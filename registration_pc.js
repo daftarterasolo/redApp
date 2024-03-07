@@ -338,42 +338,14 @@ function printSKRD() {
   for (let k of prtTombol) {
     k.addEventListener('click', async function() {
 
-      //console.log(filterTheArray(getArrayData(), this.id));
+      console.log(filterTheArray(getArrayData(), this.id));
       //console.log(this.id);
 
       let el = document.createElement("div");
       el.setAttribute("class", "alertCetakBukti");
       el.innerHTML = "Tunggu sebentar...Sedang membuat bukti pendaftaran";
       this.parentElement.insertBefore(el, this);
-      
-      let url = 'http://192.168.100.28:8000/buktidaftar/';
-
-      try {
-        await fetch(url, {
-          method : 'POST',
-          headers : {
-            "Content-Type" : "application/json"
-          },
-          body : JSON.stringify({bukti_daftar : filterTheArray(getArrayData(), this.id)})
-        })
-        .then(e => e.json())
-        .then(e => {
-          setTimeout(() => {
-            console.log(e);
-            this.parentElement.removeChild(el)
-          },2000)
-          
-        });
-
-      }
-
-      catch(e) {  
-        alert(e);
-      }
-
-      //console.log(resultData);
-      //this.parentElement.removeChild(el)
-      //setTimeout(() => this.parentElement.removeChild(el),2000);
+      setTimeout(() => this.parentElement.removeChild(el),2000);
     });
 
   }
