@@ -240,10 +240,10 @@ async function changeDate() {
       //console.log(k.value);
 
       const postData = {
-        'tanggal' : k.value,
-        'authData' : {
-              'token' : sessionStorage.getItem('key') 
-        }
+          'tanggal' : k.value,
+          'authData' : {
+                'token' : sessionStorage.getItem('key') 
+          }
       };
 
       clearTemplate(obj[k.id]["layoutPos"]);
@@ -337,7 +337,51 @@ function printSKRD() {
   let prtTombol = document.querySelectorAll('.printSKRD');
   for (let k of prtTombol) {
     k.addEventListener('click', async function() {
+      
+      let api = "https://sert.metrologi.ska:5005/buktidaftar";
 
+      let data = {"bukti_daftar" : filterTheArray(getArrayData(), this.id)};
+
+      let el = document.createElement("div");
+      el.setAttribute("class", "alertCetakBukti");
+      el.innerHTML = "Tunggu sebentar...Server sdg menyiapkan bukti daftar";
+      let tempElement = this.parentElement;
+      tempElement.insertBefore(el, this);
+
+      fetch(api,{
+        method : 'POST',
+        headers : {
+          "Content-Type" : "application/json"
+        },
+        body : JSON.stringify(data)
+      })
+      .then(result => result.json())
+      .then(result => {
+        
+        fetch(api, {
+          method : 'GET',
+          headers : {
+            "Accept" : "Application/octet-stream"
+          }
+        })
+        .then(data => data.blob())
+        .then(data => {
+          //console.log(result['file']);
+          const aElement = document.createElement("a");
+          aElement.setAttribute("download", result['file']);
+          const href = URL.createObjectURL(data);
+          aElement.href = href;
+          aElement.setAttribute("target", "_blank");
+          aElement.click();
+          URL.revokeObjectURL(href);
+          el.innerHTML = "Proses download selesai";
+          setTimeout(() => tempElement.removeChild(el), 500);
+          
+        });
+  
+      });
+      
+      /*
       console.log(filterTheArray(getArrayData(), this.id));
       //console.log(this.id);
 
@@ -345,7 +389,9 @@ function printSKRD() {
       el.setAttribute("class", "alertCetakBukti");
       el.innerHTML = "Tunggu sebentar...Sedang membuat bukti pendaftaran";
       this.parentElement.insertBefore(el, this);
-      setTimeout(() => this.parentElement.removeChild(el),2000);
+      this.parentElement.removeChild(el);
+      //seTimeout(() => this.parentElement.removeChild(el),2000);
+      */
     });
 
   }

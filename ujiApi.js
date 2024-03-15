@@ -1,8 +1,9 @@
 const downloadBuktiDaftar = () => {
+/*
 	//let api = "http://192.168.100.106:5005/buktidaftar";
 	let api = "https://sert.metrologi.ska:5005/buktidaftar";
 
-	let data = {"bukti_daftar": [["2024-01-16T03:23:27.319Z",114,"PAKET HERONA EXPRESS","Kestalan, Surakarta","-","62","TS","500 kg","200 g","PRESISIE","E160029","-",1,"Indonesia","gc","","114/TS/TUK/I/2024",225]]}
+	let data = {"bukti_daftar": [["2024-01-16T03:23:27.319Z",114,"PAKET HERONA EXPRESS","Kestalan, Surakarta","-","62","TS","500 kg","200 g","PRESISIE","E160029","-",1,"Indonesia","gc","","114/TS/TUK/I/2024",225],["2024-01-16T03:23:27.319Z",114,"PAKET HERONA EXPRESS","Kestalan, Surakarta","-","62","TS","500 kg","200 g","PRESISIE","E160029","-",1,"Indonesia","gc","","114/TS/TUK/I/2024",225],["2024-01-16T03:23:27.319Z",114,"PAKET HERONA EXPRESS","Kestalan, Surakarta","-","62","TS","500 kg","200 g","PRESISIE","E160029","-",1,"Indonesia","gc","","114/TS/TUK/I/2024",225]]}
 
 	fetch(api,{
 		method : 'POST',
@@ -15,9 +16,10 @@ const downloadBuktiDaftar = () => {
 	.then(result => {
 		console.log(result);
 	});
+*/
 
+	let api = "https://sert.metrologi.ska:5005/buktidaftar";
 
-/*
 	fetch(api, {
 		method : 'GET',
 		headers : {
@@ -34,7 +36,7 @@ const downloadBuktiDaftar = () => {
 		aElement.click();
 		URL.revokeObjectURL(href);
 	});
-*/
+
 }
 
 
