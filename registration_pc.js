@@ -210,25 +210,21 @@ async function changeDate() {
 
       let obj = {
         "tgl_tuk" : {
-          //"urlApi" : "https://script.google.com/macros/s/AKfycbwOdKdXcTkSTcFlBRW_KjdQdvMs3OdGwbXpeDe3KjcgYTFTwbaj3niE8BEE8QOoWG3WzA/exec",
           "urlApi" : "https://script.google.com/macros/s/AKfycbxQ0Df1SBipq1v2wqkSlbxyQNjI3e2wcJr3wLKgRoiRiRsXBe4RgYOhIGx01gBUGRjJJw/exec",
           "layoutPos" : ".k_tuk",
           "jenisTera" : "tuk"
         },
         "tgl_tera" : {
-          //"urlApi" : "https://script.google.com/macros/s/AKfycbwwcsuTOwtj-SNAvZRXIQXXS2aBHN44D-d7oGiZ2WC-8BpNgY8K3mMEU5p5H2_RcF8Hww/exec",
           "urlApi" : "https://script.google.com/macros/s/AKfycby_EIGGqCHpnGBqshXzS1_cGZ_zMz1OgaWZVBX7bJCxlDCUm29tBC_du1PnEdohGkEMXw/exec",
           "layoutPos" : ".k_tera",
           "jenisTera" : "tera"          
         },
         "tgl_spbu" : {
-          //"urlApi" : "https://script.google.com/macros/s/AKfycbx-SWs7QFx19uB_dHVsrUK8Wwiu_W_2kKLYcFt5JJpjcDcruUEMvXMJsVljRfWIllcnKw/exec",
           "urlApi" : "https://script.google.com/macros/s/AKfycbyDkQgrJbZvMQY86zOflYAYmC31DPEffdxFH3mutX6Gv0EFmJQotvEgVa7P1pnaijt87A/exec",
           "layoutPos" : ".k_spbu",
           "jenisTera" : "spbu"          
         },
         "tgl_loko" : {
-          //"urlApi" : "https://script.google.com/macros/s/AKfycbyLm3QRkA7sYj-KZC_CSK5NB4YXibuZLjFUymU3_GOe6cviUYZCp0QTr1E4qk-dNUZa/exec",
           "urlApi" : "https://script.google.com/macros/s/AKfycbwASU7suSjjiAm2Fg_BJFqdRF03tOQ09V1ZvyBV-03NyTVj-UUrHPRa2HnPO3E_2Ti1Hw/exec",
           "layoutPos" : ".k_loko",
           "jenisTera" : "loko"          
@@ -337,9 +333,33 @@ function printSKRD() {
   let prtTombol = document.querySelectorAll('.printSKRD');
   for (let k of prtTombol) {
     k.addEventListener('click', async function() {
+      let api = "";
+      console.log(this.parentElement.parentElement.parentElement.classList[1]);
+      /*this.parentElement.parentElement.parentElement.classList[1] === "k_tera" ?
+        api = "https://sert.metrologi.ska:5005/buktidaftartera" : api = "https://sert.metrologi.ska:5005/buktidaftar";
+      */
       
-      let api = "https://sert.metrologi.ska:5005/buktidaftar";
+      switch(this.parentElement.parentElement.parentElement.classList[1]) {
+        case 'k_tera':
+          api = "https://sert.metrologi.ska:5005/buktidaftartera";
+          break;
 
+        case 'k_tuk':
+          api = "https://sert.metrologi.ska:5005/buktidaftar";
+          break;
+
+        case 'k_spbu':
+          api = "https://sert.metrologi.ska:5005/buktidaftarspbu";
+          break;
+
+        case 'k_loko':  
+          api = "https://sert.metrologi.ska:5005/buktidaftarloko";
+          break;
+      }
+
+      console.log(api);
+
+      
       let data = {"bukti_daftar" : filterTheArray(getArrayData(), this.id)};
 
       let el = document.createElement("div");
@@ -487,88 +507,6 @@ function printSertifikat() {
   }
 
 }
-/*
-async function chooseMenu() {
-  let tab = document.querySelectorAll(".tablink");
-
-  let dataPenera = await getPenera();
-
-  for (let tb of tab) {
-    tb.addEventListener("click", async () => {
-   
-      let obj = {
-        "defaultOpen" : {
-          "urlApi" : "https://script.google.com/macros/s/AKfycbwOdKdXcTkSTcFlBRW_KjdQdvMs3OdGwbXpeDe3KjcgYTFTwbaj3niE8BEE8QOoWG3WzA/exec",
-          "layoutPos" : ".k_tuk"
-        },
-        "tabTera" : {
-          "urlApi" : "https://script.google.com/macros/s/AKfycbwwcsuTOwtj-SNAvZRXIQXXS2aBHN44D-d7oGiZ2WC-8BpNgY8K3mMEU5p5H2_RcF8Hww/exec",
-          "layoutPos" : ".k_tera"          
-        },
-        "tabSpbu" : {
-          "urlApi" : "https://script.google.com/macros/s/AKfycbx-SWs7QFx19uB_dHVsrUK8Wwiu_W_2kKLYcFt5JJpjcDcruUEMvXMJsVljRfWIllcnKw/exec",
-          "layoutPos" : ".k_spbu"          
-        },
-        "tabLoko" : {
-          "urlApi" : "https://script.google.com/macros/s/AKfycbyLm3QRkA7sYj-KZC_CSK5NB4YXibuZLjFUymU3_GOe6cviUYZCp0QTr1E4qk-dNUZa/exec",
-          "layoutPos" : ".k_loko"          
-        }        
-      };
-
-      const urlApi = obj[tb.id]["urlApi"];
-
-      let d = new Date();
-      let nowDate = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
-
-      //console.log(urlApi);
-
-      const postData = {
-        'tanggal' : nowDate,
-        'authData' : {
-              'token' : sessionStorage.getItem('key') 
-        }
-      };
-
-      clearTemplate(obj[tb.id]["layoutPos"]);
-
-      await fetch(urlApi, {
-          method : 'POST',
-          body : JSON.stringify(postData) 
-      })
-      .then(e => e.json())
-      .then(e => {
-          let str = '';
-          if (e.result !== "error") {
-            let lastOrder = 0;
-            let iterator = 0
-            for (let l of e.data) {
-              //console.log(l);
-              if (l[1] !== lastOrder) {
-                str += `</div></div>`;
-                if (l.length === 18) {
-                  str += `<div class="item"><div class="inner">Nomor Order : ${l[17]}<div class="innerOfInner">${detailItem(l,obj[tb.id]["jenisTera"], iterator)}</div>`;
-                } else {
-                  str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l,obj[tb.id]["jenisTera"], iterator)}</div>`;                  
-                }
-              } else {
-                str += `<div class="innerOfInner">${detailItem(l,obj[k.id]["jenisTera"], iterator)}</div>`;
-              }
-
-              lastOrder = l[1];
-              iterator++;
-            }
-          } else {
-            return;
-          }
-          //console.log(str);
-          document.querySelector(obj[tb.id]["layoutPos"]).innerHTML = str; 
-      });
-
-
-    });
-  } 
-}
-*/
 
 let backToMain = document.getElementById('backToMain');
 backToMain.addEventListener("click", () => {
