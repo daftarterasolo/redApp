@@ -20,8 +20,8 @@
     <button class="tablink" onclick="openPage('loko', this, '#6879D0')" id="tabLoko">Loko</button>
     <div><a href="#" id="backToMain">Kembali ke Menu Utama</a></div>
     <div id="tera" class="tabcontent">
-        <form id="tglForm">
-            <input type="date" name="tgl_tera" id="tgl_tera" class="tgl" value="2023-11-08">        
+        <form id="tglForm" class="tgl_form">
+            <input type="date" name="tgl_tera" id="tgl_tera" class="tgl">        
         </form>
         <div class="kontainer k_tera">
             <div class="item">
@@ -41,8 +41,8 @@
     </div>
 
     <div id="tuk" class="tabcontent">
-        <form id="tglForm">
-            <input type="date" name="tgl_tuk" id="tgl_tuk" class="tgl" value="2023-11-08">        
+        <form id="tglForm" class="tgl_form">
+            <input type="date" name="tgl_tuk" id="tgl_tuk" class="tgl">        
         </form>
         <div class="kontainer k_tuk">
             <div class="item">
@@ -57,8 +57,8 @@
     </div>
 
     <div id="spbu" class="tabcontent">
-        <form id="tglForm">
-            <input type="date" name="tgl_spbu" id="tgl_spbu" class="tgl" value="2023-11-08">        
+        <form id="tglForm" class="tgl_form">
+            <input type="date" name="tgl_spbu" id="tgl_spbu" class="tgl">        
         </form>
         <div class="kontainer k_spbu">
             <div class="item">
@@ -70,8 +70,8 @@
     </div>
 
     <div id="loko" class="tabcontent">
-        <form id="tglForm">
-            <input type="date" name="tgl_loko" id="tgl_loko" class="tgl" value="2023-11-08">        
+        <form id="tglForm" class="tgl_form">
+            <input type="date" name="tgl_loko" id="tgl_loko" class="tgl">        
         </form>
         <div class="kontainer k_loko">
             <div class="item">
@@ -99,6 +99,11 @@
     }
     document.getElementById(pageName).style.display = "block";
     elmnt.style.backgroundColor = color;
+    let layout = `.k_${pageName}`;
+    document.querySelector(layout).innerHTML = ``; 
+    document.querySelectorAll('.tgl_form').forEach(e => {
+        e.reset();
+    });
 }
 
 // Get the element with id="defaultOpen" and click on it

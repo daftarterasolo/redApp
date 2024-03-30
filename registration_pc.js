@@ -361,7 +361,7 @@ function printSKRD() {
 
       
       let data = {"bukti_daftar" : filterTheArray(getArrayData(), this.id)};
-
+      console.log(data);
       let el = document.createElement("div");
       el.setAttribute("class", "alertCetakBukti");
       el.innerHTML = "Tunggu sebentar...Server sdg menyiapkan bukti daftar";
