@@ -452,7 +452,49 @@ function serializedFormSertData() {
 function SertBtnClickedHandler() {
   let submitSert = document.getElementById('submitSert');
   submitSert.addEventListener('click', async function() {
+    if (document.getElementById('nurut').value === "") {
+      alert("Peringatan ! Pembuatan Sertifikat Gagal karena Nomor Urut Sertifikat Belum Diisi. Silahkan diisi dahulu");
+      return false;
+    }
+
     console.log(serializedFormSertData());
+    
+    let api = "https://sert.metrologi.ska:5005/sertifikat_tuk";
+
+    fetch(api,{
+      method : "POST",
+      header : {
+        "Content-Type" : "Application/json"
+      },
+      body : JSON.stringify(serializedFormSertData())
+    })
+    .then(result => result.json())
+    .then(result => {
+      console.log(result);
+      
+      fetch(api, {
+        method : 'GET',
+        headers : {
+          "Accept" : "Application/octet-stream"
+        }
+      })
+      .then(data => data.blob())
+      .then(data => {
+        //console.log(result['file']);
+        const aElement = document.createElement("a");
+        aElement.setAttribute("download", result['file']);
+        const href = URL.createObjectURL(data);
+        aElement.href = href;
+        aElement.setAttribute("target", "_blank");
+        aElement.click();
+        URL.revokeObjectURL(href);
+        el.innerHTML = "Proses download selesai";
+        setTimeout(() => tempElement.removeChild(el), 500);
+        
+      });
+
+    })
+
   });
 }
 
@@ -463,7 +505,11 @@ function printSertifikat() {
     k.addEventListener('click', function() {
       let j_tera = this.id.split("-")[2];
       let idx_penera = "";
+      let buatan;
+      let norder;
       j_tera === "tera" ? idx_penera = 15 : idx_penera = 14;
+      j_tera === "tera" ? buatan = 14 : buatan = 13;
+      j_tera === "spbu" ? norder = 17 : norder = 16;
       console.log(getArrayData()[this.id.split("-")[1]]);
       let el = document.createElement("div");
       el.setAttribute("class", "sertContainer");
@@ -485,15 +531,31 @@ function printSertifikat() {
       let serialNum = "";
       j_tera === "tera" ? serialNum = `${arrai[10]} - ${arrai[10]+arrai[13]-1}` : serialNum = arrai[10];
 
-      tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${arrai[16]}" readonly></td></tr>
-        <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="wtu" id="wtu" value="${parseTglTera(arrai[0])}" readonly></td></tr>
+      const objectUTTP = {
+        "N" : "NERACA",
+        "TS" : "TIMBANGAN SENTISIMAL",
+        "TM" : "TIMBANGAN MEJA",
+        "TE" : "TIMBANGAN ELEKTRONIK",
+        "DL" : "DACIN LOGAM",
+        "AT" : "ANAK TIMBANGAN",
+        "TBI" : "TIMBANGAN BOBOT INGSUT",
+        "TP" : "TIMBANGAN PEGAS",
+        "TJE" : "TIMBANGAN JEMBATAN ELEKTRONIK"
+      };
+
+      tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${arrai[norder]}" readonly></td></tr>
+        <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="tglTera" id="tglTera" value="${parseTglTera(arrai[0])}" readonly></td></tr>
         <tr><td>WTU</td><td><input type="text" class="inputSert" name="wtu" id="wtu" value="${arrai[2]}"></td></tr>
         <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
-        <tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>
+        <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>-->
+        <tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${objectUTTP[arrai[6]]}"></td></tr>
+        <tr><td>Kap / Dayabaca</td><td><input type="text" class="inputSert" name="kapDayabaca" id="kapDayabaca" value="${arrai[7]} / ${arrai[8]}"></td></tr>
         <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
         <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${serialNum}"></td></tr>
         <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[11]}"></td></tr>
         <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${arrai[idx_penera].split("-").length < 2 ? dataPeneraDetail[arrai[idx_penera]] : parsePenera(arrai[idx_penera])}"></td></tr>
+        <tr><td>Buatan</td><td><input type="text" class="inputSert" name="buatan" id="buatan" value="${arrai[buatan]}"></td></tr>
+        <tr><td style="color : red;">No.Urut Sertifikat<br>[ wajib diisi ]</td><td><input type="text" class="inputSert" name="nurut" id="nurut" value=""></td></tr>
         <tr><td colspan=2 id="submitTd"><input type="button" name="submitSert" id="submitSert" value = "Buat Sertifikat"></tr>
         `;
       el.appendChild(elHeader);
