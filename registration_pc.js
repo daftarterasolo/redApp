@@ -471,7 +471,7 @@ function SertBtnClickedHandler() {
     .then(result => result.json())
     .then(result => {
       console.log(result);
-      
+
       fetch(api, {
         method : 'GET',
         headers : {
@@ -540,7 +540,8 @@ function printSertifikat() {
         "AT" : "ANAK TIMBANGAN",
         "TBI" : "TIMBANGAN BOBOT INGSUT",
         "TP" : "TIMBANGAN PEGAS",
-        "TJE" : "TIMBANGAN JEMBATAN ELEKTRONIK"
+        "TJE" : "TIMBANGAN JEMBATAN ELEKTRONIK",
+        "PUBBM" : "POMPA UKUR BBM"
       };
 
       tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${arrai[norder]}" readonly></td></tr>
