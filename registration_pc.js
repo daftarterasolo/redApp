@@ -461,7 +461,9 @@ function SertBtnClickedHandler() {
     
     let api = "https://sert.metrologi.ska:5005/sertifikat_tuk";
 
-    fetch(api,{
+    document.getElementById("submitSert").value = `Processing...`;
+
+    await fetch(api,{
       method : "POST",
       header : {
         "Content-Type" : "Application/json"
@@ -488,9 +490,9 @@ function SertBtnClickedHandler() {
         aElement.setAttribute("target", "_blank");
         aElement.click();
         URL.revokeObjectURL(href);
-        el.innerHTML = "Proses download selesai";
-        setTimeout(() => tempElement.removeChild(el), 500);
-        
+        //el.innerHTML = "Proses download selesai";
+        //setTimeout(() => tempElement.removeChild(el), 500);
+        document.getElementById("submitSert").value = `Buat Sertifikat`;
       });
 
     })
