@@ -263,7 +263,18 @@ async function changeDate() {
                 str += `</div></div>`;
                 
                 if (l.length === 18) {
-                  str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
+                  let nomor_order = "";
+
+                  if (l[16].split("/").length === 6) {
+                    let arrFromNorder = l[16].split("/");
+                    arrFromNorder.pop();
+                    nomor_order = arrFromNorder.join("/");
+                  } else {
+                    nomor_order = l[16];
+                  }
+                  
+                  //str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
+                  str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${nomor_order}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
                 } else {
                   str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[17]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
                 }
@@ -546,7 +557,17 @@ function printSertifikat() {
         "PUBBM" : "POMPA UKUR BBM"
       };
 
-      tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${arrai[norder]}" readonly></td></tr>
+      let nomor_order = "";
+
+      if (arrai[norder].split("/").length === 6) {
+        let arrFromNorder = arrai[norder].split("/");
+        arrFromNorder.pop();
+        nomor_order = arrFromNorder.join("/");
+      } else {
+        nomor_order = arrai[norder];
+      }
+
+      tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${nomor_order}" readonly></td></tr>
         <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="tglTera" id="tglTera" value="${parseTglTera(arrai[0])}" readonly></td></tr>
         <tr><td>WTU</td><td><input type="text" class="inputSert" name="wtu" id="wtu" value="${arrai[2]}"></td></tr>
         <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
