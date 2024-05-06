@@ -276,9 +276,9 @@ async function changeDate() {
                   }
                   
                   //str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
-                  str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD${mass}">Nomor Order : ${nomor_order}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
+                  str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD${mass}">Nomor Order : ${nomor_order}</button>&nbsp;<button id="_${l[1]}" class="printFormulir${mass}">Cetak Formulir</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
                 } else {
-                  str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[17]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
+                  str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[17]}</button>&nbsp;<button id="_${l[1]}" class="printFormulir">Cetak Formulir</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
                 }
                 
                 //str += `<div class="item"><div class="inner">Nomor Order : ${l[16]}<div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator)}</div>`;
