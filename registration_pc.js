@@ -264,17 +264,19 @@ async function changeDate() {
                 
                 if (l.length === 18) {
                   let nomor_order = "";
+                  let mass = "";
 
                   if (l[16].split("/").length === 6) {
                     let arrFromNorder = l[16].split("/");
                     arrFromNorder.pop();
                     nomor_order = arrFromNorder.join("/");
+                    mass = ' mass';
                   } else {
                     nomor_order = l[16];
                   }
                   
                   //str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
-                  str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${nomor_order}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
+                  str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD${mass}">Nomor Order : ${nomor_order}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
                 } else {
                   str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[17]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
                 }
@@ -349,7 +351,9 @@ function printSKRD() {
       /*this.parentElement.parentElement.parentElement.classList[1] === "k_tera" ?
         api = "https://sert.metrologi.ska:5005/buktidaftartera" : api = "https://sert.metrologi.ska:5005/buktidaftar";
       */
-      
+      //console.log(this.classList);
+      //return false;
+
       switch(this.parentElement.parentElement.parentElement.classList[1]) {
         case 'k_tera':
           api = "https://sert.metrologi.ska:5005/buktidaftartera";
@@ -357,6 +361,7 @@ function printSKRD() {
 
         case 'k_tuk':
           api = "https://sert.metrologi.ska:5005/buktidaftar";
+          //api = "https://sert.metrologi.ska:5005/buktidaftarmassal"
           break;
 
         case 'k_spbu':
@@ -368,7 +373,8 @@ function printSKRD() {
           break;
       }
 
-      console.log(api);
+      this.classList[1] === "mass" ? api = "https://sert.metrologi.ska:5005/buktidaftarmassal" : '';
+      //console.log(api);
 
       
       let data = {"bukti_daftar" : filterTheArray(getArrayData(), this.id)};
