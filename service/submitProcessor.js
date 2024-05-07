@@ -181,7 +181,8 @@ export class spbuSubmitProcessor extends submitProcessor {
 		this.#detectIfSubmitClicked();
 		//this.#api = "https://script.google.com/macros/s/AKfycbwIrVmzY6jI9YiNEAtlepkZijgpXM8PdeLo2tkrLmWw2Ay8QGZIimaKqC7tdqapR7KdCg/exec";
 		//this.#api = "https://script.google.com/macros/s/AKfycbzMsoxJDvgram8ioXUxz-o2T0kQz_tYzDZfNvB5MvkytZuVCOHPZoZ8yp6txYJvootK8g/exec";
-		this.#api = "https://script.google.com/macros/s/AKfycbwOpnGxursw8Z8kLW-9bGa7uhufAleNJfSx0yP7pNLDSAYhEE3q_-XtMmogxR7j48PUXQ/exec";
+		//this.#api = "https://script.google.com/macros/s/AKfycbwOpnGxursw8Z8kLW-9bGa7uhufAleNJfSx0yP7pNLDSAYhEE3q_-XtMmogxR7j48PUXQ/exec";
+		this.#api = "https://script.google.com/macros/s/AKfycbxmblkPFMt-llRXxex2BKanjiLHerHt5v9fF8wg-QOzKvOb5MXvN6Xytt4CY9EUGgMdRA/exec";
 		this.#authData = {
 			'id' : sessionStorage.getItem('id'),
 			'token' : sessionStorage.getItem('key')
