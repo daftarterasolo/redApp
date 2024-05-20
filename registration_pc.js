@@ -19,7 +19,7 @@ function tempAlert(duration) {
 }
 
 //tempAlert(5000);
-
+let dispenser = "__";
 function detailItem(arr, jenisTera, iter, penera) {
   let detailStr = ``;
   let uttp = ``;
@@ -53,7 +53,22 @@ function detailItem(arr, jenisTera, iter, penera) {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
     detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]} - ${arr[10]+arr[13]-1}</td><td>${arr[11]}</td><td>${arr[13]}</td><td>${arr[14]}</td><td>${arr[15] === ""? `${strPenera} & ${strPenera2}` : arr[15]}</td><td><input type="button" class="sertifikatBtn" name="${arr[1]}-${iter}-${jenisTera}" id="${arr[1]}-${iter}-${jenisTera}" value = "Sertifikat"></td></tr></tbody>`;    
 
-  } else {
+  } 
+  if (jenisTera === "spbu") {
+    console.log(arr[15].split(".")[0]);
+    if (arr[15].split(".")[0] !== dispenser) {
+      detailStr += `<thead><tr><td>WTU</td><td>Jenis BBM</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td><td><input type="button" class="sertifikatBtn" name="${arr[1]}-${iter}-${jenisTera}" id="${arr[1]}-${iter}-${jenisTera}-${arr[15]}" value = "Sertifikat"></td></tr></thead><tbody>`;      
+    }
+    detailStr += `<tr><td>${arr[2]}</td><td> ${arr[16]} (${arr[15]})</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td><td>${arr[14] === ""? `${strPenera} & ${strPenera2}` : arr[14]}</td><td></td></tr>`;    
+    
+    
+    if (arr[15].split(".")[0] !== dispenser) {
+      detailStr += `</tbody>`;      
+    }
+
+    dispenser = arr[15].split(".")[0];
+  }
+  else {
     detailStr += `<thead><tr><td>WTU</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td></tr></thead>`;
     detailStr += `<tbody><tr><td>${arr[2]}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td><td>${arr[14] === ""? `${strPenera} & ${strPenera2}` : arr[14]}</td><td><input type="button" class="sertifikatBtn" name="${arr[1]}-${iter}-${jenisTera}" id="${arr[1]}-${iter}-${jenisTera}" value = "Sertifikat"></td></tr></tbody>`;
   }
@@ -576,21 +591,43 @@ function printSertifikat() {
       let utp = objectUTTP[arrai[6]];
       utp == "POMPA UKUR BBM" ? utp = `${utp} (${arrai[16]} ${arrai[15]})` : ''; 
 
-      tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${nomor_order}" readonly></td></tr>
-        <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="tglTera" id="tglTera" value="${parseTglTera(arrai[0])}" readonly></td></tr>
-        <tr><td>WTU</td><td><input type="text" class="inputSert" name="wtu" id="wtu" value="${arrai[2]}"></td></tr>
-        <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
-        <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>-->
-        <tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${utp}"></td></tr>
-        <tr><td>Kap / Dayabaca</td><td><input type="text" class="inputSert" name="kapDayabaca" id="kapDayabaca" value="${arrai[7]} / ${arrai[8]}"></td></tr>
-        <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
-        <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${serialNum}"></td></tr>
-        <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[11]}"></td></tr>
-        <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${arrai[idx_penera].split("-").length < 2 ? dataPeneraDetail[arrai[idx_penera]] : parsePenera(arrai[idx_penera])}"></td></tr>
-        <tr><td>Buatan</td><td><input type="text" class="inputSert" name="buatan" id="buatan" value="${arrai[buatan]}"></td></tr>
-        <tr><td style="color : red;">No.Urut Sertifikat<br>[ wajib diisi ]</td><td><input type="text" class="inputSert" name="nurut" id="nurut" value=""></td></tr>
-        <tr><td colspan=2 id="submitTd"><input type="button" name="submitSert" id="submitSert" value = "Buat Sertifikat"></tr>
-        `;
+      if j_tera === "spbu" {
+        tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${nomor_order}" readonly></td></tr>
+          <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="tglTera" id="tglTera" value="${parseTglTera(arrai[0])}" readonly></td></tr>
+          <tr><td>WTU</td><td><input type="text" class="inputSert" name="wtu" id="wtu" value="${arrai[2]}"></td></tr>
+          <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
+          <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>-->
+          <tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${utp}"></td></tr>
+          <tr><td>Kap / Dayabaca</td><td><input type="text" class="inputSert" name="kapDayabaca" id="kapDayabaca" value="${arrai[7]} / ${arrai[8]}"></td></tr>
+          <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
+          <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${serialNum}"></td></tr>
+          <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[11]}"></td></tr>
+          <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${arrai[idx_penera].split("-").length < 2 ? dataPeneraDetail[arrai[idx_penera]] : parsePenera(arrai[idx_penera])}"></td></tr>
+          <tr><td>Buatan</td><td><input type="text" class="inputSert" name="buatan" id="buatan" value="${arrai[buatan]}"></td></tr>
+          <tr><td style="color : red;">No.Urut Sertifikat<br>[ wajib diisi ]</td><td><input type="text" class="inputSert" name="nurut" id="nurut" value=""></td></tr>
+          <tr><td colspan=2 id="submitTd"><input type="button" name="submitSert" id="submitSert" value = "Buat Sertifikat"></tr>
+          `;
+        
+      }
+      else {
+        tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${nomor_order}" readonly></td></tr>
+          <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="tglTera" id="tglTera" value="${parseTglTera(arrai[0])}" readonly></td></tr>
+          <tr><td>WTU</td><td><input type="text" class="inputSert" name="wtu" id="wtu" value="${arrai[2]}"></td></tr>
+          <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
+          <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>-->
+          <tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${utp}"></td></tr>
+          <tr><td>Kap / Dayabaca</td><td><input type="text" class="inputSert" name="kapDayabaca" id="kapDayabaca" value="${arrai[7]} / ${arrai[8]}"></td></tr>
+          <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
+          <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${serialNum}"></td></tr>
+          <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[11]}"></td></tr>
+          <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${arrai[idx_penera].split("-").length < 2 ? dataPeneraDetail[arrai[idx_penera]] : parsePenera(arrai[idx_penera])}"></td></tr>
+          <tr><td>Buatan</td><td><input type="text" class="inputSert" name="buatan" id="buatan" value="${arrai[buatan]}"></td></tr>
+          <tr><td style="color : red;">No.Urut Sertifikat<br>[ wajib diisi ]</td><td><input type="text" class="inputSert" name="nurut" id="nurut" value=""></td></tr>
+          <tr><td colspan=2 id="submitTd"><input type="button" name="submitSert" id="submitSert" value = "Buat Sertifikat"></tr>
+          `;
+
+      }
+
       el.appendChild(elHeader);
       el.appendChild(sertForm);
       document.getElementById("sertForm").appendChild(tableForm);
