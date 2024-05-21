@@ -308,6 +308,7 @@ async function changeDate() {
               lastOrder = l[1];
               iterator++;
             }
+
           } else {
             alert(`Loading data tidak berhasil. Error Message : ${e.data}`);
             clearLoading(obj[k.id]["layoutPos"]);
@@ -320,6 +321,20 @@ async function changeDate() {
           detectIfPeneraDuaSelected();
           printSKRD();
           printSertifikat();
+
+          let prev = "";
+          let prevElem = "";
+          document.querySelectorAll('.innerOfInner').forEach(nil => {  
+            //console.log(nil.children[0].children[0].classList[0]);
+            let now = nil.children[0].children[0].classList[0];
+
+            prev === "green" && now === "blue" ? prevElem.style.display = "block" : nil.style.display = "none";
+            now === "blue" ? nil.style.display = "none" : '';
+
+            prev = nil.children[0].children[0].classList[0];
+            prevElem = nil;
+            
+          });
       });
     });
 
