@@ -16,6 +16,13 @@
     margin-bottom: 30px;
 }
 
+.green {
+    background-color: #003331;
+}
+
+.blue {
+    background-color: #0047AB;
+}
 /*
 .k_tera .item {
     background-image: url("img/AT.jpg");
