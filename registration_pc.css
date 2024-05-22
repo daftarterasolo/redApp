@@ -23,6 +23,11 @@
 .blue {
     background-color: #0047AB;
 }
+
+.black {
+    background-color: black;
+}
+
 /*
 .k_tera .item {
     background-image: url("img/AT.jpg");
