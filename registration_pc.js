@@ -59,11 +59,11 @@ function detailItem(arr, jenisTera, iter, penera) {
     console.log(arr[15].split(".")[0]);
 
     if (arr[15].split(".")[0] === dispenser) {
-      jenisBBM += `<br>${arr[16]} (${arr[15]})`;
+      jenisBBM += `<br>Pompa Ukur BBM untuk ${arr[16]} (${arr[15]})`;
       detailStr += `<thead class="green"><tr><td>WTU</td><td>Jenis BBM</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td><td></td></tr></thead>`;      
       detailStr += `<tbody class="green"><tr><td>${arr[2]}</td><td>${jenisBBM}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td><td>${arr[14] === ""? `${strPenera} & ${strPenera2}` : arr[14]}</td><td><input type="button" class="sertifikatBtn" name="${arr[1]}-${iter}-${jenisTera}" id="${arr[1]}-${iter}-${jenisTera}-${arr[15]}" value = "Sertifikat"></td></tr></tbody>`;
     } else {
-      jenisBBM = `<br>${arr[16]} (${arr[15]})`;
+      jenisBBM = `<br>Pompa Ukur BBM untuk ${arr[16]} (${arr[15]})`;
       detailStr += `<thead class="blue"><tr><td>WTU</td><td>Jenis BBM</td><td>Alamat</td><td>UTTP</td><td>Merek</td><td>SN</td><td>Tipe</td><td>Jml</td><td>Buatan</td><td>Penera</td><td></td></tr></thead>`;      
       detailStr += `<tbody class="blue"><tr><td>${arr[2]}</td><td>${jenisBBM}</td><td>${arr[3]}</td><td>${arr[6]} / ${arr[7]} / ${arr[8]}</td><td>${arr[9]}</td><td>${arr[10]}</td><td>${arr[11]}</td><td>${arr[12]}</td><td>${arr[13]}</td><td>${arr[14] === ""? `${strPenera} & ${strPenera2}` : arr[14]}</td><td><input type="button" class="sertifikatBtn" name="${arr[1]}-${iter}-${jenisTera}" id="${arr[1]}-${iter}-${jenisTera}-${arr[15]}" value = "Sertifikat"></td></tr></tbody>`;
     }
