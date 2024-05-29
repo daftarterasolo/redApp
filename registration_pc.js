@@ -7,15 +7,6 @@ function tempAlert(duration) {
     });
 
   }
-  /*let el = document.createElement("div");
-  el.setAttribute("class", "alertUpdatePenera");
-  el.setAttribute("style","position:absolute;top:40%;left:20%;background-color:white;");
-  el.innerHTML = "Tunggu sebentar ya..";
-  setTimeout(function(){
-    el.parentNode.removeChild(el);
-  },duration);
-  document.body.appendChild(el);
-  */
 }
 
 //tempAlert(5000);
@@ -320,6 +311,7 @@ async function changeDate() {
           detectIfPeneraSelected();
           detectIfPeneraDuaSelected();
           printSKRD();
+          printFormulir();
           printSertifikat();
           
           let prev = "";
@@ -389,6 +381,86 @@ function filterTheArray(arr, id) {
     return arrayToSend;    
 }
 
+function printFormulir() {
+
+  let prtTombol = document.querySelectorAll('.printFormulir');
+  for (let k of prtTombol) {
+    k.addEventListener('click', async function() {
+      let api = "";
+      console.log(this.parentElement.parentElement.parentElement.classList[1]);
+      /*
+      switch(this.parentElement.parentElement.parentElement.classList[1]) {
+        case 'k_tera':
+          api = "https://sert.metrologi.ska:5005/buktidaftartera";
+          break;
+
+        case 'k_tuk':
+          api = "https://sert.metrologi.ska:5005/buktidaftar";
+          //api = "https://sert.metrologi.ska:5005/buktidaftarmassal"
+          break;
+
+        case 'k_spbu':
+          api = "https://sert.metrologi.ska:5005/buktidaftarspbu";
+          break;
+
+        case 'k_loko':  
+          api = "https://sert.metrologi.ska:5005/buktidaftarloko";
+          break;
+      }
+
+      this.classList[1] === "mass" ? api = "https://sert.metrologi.ska:5005/buktidaftarmassal" : '';
+      //console.log(api);
+      */
+      api = "https://sert.metrologi.ska:5006/formulirpendaftaran";
+
+      let data = {"bukti_daftar" : filterTheArray(getArrayData(), this.id.replace("_",""))};
+      console.log(data);
+      
+      let el = document.createElement("div");
+      el.setAttribute("class", "alertCetakBukti");
+      el.innerHTML = "Tunggu sebentar...Server sdg menyiapkan formulir pendaftaran";
+      let tempElement = this.parentElement;
+      tempElement.insertBefore(el, this);
+      
+      fetch(api,{
+        method : 'POST',
+        headers : {
+          "Content-Type" : "application/json"
+        },
+        body : JSON.stringify(data)
+      })
+      .then(result => result.json())
+      .then(result => {
+        
+        fetch(api, {
+          method : 'GET',
+          headers : {
+            "Accept" : "Application/octet-stream"
+          }
+        })
+        .then(data => data.blob())
+        .then(data => {
+          //console.log(result['file']);
+          const aElement = document.createElement("a");
+          aElement.setAttribute("download", result['file']);
+          const href = URL.createObjectURL(data);
+          aElement.href = href;
+          aElement.setAttribute("target", "_blank");
+          aElement.click();
+          URL.revokeObjectURL(href);
+          el.innerHTML = "Proses download selesai";
+          setTimeout(() => tempElement.removeChild(el), 500);
+          
+        });
+  
+      });
+      
+    });
+
+  }
+}
+
+
 function printSKRD() {
 
   let prtTombol = document.querySelectorAll('.printSKRD');
@@ -426,8 +498,25 @@ function printSKRD() {
 
       
       let data = {"bukti_daftar" : filterTheArray(getArrayData(), this.id)};
+      console.log(data["bukti_daftar"][0][14]);
+      let dropdown = this.parentElement.children[2].children[0].children[1].children[0].children[8].children[0];
+
+      if (dropdown) {
+        console.log(dropdown.selectedIndex);
+        console.log(dropdown.options[dropdown.selectedIndex].text);
+
+        if (data["bukti_daftar"][0][14] === "") {
+          data["bukti_daftar"][0][14] = dropdown.options[dropdown.selectedIndex].text;
+        }
+
+      }
+
       console.log(data);
+
+      //return;
+
       let el = document.createElement("div");
+
       el.setAttribute("class", "alertCetakBukti");
       el.innerHTML = "Tunggu sebentar...Server sdg menyiapkan bukti daftar";
       let tempElement = this.parentElement;
