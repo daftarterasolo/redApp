@@ -411,7 +411,7 @@ function printFormulir() {
       this.classList[1] === "mass" ? api = "https://sert.metrologi.ska:5005/buktidaftarmassal" : '';
       //console.log(api);
       */
-      api = "https://sert.metrologi.ska:5006/formulirpendaftaran";
+      api = "https://sert.metrologi.ska:5005/formulirpendaftaran";
 
       let data = {"bukti_daftar" : filterTheArray(getArrayData(), this.id.replace("_",""))};
       console.log(data);
