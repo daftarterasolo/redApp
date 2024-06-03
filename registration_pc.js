@@ -468,11 +468,6 @@ function printSKRD() {
     k.addEventListener('click', async function() {
       let api = "";
       console.log(this.parentElement.parentElement.parentElement.classList[1]);
-      /*this.parentElement.parentElement.parentElement.classList[1] === "k_tera" ?
-        api = "https://sert.metrologi.ska:5005/buktidaftartera" : api = "https://sert.metrologi.ska:5005/buktidaftar";
-      */
-      //console.log(this.classList);
-      //return false;
 
       switch(this.parentElement.parentElement.parentElement.classList[1]) {
         case 'k_tera':
@@ -481,7 +476,13 @@ function printSKRD() {
 
         case 'k_tuk':
           api = "https://sert.metrologi.ska:5005/buktidaftar";
+          let peneraOption = this.parentElement.children[2].children[0].children[1].children[0].children[8].children[0];
+          if (peneraOption.options[peneraOption.selectedIndex].text === "") {
+            alert("Penera belum diisi, Silahkan isi inisial penera dahulu.");
+            return;
+          }
           //api = "https://sert.metrologi.ska:5005/buktidaftarmassal"
+
           break;
 
         case 'k_spbu':
