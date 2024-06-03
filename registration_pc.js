@@ -477,7 +477,7 @@ function printSKRD() {
         case 'k_tuk':
           api = "https://sert.metrologi.ska:5005/buktidaftar";
           let peneraOption = this.parentElement.children[2].children[0].children[1].children[0].children[8].children[0];
-          if (peneraOption.options[peneraOption.selectedIndex].text === "") {
+          if (peneraOption && peneraOption.options[peneraOption.selectedIndex].text === "") {
             alert("Penera belum diisi, Silahkan isi inisial penera dahulu.");
             return;
           }
