@@ -388,30 +388,9 @@ function printFormulir() {
     k.addEventListener('click', async function() {
       let api = "";
       console.log(this.parentElement.parentElement.parentElement.classList[1]);
-      /*
-      switch(this.parentElement.parentElement.parentElement.classList[1]) {
-        case 'k_tera':
-          api = "https://sert.metrologi.ska:5005/buktidaftartera";
-          break;
 
-        case 'k_tuk':
-          api = "https://sert.metrologi.ska:5005/buktidaftar";
-          //api = "https://sert.metrologi.ska:5005/buktidaftarmassal"
-          break;
-
-        case 'k_spbu':
-          api = "https://sert.metrologi.ska:5005/buktidaftarspbu";
-          break;
-
-        case 'k_loko':  
-          api = "https://sert.metrologi.ska:5005/buktidaftarloko";
-          break;
-      }
-
-      this.classList[1] === "mass" ? api = "https://sert.metrologi.ska:5005/buktidaftarmassal" : '';
-      //console.log(api);
-      */
-      api = "https://sert.metrologi.ska:5005/formulirpendaftaran";
+      this.classList[1] === "mass" ? api = "https://sert.metrologi.ska:5005/formulirpendaftaranmassal" : api = "https://sert.metrologi.ska:5005/formulirpendaftaran";
+      
 
       let data = {"bukti_daftar" : filterTheArray(getArrayData(), this.id.replace("_",""))};
       console.log(data);
