@@ -389,8 +389,11 @@ function printFormulir() {
       let api = "";
       console.log(this.parentElement.parentElement.parentElement.classList[1]);
 
+      let jenisTera = this.parentElement.parentElement.parentElement.classList[1];
+
       this.classList[1] === "mass" ? api = "https://sert.metrologi.ska:5005/formulirpendaftaranmassal" : api = "https://sert.metrologi.ska:5005/formulirpendaftaran";
       
+      jenisTera === "k_tera" ? api = "https://sert.metrologi.ska:5005/formulirpendaftarantera" : '';
 
       let data = {"bukti_daftar" : filterTheArray(getArrayData(), this.id.replace("_",""))};
       console.log(data);
