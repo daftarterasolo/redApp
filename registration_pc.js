@@ -713,6 +713,7 @@ function printSertifikat() {
           <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[11]}"></td></tr>
           <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${arrai[idx_penera].split("-").length < 2 ? dataPeneraDetail[arrai[idx_penera]] : parsePenera(arrai[idx_penera])}"></td></tr>
           <tr><td>Buatan</td><td><input type="text" class="inputSert" name="buatan" id="buatan" value="${arrai[buatan]}"></td></tr>
+          <tr><td style="color : darkgreen;">Penandatangan<br>[ wajib diisi ]</td><td><select class="inputSert" name="ttd" id="ttd"><option value="kepala">Ka UPTD Metrologi</option><option value="kepala_tte">Ka UPTD Metrologi TTE</option><option value="kasubag">Ka Subbag TU</option></select></td></tr>         
           <tr><td style="color : red;">No.Urut Sertifikat<br>[ wajib diisi ]</td><td><input type="text" class="inputSert" name="nurut" id="nurut" value=""></td></tr>
           <tr><td colspan=2 id="submitTd"><input type="button" name="submitSert" id="submitSert" value = "Buat Sertifikat"></tr>
           `;
