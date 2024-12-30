@@ -101,12 +101,14 @@ label {
 }
 
 input[type=submit] {
-	background-color: #228234;
+	/*background-color: #228234;*/
+	background-color: #09D0F8;
 	margin-top: 12px;
 	border: none;
 	font-family: 'Montserrat';
 	font-size: 14px;
-	font-weight : 700;
+	font-weight : bolder;
+	color : #FFFFFF;
 }
 
 span {

@@ -2,15 +2,15 @@ import { lgin, clearForm, checkTheLocalSession, setSession } from './service/log
 
 function setSubmitBtn() {
 	const lin = document.getElementById("lin");
-	lin.style.backgroundColor = "#69b076";
-	lin.style.fontWeight = "100";
-	lin.style.color = "#dddddd";
+	lin.style.backgroundColor = "#25476A";
+	lin.style.fontWeight = "bolder";
+	lin.style.color = "#EEEFEA";
 	lin.value = "Signing in ....";	
 }
 
 function setBackSubmitBtn() {
 	const lin = document.getElementById("lin");
-	lin.style.backgroundColor = "green";
+	lin.style.backgroundColor = "#09D0F8";
 	lin.value = "Sign in";	
 	lin.style.fontWeight = "700";
 	lin.style.color = "#FFFFFF";
