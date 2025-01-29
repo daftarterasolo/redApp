@@ -180,6 +180,7 @@ export class createFormPabrik extends createFormMasy {
 	}
 
 	determineDataSrc() {
+		console.log(this.#pabrikData);
 		return this.#pabrikData;
 	}
 

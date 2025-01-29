@@ -69,6 +69,7 @@ function clickLogout() {
 							</div>                  
 						</div>
 						<datalist id="kelurahan"></datalist>
+						<datalist id="wtuHistory"></datalist>
 					</div>
 					<div class="uttpDiv hidden"></div>					
 					<div class="scanDiv hidden">

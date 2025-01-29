@@ -11,6 +11,7 @@ export class createFormMasyRedApp {
 	static shopChartTemp = [];
 	static dataToSend = {};
 	#dataForm = {};
+	#wtuHistoryData = [];    //field yg digunakan pada method #loadWtuHistory
 
 	constructor(formKontainer, str) {
 		this.formKontainer = formKontainer;
