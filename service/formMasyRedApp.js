@@ -1,4 +1,4 @@
-import { getKelurahan, listOfUttpMasyRedApp } from '../util/utilFunc.js'; 
+import { getKelurahan, listOfUttpMasyRedApp, getWtuHistory } from '../util/utilFunc.js'; 
 /*import { lakukanScan } from '../util/siapkanKamera.js';*/
 
 export class createFormMasyRedApp {
@@ -39,12 +39,18 @@ export class createFormMasyRedApp {
 		document.querySelector(".jmlhDiv") != null ? document.querySelector(".jmlhDiv").remove() : '';
 	}
 
+	async #loadWtuHistory() {
+		document.getElementById("wtuHistory") != null ? this.#wtuHistoryData = await getWtuHistory() : '';
+		//console.log(this.#wtuHistoryData[100]);
+	}
+
 	async generateForm() {
 		this.#generateLoadingBar(true);
 		this.#removeContentComponent();
 		this.formKontainer.insertAdjacentHTML('beforeend', this.str);
 		this.constructor.kelurahan = await getKelurahan();
 		this.#generateLoadingBar(false);
+		await this.#loadWtuHistory();
 	}
 
 	//method utk dijalankan pada generateListUttp()
@@ -320,11 +326,50 @@ export class createFormMasyRedApp {
 
 	}
 
+	
+	//method utk dijalankan pd method #autoCompleteForm()
+	#clearFormPendaftaran() {
+		document.getElementById("alamat").value = "";
+		document.getElementById("kel").value = "";
+		document.getElementById("wa").value = "";			
+	}
+	
+	//method untuk dijalankan pada method #generateEventHandler()
+	#autoCompleteForm(katakunci, srcData) {
+		this.#clearFormPendaftaran();
+		//let filteredData = this.#pabrikData.filter(e => e[1] === katakunci);
+		let filteredData = srcData.filter(e => e[1] === katakunci);
+		if (filteredData[0] != undefined) {
+			document.getElementById("alamat").value = filteredData[0][2];
+			document.getElementById("kel").value = filteredData[0][4];
+			document.getElementById("wa").value = filteredData[0][3];			
+		}
+	}
+
+	determineDataSrc() {
+		//console.log(this.#pabrikData);
+		return this.#wtuHistoryData;
+	}
+
+	//method utk dijalankan pd method generateBtnHandler()
+	#generateEventHandler() {	
+		document.getElementById("nama").addEventListener('input', e => {
+			e.target.value.length > 1 ? this.#autoCompleteForm(e.target.value.toUpperCase(), this.determineDataSrc()) : '';
+		});
+
+		document.getElementById("nama").addEventListener('keyup', e => {
+			e.target.value.length > 1 ? this.#autoCompleteForm(e.target.value.toUpperCase(), this.determineDataSrc()) : '';
+		});
+
+	}
+
+
 	//method utk dijalankan pd generateBtnHandler()
 	generateBtnHandler() {
 		this.#nextBtnHandler();
 		this.#backBtnHandler();
 		this.#addBtnHandler();
+		this.#generateEventHandler();
 		//this.#addByQrcodeBtnHandler();
 	}
 

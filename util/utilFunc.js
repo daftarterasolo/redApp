@@ -46,6 +46,7 @@ export async function getPabrikTimb() {
 
 export async function getWtuHistory() {
 	let url = "https://script.google.com/macros/s/AKfycbzZGAQEX556ca9KwC-9aTiL2PACf_nnY2vZVNxVvrBN4mfFCyk3gXqGMrAEvSVZMuE/exec";
+	//let url = "https://script.google.com/macros/s/AKfycbyabHAX8qUiIDXOcNpMqz5kwPu4FGvpBVVrKHT_LwTbZ4OtDHIZVmaXpyJEJ3g17Q/exec";
 
 	let wtuHistory = [];
 	await fetch(url).then(data => data.json()).then(data => {

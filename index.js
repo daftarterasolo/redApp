@@ -49,7 +49,7 @@ function clickLogout() {
 						<div class="subContent" id="sub1">
 							<div class="title">Silahkan isi data</div>
 							<form>
-								<input type="text" class="form_data" name="nama" id="nama" placeholder="Masukkan nama / badan usaha">
+								<input type="text" class="form_data" name="nama" id="nama" list="wtuHistory" placeholder="Masukkan nama / badan usaha">
 								<textarea  class="form_data" name="alamat" id="alamat" rows="4" cols="10" placeholder="Masukkan alamat"></textarea>  
 								<input type="text" class="form_data" name="kel" id="kel" list="kelurahan" placeholder="Masukkan kelurahan">  
 								<input type="number" class="form_data" name="wa" id="wa" placeholder="Nomor HP/Whatsapp">
