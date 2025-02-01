@@ -341,8 +341,8 @@ export class createFormMasyRedApp {
 		let filteredData = srcData.filter(e => e[1] === katakunci);
 		if (filteredData[0] != undefined) {
 			document.getElementById("alamat").value = filteredData[0][2];
-			document.getElementById("kel").value = filteredData[0][4];
-			document.getElementById("wa").value = filteredData[0][3];			
+			document.getElementById("kel").value = filteredData[0][3];
+			document.getElementById("wa").value = filteredData[0][4];			
 		}
 	}
 
