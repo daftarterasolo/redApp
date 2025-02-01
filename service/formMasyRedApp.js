@@ -166,7 +166,7 @@ export class createFormMasyRedApp {
 			document.getElementById("uttp").value = `${this.list[e.id][3]} ${this.list[e.id][1]}`;
 			//document.getElementById("kap").value = this.list[e.id][1];
 			//document.getElementById("d").value = this.list[e.id][2];
-			if ((this.list[e.id][0] === "TE" || this.list[e.id][0] === "TP") && (this.list[e.id][1] === '-' || this.list[e.id][1] === '-')) {
+			if ((this.list[e.id][0] === "TE" || this.list[e.id][0] === "TP" || this.list[e.id][0] === "TC" || this.list[e.id][0] === "MP") && (this.list[e.id][1] === '-' || this.list[e.id][1] === '-')) {
 				document.getElementById("kap").removeAttribute("readonly");
 				document.getElementById("d").removeAttribute("readonly");
 				//document.getElementById("kap").value = "";
@@ -211,7 +211,7 @@ export class createFormMasyRedApp {
 
 			let listTampung = [].concat(this.list[this.#listIndex]);
 
-			if (listTampung[0] === "TE" || listTampung[0] === "TP") {
+			if (listTampung[0] === "TE" || listTampung[0] === "TP" || listTampung[0] === "TC" || listTampung[0] === "MP") {
 				listTampung[1] = document.getElementById("kap").value;
 				listTampung[2] = document.getElementById("d").value;
 			}

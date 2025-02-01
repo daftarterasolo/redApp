@@ -393,3 +393,57 @@ body, html {
     border : 2px solid steelblue;
     background-color: rgba(227, 61, 148);    
 }
+
+#submitEdit {
+    font-family: 'Poppins', sans-serif;   
+    color : #FFFFFF;
+    font-weight: bolder;
+    font-size: 14px;
+    border : 2px solid rgba(0, 0, 0);
+    background-color: #BB0606;    
+}
+
+#submitEdit:active {
+    font-family: 'Poppins', sans-serif;   
+    color : #BB0606;
+    font-weight: bolder;
+    font-size: 14px;
+    border : 2px solid rgba(0, 0, 0);
+    background-color: #FFFFFF;    
+}
+
+#submitDel {
+    font-family: 'Poppins', sans-serif;   
+    color : #FFFFFF;
+    font-weight: bolder;
+    font-size: 14px;
+    border : 2px solid rgba(0, 0, 0);
+    background-color: #2F413E;    
+}
+
+#submitDel:active {
+    font-family: 'Poppins', sans-serif;   
+    color : #2F413E;
+    font-weight: bolder;
+    font-size: 14px;
+    border : 2px solid rgba(0, 0, 0);
+    background-color: #FFFFFF;    
+}
+
+#submitBatal {
+    font-family: 'Poppins', sans-serif;   
+    color : #FFFFFF;
+    font-weight: bolder;
+    font-size: 14px;
+    border : 2px solid rgba(0, 0, 0);
+    background-color: #FF5F01;    
+}
+
+#submitBatal:active {
+    font-family: 'Poppins', sans-serif;   
+    color : #FF5F01;
+    font-weight: bolder;
+    font-size: 14px;
+    border : 2px solid rgba(0, 0, 0);
+    background-color: #FFFFFF;    
+}
