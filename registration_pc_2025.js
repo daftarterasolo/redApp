@@ -646,9 +646,11 @@ function printSertifikat() {
       let idx_penera = "";
       let buatan;
       let norder;
+      let jml;
       j_tera === "tera" ? idx_penera = 15 : idx_penera = 14;
       j_tera === "tera" ? buatan = 14 : buatan = 13;
       j_tera === "spbu" ? norder = 17 : norder = 16;
+      j_tera === "tera" ? jml = 13 : jml = 12; 
       //console.log(getArrayData()[this.id.split("-")[1]]);
       console.log(getArrayData());
       let el = document.createElement("div");
@@ -705,6 +707,15 @@ function printSertifikat() {
         "TIMBANGAN CEPAT" : "TC"
       };
 
+      const objectUTTPReverseDetails = {
+        "NERACA" : ["1000 g / 500 mg","500 g / 250 mg","250 g / 125 mg","100 g / 50 mg","50 g / 25 mg"],
+        "TIMBANGAN SENTISIMAL" : ["500 kg / 200 g","300 kg / 100 g","150 kg / 100 g"],
+        "TIMBANGAN MEJA" : ["10 kg / 10 g","25 kg / 25 g","5 kg / 5 g","3 kg / 3 g"],        
+        "DACIN LOGAM" : ["110 kg / 100 g","50 kg / 100 g","25 kg / 100 g"],
+        "TIMBANGAN BOBOT INGSUT" : ["520 kg / 200 g","310 kg / 100 g","150 kg / 50 g","50 kg / 10 g"],
+        "TIMBANGAN PEGAS" : ["100 kg / 500 g","50 kg / 200 g","30 kg / 100 g","25 kg / 100 g","20 kg / 100 g","15 kg / 50 g","2 kg / 10 g"]
+      };
+
       let nomor_order = "";
 
       if (arrai[norder].split("/").length === 6) {
@@ -740,18 +751,19 @@ function printSertifikat() {
           `;
 
       } else {
+        let str = ``;
         tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${nomor_order}" readonly></td></tr>
           <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="tglTera" id="tglTera" value="${parseTglTera(arrai[0])}" readonly></td></tr>
           <tr><td>WTU</td><td><input type="text" class="inputSert" name="wtu" id="wtu" value="${arrai[2]}"></td></tr>
           <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
           <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>-->
           <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${utp}"></td></tr>-->
-          <tr><td>UTTP</td><td><select class="inputSert" name="utp" id="utp">${ Object.entries(objectUTTPReverse).forEach(([key,val]) => {
-            `<option>${key}</option>`;
-          }) }
+          <tr><td>UTTP</td><td><select class="inputSert" name="utp" id="utp">
+          ${ Object.entries(objectUTTPReverse).reduce((acc, [key,val]) => acc + `<option value="${val}">${key}</option>`,``)} 
           </select></td></tr>
           <tr><td>Kap / Dayabaca</td><td><input type="text" class="inputSert" name="kapDayabaca" id="kapDayabaca" value="${arrai[7]} / ${arrai[8]}"></td></tr>
           <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
+          <tr><td>Jumlah</td><td><input type="text" class="inputSert" name="jml" id="jml" value="${arrai[jml]}"></td></tr>
           <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${serialNum}"></td></tr>
           <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[11]}"></td></tr>
           <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${arrai[idx_penera].split("-").length < 2 ? dataPeneraDetail[arrai[idx_penera]] : parsePenera(arrai[idx_penera])}"></td></tr>
@@ -783,6 +795,46 @@ function printSertifikat() {
       el.appendChild(elHeader);
       el.appendChild(sertForm);
       document.getElementById("sertForm").appendChild(tableForm);
+      document.getElementById("utp").value = objectUTTPReverse[utp];
+
+      (function changeUttpHandler() {
+        let originalUttp = document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text;
+        document.getElementById("utp").addEventListener("change", () => {
+          let pilihKapDiv = document.createElement("div");
+          pilihKapDiv.setAttribute("id","pilihKapDiv");   
+          pilihKapDiv.style.position = "fixed";
+          pilihKapDiv.style.top = "20%";
+          pilihKapDiv.style.left = "25%";
+          pilihKapDiv.style.width = "50vw";
+          pilihKapDiv.style.height = "50vh";
+          pilihKapDiv.style.backgroundColor = "rgba(255, 255, 255, 0.8)"; // Transparan gelap
+          pilihKapDiv.style.zIndex = "9999"; // Pastikan di atas semua elemen lain
+          pilihKapDiv.style.pointerEvents = "auto"; // Aktifkan overlay untuk klik     
+
+          let choosenUttp = document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text;
+          pilihKapDiv.innerHTML = `<span class="closeListSpan">X Close This Dialog</span>` 
+          pilihKapDiv.innerHTML += `<h3 class="headerList">Pilih Kapasitas dan Dayabaca ${choosenUttp}-nya ... </h3>`;
+          pilihKapDiv.innerHTML += `<ul>${ objectUTTPReverseDetails[document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text].reduce((acc,nilai) => acc + `<li><a class="list_href" id="${nilai}" href=#>${objectUTTPReverse[choosenUttp]} ${nilai}</a></li>`,`<li hidden><a class="originalVal" id="${originalUttp}" href=#></a></li>`) }</ul>`;
+
+          document.body.appendChild(pilihKapDiv);
+
+          // Matikan interaksi dengan background
+          document.body.style.pointerEvents = "none";
+          pilihKapDiv.style.pointerEvents = "auto"; // Overlay tetap bisa diklik
+
+          // Matikan scroll
+          document.body.style.overflow = "hidden";     
+
+          (function tutupDialog() {
+            document.querySelector(".closeListSpan").addEventListener('click', () => {
+              document.getElementById("utp").value = objectUTTPReverse[document.querySelector(".originalVal").id];
+              document.getElementById("pilihKapDiv").remove();
+              document.body.style.pointerEvents = "auto";
+              document.body.style.overflow = "auto";  
+          });
+          })();     
+        });
+      })();
 
       SertBtnClickedHandler();  
       closeSertDialog(el);
