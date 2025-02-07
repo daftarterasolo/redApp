@@ -119,6 +119,14 @@ function detectIfPeneraSelected() {
       
 
       let url = "https://script.google.com/macros/s/AKfycbxM3w_o36FS0giKTKchPjM84XMRxTqorCVqq5XU_TBi7_IZDDoTVx8ZOacYcgzpT3oqxw/exec";
+
+      if (data['jenisTera'] === "sidangwly") {
+        url = "https://script.google.com/macros/s/AKfycbzIBuhSpSXpMRVeUGg4NTBqimmi6MbtIbTS5xu9vBwbzwIXzgM4iqZCO9ClyMnOXHJVmg/exec";
+      }
+
+      console.log(data['jenisTera']);
+      console.log(url);
+
       await fetch(url, {
         method : 'POST',
         body : JSON.stringify(data)
@@ -163,6 +171,14 @@ function detectIfPeneraDuaSelected() {
       
 
       let url = "https://script.google.com/macros/s/AKfycbxM3w_o36FS0giKTKchPjM84XMRxTqorCVqq5XU_TBi7_IZDDoTVx8ZOacYcgzpT3oqxw/exec";
+      
+      if (data['jenisTera'] === "sidangwly") {
+        url = "https://script.google.com/macros/s/AKfycbzIBuhSpSXpMRVeUGg4NTBqimmi6MbtIbTS5xu9vBwbzwIXzgM4iqZCO9ClyMnOXHJVmg/exec";
+      }
+
+      console.log(data['jenisTera']);
+      console.log(url);
+
       await fetch(url, {
         method : 'POST',
         body : JSON.stringify(data)
@@ -238,6 +254,11 @@ async function changeDate() {
           "urlApi" : "https://script.google.com/macros/s/AKfycbwASU7suSjjiAm2Fg_BJFqdRF03tOQ09V1ZvyBV-03NyTVj-UUrHPRa2HnPO3E_2Ti1Hw/exec",
           "layoutPos" : ".k_loko",
           "jenisTera" : "loko"          
+        },
+        "tgl_sidangwly" : {
+          "urlApi" : "https://script.google.com/macros/s/AKfycbwOdMBRwhcGOUj1TbRbkdgOtgipunPyp3FcGgSQpqZ8dF_BjgsRVSAZcqmL2I6VuwOLJg/exec",
+          "layoutPos" : ".k_sidangwly",
+          "jenisTera" : "sidangwly"          
         }        
       };
 
@@ -578,9 +599,27 @@ function parseTglTera(rawTgl) {
 function serializedFormSertData() {
   let formData = new FormData(document.getElementById('sertForm'));
   let serializedData = {};
+      
+  const objectUTTP = {
+    "N" : "NERACA",
+    "TS" : "TIMBANGAN SENTISIMAL",
+    "TM" : "TIMBANGAN MEJA",
+    "TE" : "TIMBANGAN ELEKTRONIK",
+    "DL" : "DACIN LOGAM",
+    /*"AT" : "ANAK TIMBANGAN",*/
+    "TBI" : "TIMBANGAN BOBOT INGSUT",
+    "TP" : "TIMBANGAN PEGAS",
+    "TJE" : "TIMBANGAN JEMBATAN ELEKTRONIK",
+    "PUBBM" : "POMPA UKUR BBM",
+    "MP" : "METER PARKIR",
+    "ATB" : "ANAK TIMBANGAN KASAR",
+    "ATH" : "ANAK TIMBANGAN HALUS",
+    "TC" : "TIMBANGAN CEPAT"
+  };
 
   for (let[name, value] of formData) {
-    serializedData[name] = value;
+    name === "utp" ? serializedData[name] = objectUTTP[value] : serializedData[name] = value;
+    
   }
 
   return serializedData;   

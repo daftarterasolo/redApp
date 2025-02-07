@@ -103,7 +103,7 @@ body, html {
   cursor: pointer;
   padding: 14px 16px;
   font-size: 17px;
-  width: 25%;
+  width: 20%;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -147,7 +147,14 @@ body, html {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 12px;
 }
+
 #loko {
+    background-color: #FFFFFF; 
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+}
+
+#sidangwly {
     background-color: #FFFFFF; 
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 12px;
