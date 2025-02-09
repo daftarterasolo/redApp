@@ -237,6 +237,7 @@ async function changeDate() {
       let obj = {
         "tgl_tuk" : {
           "urlApi" : "https://script.google.com/macros/s/AKfycbxQ0Df1SBipq1v2wqkSlbxyQNjI3e2wcJr3wLKgRoiRiRsXBe4RgYOhIGx01gBUGRjJJw/exec",
+          /*"https://script.google.com/macros/s/AKfycbxK5JTcPQ-ppis3ojx5TK62V-ZA5rp-g_xlCfNIFVGBpWwYTU-l5iu695Yv8hJH9hzxPg/exec",*/
           "layoutPos" : ".k_tuk",
           "jenisTera" : "tuk"
         },

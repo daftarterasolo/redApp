@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <link rel="stylesheet" href="registration_pc_2025_revisi.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    </style>
+    <title>RedApp Metrologi Surakarta</title>
+
+</head>
+<body>
+<div class="kontainerMain">
+    <button class="tablink" onclick="openPage('tera', this, '#6879D0')" id="tabTera">Tera</button>
+    <button class="tablink" onclick="openPage('tuk', this, '#6879D0')" id="defaultOpen">TUK</button>
+    <button class="tablink" onclick="openPage('spbu', this, '#6879D0')" id="tabSpbu">SPBU</button>
+    <button class="tablink" onclick="openPage('loko', this, '#6879D0')" id="tabLoko">Loko</button>
+    <button class="tablink" onclick="openPage('sidangwly', this, '#6879D0')" id="tabSidangwly">Kelurahan</button>
+    <div><a href="#" id="backToMain">Menu Utama</a></div>
+    <div id="tera" class="tabcontent">
+        <form id="tglForm" class="tgl_form">
+            <input type="date" name="tgl_tera" id="tgl_tera" class="tgl">        
+        </form>
+        <div class="kontainer k_tera">
+            <div class="item">
+                <div class="inner">
+                    <!--Nomor Order : 127/TM/X/2023 -->
+                </div>
+            </div>
+            <!--
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        -->
+        </div>
+
+    </div>
+
+    <div id="tuk" class="tabcontent">
+        <form id="tglForm" class="tgl_form">
+            <input type="date" name="tgl_tuk" id="tgl_tuk" class="tgl">        
+        </form>
+        <div class="kontainer k_tuk">
+            <div class="item">
+                <div class="inner">
+                    <!-- Nomor Order : 127/TM/X/2023
+                    <div class="innerOfInner">Tes</div>
+                    <div class="innerOfInner">Tes</div> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="spbu" class="tabcontent">
+        <form id="tglForm" class="tgl_form">
+            <input type="date" name="tgl_spbu" id="tgl_spbu" class="tgl">        
+        </form>
+        <div class="kontainer k_spbu">
+            <div class="item">
+                <div class="inner">
+                    <!--Nomor Order : 127/TM/X/2023-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loko" class="tabcontent">
+        <form id="tglForm" class="tgl_form">
+            <input type="date" name="tgl_loko" id="tgl_loko" class="tgl">        
+        </form>
+        <div class="kontainer k_loko">
+            <div class="item">
+                <div class="inner">
+                    <!--Nomor Order : 127/TM/X/2023-->
+                    <div class="innerOfInner"><!--Tes--></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sidangwly" class="tabcontent">
+        <form id="tglForm" class="tgl_form">
+            <input type="date" name="tgl_sidangwly" id="tgl_sidangwly" class="tgl">        
+        </form>
+        <div class="kontainer k_sidangwly">
+            <div class="item">
+                <div class="inner">
+                    <!--Nomor Order : 127/TM/X/2023-->
+                    <div class="innerOfInner">TEST</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script type="module" src="registration_pc_2025_revisi.js"></script>
+<script type="text/javascript">
+    function openPage(pageName,elmnt,color) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].style.backgroundColor = "";
+    }
+    document.getElementById(pageName).style.display = "block";
+    elmnt.style.backgroundColor = color;
+    let layout = `.k_${pageName}`;
+    document.querySelector(layout).innerHTML = ``; 
+    document.querySelectorAll('.tgl_form').forEach(e => {
+        e.reset();
+    });
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+   
+</body>
+</html> 
+
+
