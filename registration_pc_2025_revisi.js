@@ -628,6 +628,18 @@ function tempAlert(duration) {
     return serializedData;   
   }
   
+  function batalBtnClickHandler() {
+    let batalBtn = document.getElementById('submitBatal');
+    batalBtn.addEventListener('click', async () => {
+      //alert("Membatalkan ");
+      const dataPembatalan = {
+        'authData' : {
+              'token' : sessionStorage.getItem('key') 
+        }
+      };
+    });
+  }
+
   function SertBtnClickedHandler() {
     let submitSert = document.getElementById('submitSert');
     submitSert.addEventListener('click', async function() {
@@ -772,15 +784,17 @@ function tempAlert(duration) {
         utp == "POMPA UKUR BBM" ? utp = `${utp} (${arrai[16]} ${arrai[15]})` : ''; 
   
         if (j_tera === "spbu") {
+          //console.log(`ini adalah ${this.parentElement.parentElement.children[1].innerHTML}`);
           let listOfNozz = this.parentElement.parentElement.children[1].innerHTML.split("<br>").join("\n");
+          console.log(listOfNozz);
   
           tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${nomor_order}" readonly></td></tr>
             <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="tglTera" id="tglTera" value="${parseTglTera(arrai[0])}" readonly></td></tr>
             <tr><td>WTU</td><td><input type="text" class="inputSert" name="wtu" id="wtu" value="${arrai[2]}"></td></tr>
             <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
             <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>-->
-            <tr><td>UTTP</td><td><textarea class="inputSert" id="utp" name="utp" rows="10" cols="33">${listOfNozz}</textarea></td></tr>
-            <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${utp}"></td></tr>-->
+            <tr><td>UTTP</td><td><textarea class="inputSert" id="utp2" name="utp2" rows="10" cols="33">${listOfNozz}</textarea></td></tr>
+            <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp2" id="utp2" value="${utp}"></td></tr>-->
             <tr><td>Kap / Dayabaca</td><td><input type="text" class="inputSert" name="kapDayabaca" id="kapDayabaca" value="${arrai[7]} / ${arrai[8]}"></td></tr>
             <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
             <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${serialNum}"></td></tr>
@@ -813,6 +827,7 @@ function tempAlert(duration) {
             <tr><td>QRCODE (Jika ada)</td><td><input type="text" class="inputSert" name="qrcode" id="qrcode" value="${arrai[19]}"></td></tr>
             <tr><td style="color : darkgreen;">Penandatangan<br>[ wajib diisi ]</td><td><select class="inputSert" name="ttd" id="ttd"><option value="kepala">Ka UPTD Metrologi</option><option value="kepala_tte">Ka UPTD Metrologi TTE</option><option value="kasubag">Ka Subbag TU</option></select></td></tr>         
             <tr><td style="color : red;">No.Urut Sertifikat<br>[ wajib diisi ]</td><td><input type="text" class="inputSert" name="nurut" id="nurut" value=""></td></tr>
+            <tr><td>Nomor Baris</td><td><input type="text" class="inputSert" name="baris" id="baris" value="${arrai[17]}"></td></tr>
             <tr><td colspan=2 id="submitTd"><input type="button" name="submitSert" id="submitSert" value = "Buat Sertifikat">&nbsp;<input type="button" name="submitEdit" id="submitEdit" value = "Ubah Data">&nbsp;<input type="button" name="submitDel" id="submitDel" value = "Hapus">&nbsp;<input type="button" name="submitBatal" id="submitBatal" value = "Batalkan"></tr>
             `;
   
@@ -838,48 +853,52 @@ function tempAlert(duration) {
         el.appendChild(elHeader);
         el.appendChild(sertForm);
         document.getElementById("sertForm").appendChild(tableForm);
-        document.getElementById("utp").value = objectUTTPReverse[utp];
-  
-        (function changeUttpHandler() {
-          let originalUttp = document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text;
-          document.getElementById("utp").addEventListener("change", () => {
-            let pilihKapDiv = document.createElement("div");
-            pilihKapDiv.setAttribute("id","pilihKapDiv");   
-            pilihKapDiv.style.position = "fixed";
-            pilihKapDiv.style.top = "20%";
-            pilihKapDiv.style.left = "25%";
-            pilihKapDiv.style.width = "50vw";
-            pilihKapDiv.style.height = "50vh";
-            pilihKapDiv.style.backgroundColor = "rgba(255, 255, 255, 0.8)"; // Transparan gelap
-            pilihKapDiv.style.zIndex = "9999"; // Pastikan di atas semua elemen lain
-            pilihKapDiv.style.pointerEvents = "auto"; // Aktifkan overlay untuk klik     
-  
-            let choosenUttp = document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text;
-            pilihKapDiv.innerHTML = `<span class="closeListSpan">X Close This Dialog</span>` 
-            pilihKapDiv.innerHTML += `<h3 class="headerList">Pilih Kapasitas dan Dayabaca ${choosenUttp}-nya ... </h3>`;
-            pilihKapDiv.innerHTML += `<ul>${ objectUTTPReverseDetails[document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text].reduce((acc,nilai) => acc + `<li><a class="list_href" id="${nilai}" href=#>${objectUTTPReverse[choosenUttp]} ${nilai}</a></li>`,`<li hidden><a class="originalVal" id="${originalUttp}" href=#></a></li>`) }</ul>`;
-  
-            document.body.appendChild(pilihKapDiv);
-  
-            // Matikan interaksi dengan background
-            document.body.style.pointerEvents = "none";
-            pilihKapDiv.style.pointerEvents = "auto"; // Overlay tetap bisa diklik
-  
-            // Matikan scroll
-            document.body.style.overflow = "hidden";     
-  
-            (function tutupDialog() {
-              document.querySelector(".closeListSpan").addEventListener('click', () => {
-                document.getElementById("utp").value = objectUTTPReverse[document.querySelector(".originalVal").id];
-                document.getElementById("pilihKapDiv").remove();
-                document.body.style.pointerEvents = "auto";
-                document.body.style.overflow = "auto";  
+        j_tera !== "spbu" ? document.getElementById("utp").value = objectUTTPReverse[utp] : '';
+
+        if (j_tera !== "spbu") {
+          (function changeUttpHandler() {
+            let originalUttp = document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text;
+            document.getElementById("utp").addEventListener("change", () => {
+              let pilihKapDiv = document.createElement("div");
+              pilihKapDiv.setAttribute("id","pilihKapDiv");   
+              pilihKapDiv.style.position = "fixed";
+              pilihKapDiv.style.top = "20%";
+              pilihKapDiv.style.left = "25%";
+              pilihKapDiv.style.width = "50vw";
+              pilihKapDiv.style.height = "50vh";
+              pilihKapDiv.style.backgroundColor = "rgba(255, 255, 255, 0.8)"; // Transparan gelap
+              pilihKapDiv.style.zIndex = "9999"; // Pastikan di atas semua elemen lain
+              pilihKapDiv.style.pointerEvents = "auto"; // Aktifkan overlay untuk klik     
+    
+              let choosenUttp = document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text;
+              pilihKapDiv.innerHTML = `<span class="closeListSpan">X Close This Dialog</span>` 
+              pilihKapDiv.innerHTML += `<h3 class="headerList">Pilih Kapasitas dan Dayabaca ${choosenUttp}-nya ... </h3>`;
+              pilihKapDiv.innerHTML += `<ul>${ objectUTTPReverseDetails[document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text].reduce((acc,nilai) => acc + `<li><a class="list_href" id="${nilai}" href=#>${objectUTTPReverse[choosenUttp]} ${nilai}</a></li>`,`<li hidden><a class="originalVal" id="${originalUttp}" href=#></a></li>`) }</ul>`;
+    
+              document.body.appendChild(pilihKapDiv);
+    
+              // Matikan interaksi dengan background
+              document.body.style.pointerEvents = "none";
+              pilihKapDiv.style.pointerEvents = "auto"; // Overlay tetap bisa diklik
+    
+              // Matikan scroll
+              document.body.style.overflow = "hidden";     
+    
+              (function tutupDialog() {
+                document.querySelector(".closeListSpan").addEventListener('click', () => {
+                  document.getElementById("utp").value = objectUTTPReverse[document.querySelector(".originalVal").id];
+                  document.getElementById("pilihKapDiv").remove();
+                  document.body.style.pointerEvents = "auto";
+                  document.body.style.overflow = "auto";  
+              });
+              })();     
             });
-            })();     
-          });
-        })();
+          })();
+  
+        }
   
         SertBtnClickedHandler();  
+        batalBtnClickHandler();
         closeSertDialog(el);
   
       });
