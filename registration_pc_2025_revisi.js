@@ -242,7 +242,8 @@ function tempAlert(duration) {
             "jenisTera" : "tuk"
           },
           "tgl_tera" : {
-            "urlApi" : "https://script.google.com/macros/s/AKfycby_EIGGqCHpnGBqshXzS1_cGZ_zMz1OgaWZVBX7bJCxlDCUm29tBC_du1PnEdohGkEMXw/exec",
+            "urlApi" : /*"https://script.google.com/macros/s/AKfycby_EIGGqCHpnGBqshXzS1_cGZ_zMz1OgaWZVBX7bJCxlDCUm29tBC_du1PnEdohGkEMXw/exec",*/
+            "https://script.google.com/macros/s/AKfycbwCGulZm-TAnm1VYkS3aGIWVSkmWSrHzwgietq75T7Wi-mh5tqUiGRAeAKVJbcqC5VvTw/exec",
             "layoutPos" : ".k_tera",
             "jenisTera" : "tera"          
           },
@@ -296,7 +297,7 @@ function tempAlert(duration) {
                 if (l[1] !== lastOrder) {
                   str += `</div></div>`;
                   
-                  if (l.length === 18) {
+                  /*if (l.length === 18) {
                     let nomor_order = "";
                     let mass = "";
   
@@ -311,7 +312,26 @@ function tempAlert(duration) {
                     
                     //str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
                     str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD${mass}">Nomor Order : ${nomor_order}</button>&nbsp;<button id="_${l[1]}" class="printFormulir${mass}">Cetak Formulir</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
-                  } else {
+                  }
+                  else*/
+                  if (l.length === 20) {
+                    let nomor_order = "";
+                    let mass = "";
+  
+                    if (l[16].split("/").length === 6) {
+                      let arrFromNorder = l[16].split("/");
+                      arrFromNorder.pop();
+                      nomor_order = arrFromNorder.join("/");
+                      mass = ' mass';
+                    } else {
+                      nomor_order = l[16];
+                    }
+                    
+                    //str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[16]}</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
+                    str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD${mass}">Nomor Order : ${nomor_order}</button>&nbsp;<button id="_${l[1]}" class="printFormulir${mass}">Cetak Formulir</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;
+                  }
+
+                  else {
                     str += `<div class="item"><div class="inner"><button id="${l[1]}" class="printSKRD">Nomor Order : ${l[17]}</button>&nbsp;<button id="_${l[1]}" class="printFormulir">Cetak Formulir</button><div class="innerOfInner">${detailItem(l, obj[k.id]["jenisTera"], iterator, dataPenera.data)}</div>`;                  
                   }
                   
@@ -498,6 +518,13 @@ function tempAlert(duration) {
           case 'k_loko':  
             api = "https://sert.metrologi.ska:5005/buktidaftarloko";
             break;
+
+          case 'k_sidangwly':
+            api = "https://sert.metrologi.ska:5005/buktidaftar";
+            if (peneraOption && peneraOption.options[peneraOption.selectedIndex].text === "") {
+              alert("Penera belum diisi, Silahkan isi inisial penera dahulu.");
+              return;
+            }
         }
   
         this.classList[1] === "mass" ? api = "https://sert.metrologi.ska:5005/buktidaftarmassal" : '';
