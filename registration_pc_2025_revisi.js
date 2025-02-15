@@ -438,6 +438,8 @@ function tempAlert(duration) {
         this.classList[1] === "mass" ? api = "https://sert.metrologi.ska:5005/formulirpendaftaranmassal" : api = "https://sert.metrologi.ska:5005/formulirpendaftaran";
         
         jenisTera === "k_tera" ? api = "https://sert.metrologi.ska:5005/formulirpendaftarantera" : '';
+
+        jenisTera === "k_sidangwly" ? api = "https://sert.metrologi.ska:5005/formulirpendaftaransdgwly" : '';
   
         let data = {"bukti_daftar" : filterTheArray(getArrayData(), this.id.replace("_",""))};
         console.log(data);
@@ -520,11 +522,14 @@ function tempAlert(duration) {
             break;
 
           case 'k_sidangwly':
-            api = "https://sert.metrologi.ska:5005/buktidaftar";
+            api = "https://sert.metrologi.ska:5005/buktidaftarsidangwly";
+            /*
             if (peneraOption && peneraOption.options[peneraOption.selectedIndex].text === "") {
               alert("Penera belum diisi, Silahkan isi inisial penera dahulu.");
               return;
             }
+            */
+            break;
         }
   
         this.classList[1] === "mass" ? api = "https://sert.metrologi.ska:5005/buktidaftarmassal" : '';
