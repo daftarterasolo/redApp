@@ -663,12 +663,35 @@ function tempAlert(duration) {
   function batalBtnClickHandler() {
     let batalBtn = document.getElementById('submitBatal');
     batalBtn.addEventListener('click', async () => {
-      //alert("Membatalkan ");
+      
+      const formData = new FormData(document.getElementById("sertForm"));
+
+      let n_order = formData.get('norder').split("/");
+      let jenisTera = "";
+
+      if (n_order.length <= 4) {
+        jenisTera = "tera";
+      } else {
+
+        const jenisTeraKonversi = {
+          'TUK' : 'tuk',
+          'LOKO' : 'loko',
+          'SDG_WLY' : 'sidangwly',
+          'TULK' : 'spbu' 
+        }
+
+        jenisTera = jenisTeraKonversi[n_order[2]];
+      }
+
       const dataPembatalan = {
+        'jenisTera' : jenisTera,
+        'dataYgDihapus' : formData.get('baris'),
         'authData' : {
               'token' : sessionStorage.getItem('key') 
         }
       };
+
+      console.log(dataPembatalan);
     });
   }
 
