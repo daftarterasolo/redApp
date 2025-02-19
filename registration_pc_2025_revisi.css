@@ -464,6 +464,15 @@ body, html {
     padding-right: 4px;
 }
 
+#changeSeriAwalDiv {
+    font-family: 'Poppins', sans-serif;   
+    color : #FF5F01;
+    font-weight: bolder;
+    font-size: 14px;    
+    padding-left: 7px;
+    padding-right: 4px;
+}
+
 .headerList {
     background-color: #b2e4ff;
 }

@@ -357,6 +357,7 @@ function tempAlert(duration) {
             printSKRD();
             printFormulir();
             printSertifikat();
+
             
             let prev = "";
             let prevElem = "";
@@ -857,7 +858,7 @@ function tempAlert(duration) {
         tableForm.setAttribute("class","tableForm");
         let arrai = getArrayData()[this.id.split("-")[1]];
         let serialNum = "";
-        j_tera === "tera" ? serialNum = `${arrai[10]} - ${arrai[10]+arrai[13]-1}` : serialNum = arrai[10];
+        j_tera === "tera" ? serialNum = `${arrai[11]}${arrai[10]} - ${arrai[11]}${arrai[10]+arrai[13]-1}` : serialNum = arrai[10];
   
         const objectUTTP = {
           "N" : "NERACA",
@@ -914,7 +915,9 @@ function tempAlert(duration) {
   
         let utp = objectUTTP[arrai[6]];
         utp == "POMPA UKUR BBM" ? utp = `${utp} (${arrai[16]} ${arrai[15]})` : ''; 
-  
+        
+        console.log(j_tera);
+
         if (j_tera === "spbu") {
           //console.log(`ini adalah ${this.parentElement.parentElement.children[1].innerHTML}`);
           let listOfNozz = this.parentElement.parentElement.children[1].innerHTML.split("<br>").join("\n");
@@ -938,7 +941,36 @@ function tempAlert(duration) {
             <tr><td colspan=2 id="submitTd"><input type="button" name="submitSert" id="submitSert" value = "Buat Sertifikat">&nbsp;<input type="button" name="submitEdit" id="submitEdit" value = "Ubah Data">&nbsp;<!--<input type="button" name="submitDel" id="submitDel" value = "Hapus">&nbsp;--><input type="button" name="submitBatal" id="submitBatal" value = "Batalkan"></tr>
             `;
   
-        } else {
+        }
+        if (j_tera === 'tera') {
+          let str = ``;
+          tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${nomor_order}" readonly></td></tr>
+            <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="tglTera" id="tglTera" value="${parseTglTera(arrai[0])}" readonly></td></tr>
+            <tr><td>WTU</td><td><input type="text" class="inputSert" name="wtu" id="wtu" value="${arrai[2]}"></td></tr>
+            <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
+            <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>-->
+            <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${utp}"></td></tr>-->
+            <tr><td>UTTP</td><td><select class="inputSert" name="utp" id="utp">
+            ${ Object.entries(objectUTTPReverse).reduce((acc, [key,val]) => acc + `<option value="${val}">${key}</option>`,``)} 
+            </select></td></tr>
+            <tr><td>Kap / Dayabaca</td><td><input type="text" class="inputSert" name="kapDayabaca" id="kapDayabaca" value="${arrai[7]} / ${arrai[8]}"></td></tr>
+            <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
+            <tr><td>Jumlah</td><td><input type="text" class="inputSert" name="jml" id="jml" value="${arrai[jml]}"></td></tr>
+            <tr><td>Serial Awal</td><td><input type="text" class="inputSert" name="srlAwal" id="srlAwal" value="${arrai[10]}"></td></tr>
+            <tr><td>Teks Nomor Seri</td><td><input type="text" class="inputSert" name="txtSeri" id="txtSeri" value="${arrai[11]}"></td></tr>
+            <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${serialNum}"></td></tr>
+            <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[12]}"></td></tr>
+            <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${arrai[idx_penera].split("-").length < 2 ? dataPeneraDetail[arrai[idx_penera]] : parsePenera(arrai[idx_penera])}"></td></tr>
+            <tr><td>Buatan</td><td><input type="text" class="inputSert" name="buatan" id="buatan" value="${arrai[buatan]}"></td></tr>
+            <tr><td>QRCODE (Jika ada)</td><td><input type="text" class="inputSert" name="qrcode" id="qrcode" value="${arrai[19]}"></td></tr>
+            <tr><td style="color : darkgreen;">Penandatangan<br>[ wajib diisi ]</td><td><select class="inputSert" name="ttd" id="ttd"><option value="kepala">Ka UPTD Metrologi</option><option value="kepala_tte">Ka UPTD Metrologi TTE</option><option value="kasubag">Ka Subbag TU</option></select></td></tr>         
+            <tr><td style="color : red;">No.Urut Sertifikat<br>[ wajib diisi ]</td><td><input type="text" class="inputSert" name="nurut" id="nurut" value=""></td></tr>
+            <tr><td>Nomor Baris</td><td><input type="text" class="inputSert" name="baris" id="baris" value="${arrai[17]}"></td></tr>
+            <tr><td colspan=2 id="submitTd"><input type="button" name="submitSert" id="submitSert" value = "Buat Sertifikat">&nbsp;<input type="button" name="submitEdit" id="submitEdit" value = "Ubah Data">&nbsp;<!--<input type="button" name="submitDel" id="submitDel" value = "Hapus">&nbsp;--><input type="button" name="submitBatal" id="submitBatal" value = "Batalkan"></tr>
+            `;
+
+        } 
+        else {
           let str = ``;
           tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${nomor_order}" readonly></td></tr>
             <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="tglTera" id="tglTera" value="${parseTglTera(arrai[0])}" readonly></td></tr>
@@ -1011,7 +1043,53 @@ function tempAlert(duration) {
           })();
   
         }
-  
+    
+        if (j_tera === "tera") {
+          (function changeJmlHandler() {
+            let jml_existing = Number(document.getElementById("jml").value);
+
+            document.getElementById("jml").addEventListener("blur", () => {
+              //alert("jml berubah");
+              if (jml_existing === Number(document.getElementById("jml").value)) {
+                return;
+              }
+
+              let changeSeriAwalDiv = document.createElement("div");
+              changeSeriAwalDiv.setAttribute("id","changeSeriAwalDiv");   
+              changeSeriAwalDiv.style.position = "fixed";
+              changeSeriAwalDiv.style.top = "20%";
+              changeSeriAwalDiv.style.left = "25%";
+              changeSeriAwalDiv.style.width = "50vw";
+              changeSeriAwalDiv.style.height = "50vh";
+              changeSeriAwalDiv.style.backgroundColor = "rgba(255, 255, 255, 0.8)"; // Transparan gelap
+              changeSeriAwalDiv.style.zIndex = "9999"; // Pastikan di atas semua elemen lain
+              changeSeriAwalDiv.style.pointerEvents = "auto"; // Aktifkan overlay untuk klik    
+
+              changeSeriAwalDiv.innerHTML = `<span class="closeListSpan">X Close This Dialog</span>` 
+              changeSeriAwalDiv.innerHTML += `<h3 class="headerList">Anda telah mengubah jumlah uttp, apakah nomor seri awal dan teks nomor serinya juga berubah? </h3>`;
+
+              document.body.appendChild(changeSeriAwalDiv);
+    
+              // Matikan interaksi dengan background
+              document.body.style.pointerEvents = "none";
+              changeSeriAwalDiv.style.pointerEvents = "auto"; // Overlay tetap bisa diklik
+    
+              // Matikan scroll
+              document.body.style.overflow = "hidden";     
+
+              (function tutupDialog() {
+                document.querySelector(".closeListSpan").addEventListener('click', () => {
+                  document.getElementById("changeSeriAwalDiv").remove();
+                  document.body.style.pointerEvents = "auto";
+                  document.body.style.overflow = "auto";  
+              });
+              })();     
+
+            });
+
+          })();
+        }
+
         SertBtnClickedHandler();  
         batalBtnClickHandler();
         editBtnClickHandler();
