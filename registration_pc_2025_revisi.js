@@ -1047,6 +1047,8 @@ function tempAlert(duration) {
         if (j_tera === "tera") {
           (function changeJmlHandler() {
             let jml_existing = Number(document.getElementById("jml").value);
+            let seri_awal = Number(document.getElementById("srlAwal").value);
+            let txt_noseri_awal = document.getElementById("txtSeri").value;
 
             document.getElementById("jml").addEventListener("blur", () => {
               //alert("jml berubah");
@@ -1067,6 +1069,11 @@ function tempAlert(duration) {
 
               changeSeriAwalDiv.innerHTML = `<span class="closeListSpan">X Close This Dialog</span>` 
               changeSeriAwalDiv.innerHTML += `<h3 class="headerList">Anda telah mengubah jumlah uttp, apakah nomor seri awal dan teks nomor serinya juga berubah? </h3>`;
+              changeSeriAwalDiv.innerHTML += `<form id="ubahJmlForm">
+                <input type="text" name="s_a" id="s_a" value="${seri_awal}">
+                <input type="text" name="t_n" id="t_n" value="${txt_noseri_awal}">
+              </form>
+              `;
 
               document.body.appendChild(changeSeriAwalDiv);
     
