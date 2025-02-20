@@ -691,21 +691,7 @@ function tempAlert(duration) {
 
       formData.append('jenisTera', jenisTera);
       console.log(formData);
-/*
-      if (n_order.length <= 4) {
-        jenisTera = "tera";
-      } else {
 
-        const jenisTeraKonversi = {
-          'TUK' : 'tuk',
-          'LOKO' : 'loko',
-          'SDG_WLY' : 'sidangwly',
-          'TULK' : 'spbu' 
-        }
-
-        jenisTera = jenisTeraKonversi[n_order[2]];
-      }
-*/
       switch(formData.get('qrcode')) {
         case '':
           console.log('qrcode kosong');
@@ -958,7 +944,7 @@ function tempAlert(duration) {
             <tr><td>Jumlah</td><td><input type="text" class="inputSert" name="jml" id="jml" value="${arrai[jml]}"></td></tr>
             <tr><td>Serial Awal</td><td><input type="text" class="inputSert" name="srlAwal" id="srlAwal" value="${arrai[10]}"></td></tr>
             <tr><td>Teks Nomor Seri</td><td><input type="text" class="inputSert" name="txtSeri" id="txtSeri" value="${arrai[11]}"></td></tr>
-            <tr><td>Serial Number</td><td><input type="text" class="inputSert" name="srlnum" id="srlnum" value="${serialNum}"></td></tr>
+            <tr><td>Serial Number</td><td><input type="text" class="inputSert hanyabaca" name="srlnum" id="srlnum" value="${serialNum}" readonly></td></tr>
             <tr><td>Model/Tipe</td><td><input type="text" class="inputSert" name="mdl" id="mdl" value="${arrai[12]}"></td></tr>
             <tr><td>Penera</td><td><input type="text" class="inputSert" name="pb" id="pb" value="${arrai[idx_penera].split("-").length < 2 ? dataPeneraDetail[arrai[idx_penera]] : parsePenera(arrai[idx_penera])}"></td></tr>
             <tr><td>Buatan</td><td><input type="text" class="inputSert" name="buatan" id="buatan" value="${arrai[buatan]}"></td></tr>
@@ -1069,9 +1055,14 @@ function tempAlert(duration) {
 
               changeSeriAwalDiv.innerHTML = `<span class="closeListSpan">X Close This Dialog</span>` 
               changeSeriAwalDiv.innerHTML += `<h3 class="headerList">Anda telah mengubah jumlah uttp, apakah nomor seri awal dan teks nomor serinya juga berubah? </h3>`;
-              changeSeriAwalDiv.innerHTML += `<form id="ubahJmlForm">
-                <input type="text" name="s_a" id="s_a" value="${seri_awal}">
-                <input type="text" name="t_n" id="t_n" value="${txt_noseri_awal}">
+              changeSeriAwalDiv.innerHTML += `
+              <form id="ubahJmlForm">
+                <table>
+                  <tr><td colspan=2><input type="button" name="ya" id="ya" value = "Iya">&nbsp;<input type="button" name="tdk" id="tdk" value = "Tidak"></td></tr>
+                  <tr class="sembunyikan id="penjelasan"><td colspan=2>Jika iya, silahkan mengisi NOmor Seri Awal yang baru dan Text Nomor Seri yang baru di bawah ini</td></tr>
+                  <tr class="sembunyikan"><td>Nomor Seri Awal Baru</td><td><input type="text" name="s_a" id="s_a" value="${seri_awal}"></td></tr>
+                  <tr class="sembunyikan"><td>Text Nomor Seri Baru</td><td><input type="text" name="t_n" id="t_n" value="${txt_noseri_awal}"></td></tr>
+                </table>
               </form>
               `;
 
@@ -1083,6 +1074,12 @@ function tempAlert(duration) {
     
               // Matikan scroll
               document.body.style.overflow = "hidden";     
+
+              (function iyaHandler() {
+                document.getElementById("ya").addEventListener('click', () => {
+                  document.querySelector(".sembunyikan").style.display = "block";
+                });
+              })();
 
               (function tutupDialog() {
                 document.querySelector(".closeListSpan").addEventListener('click', () => {

@@ -476,6 +476,8 @@ body, html {
 .headerList {
     background-color: #fcccc4;
     color : #f23612;
+    padding-right: 8px;
+    padding-left: 8px;
 }
 
 .list_href {
@@ -488,4 +490,34 @@ body, html {
     color : #000000;
     margin-left: auto;
     position: absolute; right: 10px;
+}
+
+.sembunyikan {
+    display: none;
+}
+
+#ya, #tdk {
+    font-family: 'Poppins', sans-serif;   
+    color : #FFFFFF;
+    font-weight: bolder;
+    font-size: 14px;
+    /*border : 2px solid rgba(0, 0, 0);*/
+    background-color: #ff7396;
+    border : none;   
+}
+
+#tdk {
+    background-color: #eaa221;
+}
+
+#ya:active, #tdk:active {
+    transform: translateY(3px); /* Geser 3px ke bawah */
+
+}
+
+#penjelasan {
+    background-color: #fcccc4;
+    color : #f23612;
+    padding-right: 8px;
+    padding-left: 8px;    
 }
