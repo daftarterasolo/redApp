@@ -690,10 +690,18 @@ function tempAlert(duration) {
       }
 
       formData.append('jenisTera', jenisTera);
+      formData.append('token',sessionStorage.getItem('key')); 
       console.log(formData);
 
       switch(formData.get('qrcode')) {
         case '':
+          console.log('kirim data');
+          let url = "https://script.google.com/macros/s/AKfycbz9_oI5FDrMNk1jdpZ4jtdxsxq5m-Dj_1dQaxKifUIJ1wSBMbOD5vQhwphJ2s4bz0xPAw/exec";
+          await fetch(url,{
+            method : 'POST',
+            body : formData
+          });
+
           console.log('qrcode kosong');
           break;
         default: 
@@ -997,16 +1005,29 @@ function tempAlert(duration) {
               pilihKapDiv.style.position = "fixed";
               pilihKapDiv.style.top = "20%";
               pilihKapDiv.style.left = "25%";
-              pilihKapDiv.style.width = "50vw";
-              pilihKapDiv.style.height = "50vh";
+              pilihKapDiv.style.width = "30%";
+              pilihKapDiv.style.height = "auto";
               pilihKapDiv.style.backgroundColor = "rgba(255, 255, 255, 0.8)"; // Transparan gelap
               pilihKapDiv.style.zIndex = "9999"; // Pastikan di atas semua elemen lain
-              pilihKapDiv.style.pointerEvents = "auto"; // Aktifkan overlay untuk klik     
+              pilihKapDiv.style.pointerEvents = "auto"; // Aktifkan overlay untuk klik  
+              pilihKapDiv.style.paddingBottom = "14px";   
     
               let choosenUttp = document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text;
-              pilihKapDiv.innerHTML = `<span class="closeListSpan">X Close This Dialog</span>` 
-              pilihKapDiv.innerHTML += `<h3 class="headerList">Pilih Kapasitas dan Dayabaca ${choosenUttp}-nya ... </h3>`;
-              pilihKapDiv.innerHTML += `<ul>${ objectUTTPReverseDetails[document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text].reduce((acc,nilai) => acc + `<li><a class="list_href" id="${nilai}" href=#>${objectUTTPReverse[choosenUttp]} ${nilai}</a></li>`,`<li hidden><a class="originalVal" id="${originalUttp}" href=#></a></li>`) }</ul>`;
+              pilihKapDiv.innerHTML = `<span class="closeListSpan">X Close This Dialog</span>`;
+              if (objectUTTPReverseDetails[document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text]) { 
+                pilihKapDiv.innerHTML += `<h3 class="headerList">Pilih Kapasitas dan Dayabaca ${choosenUttp}-nya ... </h3>`;
+                pilihKapDiv.innerHTML += `<ul>${ objectUTTPReverseDetails[document.getElementById("utp").options[document.getElementById("utp").selectedIndex].text].reduce((acc,nilai) => acc + `<li><a class="list_href" id="${nilai}" href=#>${objectUTTPReverse[choosenUttp]} ${nilai}</a></li>`,`<li hidden><a class="originalVal" id="${originalUttp}" href=#></a></li>`) }</ul>`;
+
+              } else {
+                pilihKapDiv.innerHTML += `<h3 class="headerList">Isi Kapasitas dan Dayabaca ${choosenUttp}-nya ... </h3>`;  
+                pilihKapDiv.innerHTML += `<input type="hidden" class="originalVal" id="${originalUttp}" value="${originalUttp}">`;
+                pilihKapDiv.innerHTML += `<table width="100%">
+                                          <tr><td>Kapasitas</td><td><input type="text" name="new_kap" id="new_kap"></td></tr>
+                                          <tr><td>Dayabaca</td><td><input type="text" name="new_d" id="new_d"></td></tr>
+                                          </table>`;
+                pilihKapDiv.innerHTML += `<br><br><button class="button-52" role="button" id="set">SUBMIT</button>`;
+                
+              }
     
               document.body.appendChild(pilihKapDiv);
     
@@ -1018,19 +1039,80 @@ function tempAlert(duration) {
               document.body.style.overflow = "hidden";     
     
               (function tutupDialog() {
+
                 document.querySelector(".closeListSpan").addEventListener('click', () => {
                   document.getElementById("utp").value = objectUTTPReverse[document.querySelector(".originalVal").id];
                   document.getElementById("pilihKapDiv").remove();
                   document.body.style.pointerEvents = "auto";
                   document.body.style.overflow = "auto";  
-              });
-              })();     
+                });
+                  
+              })();    
+              
+              (function list_hrefClickHandler() {
+
+                document.querySelectorAll(".list_href").forEach(function(elem) {
+                  elem.addEventListener('click', function() {
+                    //console.log(this.id);
+                    document.getElementById("kapDayabaca").value = this.id;
+                    document.getElementById("pilihKapDiv").remove();
+                    document.body.style.pointerEvents = "auto";
+                    document.body.style.overflow = "auto";  
+  
+                  });
+                });
+                
+              })();
+
+              (function submitBtnHandler() {
+                document.getElementById("set").addEventListener('click', () => {
+                  document.getElementById("kapDayabaca").value = `${document.getElementById("new_kap").value} / ${document.getElementById("new_d").value}`;
+                  document.getElementById("pilihKapDiv").remove();
+                  document.body.style.pointerEvents = "auto";
+                  document.body.style.overflow = "auto";  
+                });
+              })();
+                  
             });
           })();
-  
+          
         }
     
         if (j_tera === "tera") {
+          (function changeJmlHandler() {
+            let jml_existing = Number(document.getElementById("jml").value);
+            document.getElementById("jml").addEventListener('keyup',() => {
+              let jml_now = Number(document.getElementById("jml").value);
+              let serial_awal = Number(document.getElementById("srlAwal").value);
+              let text_serial = document.getElementById("txtSeri").value;
+
+              document.getElementById("srlnum").value = `${text_serial}${serial_awal} - ${text_serial}${serial_awal+jml_now-1}`;
+            });
+          })();
+
+          (function seriAwalHandler() {
+            let seriAwal_existing = Number(document.getElementById("srlAwal").value);
+            document.getElementById("srlAwal").addEventListener('keyup',() => {
+              let jml = Number(document.getElementById("jml").value);
+              let serial_awal_now = Number(document.getElementById("srlAwal").value);
+              let text_serial = document.getElementById("txtSeri").value;
+
+              document.getElementById("srlnum").value = `${text_serial}${serial_awal_now} - ${text_serial}${serial_awal_now+jml-1}`;
+            });
+          })();
+
+          (function txtSerialHandler() {
+            let txtSerial_existing = Number(document.getElementById("txtSeri").value);
+            document.getElementById("txtSeri").addEventListener('keyup',() => {
+              let jml = Number(document.getElementById("jml").value);
+              let serial_awal = Number(document.getElementById("srlAwal").value);
+              let text_serial_now = document.getElementById("txtSeri").value;
+
+              document.getElementById("srlnum").value = `${text_serial_now}${serial_awal} - ${text_serial_now}${serial_awal+jml-1}`;
+            });
+          })();
+
+          /*
           (function changeJmlHandler() {
             let jml_existing = Number(document.getElementById("jml").value);
             let seri_awal = Number(document.getElementById("srlAwal").value);
@@ -1088,10 +1170,11 @@ function tempAlert(duration) {
                   document.body.style.overflow = "auto";  
               });
               })();     
-
+              
             });
 
           })();
+          */
         }
 
         SertBtnClickedHandler();  

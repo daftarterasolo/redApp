@@ -474,10 +474,11 @@ body, html {
 }
 
 .headerList {
-    background-color: #fcccc4;
-    color : #f23612;
+    background-color: #b71f33;
+    color : #ffffff;
     padding-right: 8px;
     padding-left: 8px;
+    font-family: 'Poppins', sans-serif; 
 }
 
 .list_href {
@@ -520,4 +521,50 @@ body, html {
     color : #f23612;
     padding-right: 8px;
     padding-left: 8px;    
+}
+
+
+
+
+/* CSS */
+.button-52 {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  /*padding: 8px 0px 8px;*/
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  font-family: 'Poppins', sans-serif; 
+  display: block;
+  margin: auto;
+  height : 40px;
+}
+
+.button-52:after {
+  content: "";
+  background-color: #ffe54c;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 5px;
+  left: 5px;
+  transition: 0.2s;
+}
+
+.button-52:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+@media (min-width: 768px) {
+  .button-52 {
+    padding: 13px 50px 13px;
+  }
 }
