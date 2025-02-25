@@ -652,9 +652,11 @@ function tempAlert(duration) {
       "ATH" : "ANAK TIMBANGAN HALUS",
       "TC" : "TIMBANGAN CEPAT"
     };
-  
+    
+    console.log(formData);
+
     for (let[name, value] of formData) {
-      name === "utp" ? serializedData[name] = objectUTTP[value] : serializedData[name] = value;
+      name === "utp2" ? serializedData['utp'] = 'POMPA UKUR BBM' : serializedData[name] = value;
       
     }
   
@@ -922,7 +924,7 @@ function tempAlert(duration) {
             <tr><td>WTU</td><td><input type="text" class="inputSert" name="wtu" id="wtu" value="${arrai[2]}"></td></tr>
             <tr><td>Alamat</td><td><input type="text" class="inputSert" name="almt" id="almt" value="${arrai[3]}"></td></tr>
             <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp" id="utp" value="${arrai[6]} ${arrai[7]} / ${arrai[8]}"></td></tr>-->
-            <tr><td>UTTP</td><td><textarea class="inputSert" id="utp2" name="utp2" rows="10" cols="33">${listOfNozz}</textarea></td></tr>
+            <tr><td>UTTP</td><td><textarea class="inputSert" id="utp" name="utp" rows="10" cols="33">${listOfNozz}</textarea></td></tr>
             <!--<tr><td>UTTP</td><td><input type="text" class="inputSert" name="utp2" id="utp2" value="${utp}"></td></tr>-->
             <tr><td>Kap / Dayabaca</td><td><input type="text" class="inputSert" name="kapDayabaca" id="kapDayabaca" value="${arrai[7]} / ${arrai[8]}"></td></tr>
             <tr><td>Merek</td><td><input type="text" class="inputSert" name="mrk" id="mrk" value="${arrai[9]}"></td></tr>
@@ -964,7 +966,7 @@ function tempAlert(duration) {
             `;
 
         } 
-        else {
+        if (j_tera !== 'spbu' && j_tera !== 'tera') {
           let str = ``;
           tableForm.innerHTML = `<tr><td>No Order</td><td><input type="text" class="inputSert hanyabaca" name="norder" id="norder" value="${nomor_order}" readonly></td></tr>
             <tr><td>Tanggal Peneraan</td><td><input type="text" class="inputSert hanyabaca" name="tglTera" id="tglTera" value="${parseTglTera(arrai[0])}" readonly></td></tr>
