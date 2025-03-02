@@ -777,9 +777,13 @@ function tempAlert(duration) {
         return false;
       }
   
-      console.log(serializedFormSertData());
+      //console.log(serializedFormSertData());
+
+      let panjangData = Object.keys(serializedFormSertData()).length;
+      //console.log(panjangData);
       
-      let api = "https://sert.metrologi.ska:5005/sertifikat_tuk";
+      let api = "";
+      panjangData === 18 ? api = "https://sert.metrologi.ska:5005/sertifikat_tera" : api = "https://sert.metrologi.ska:5005/sertifikat_tuk";
   
       document.getElementById("submitSert").value = `Processing...`;
   
