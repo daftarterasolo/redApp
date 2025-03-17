@@ -698,10 +698,21 @@ function tempAlert(duration) {
       switch(formData.get('qrcode')) {
         case '':
           console.log('kirim data');
-          let url = "https://script.google.com/macros/s/AKfycbz9_oI5FDrMNk1jdpZ4jtdxsxq5m-Dj_1dQaxKifUIJ1wSBMbOD5vQhwphJ2s4bz0xPAw/exec";
+          //let url = "https://script.google.com/macros/s/AKfycbz9_oI5FDrMNk1jdpZ4jtdxsxq5m-Dj_1dQaxKifUIJ1wSBMbOD5vQhwphJ2s4bz0xPAw/exec";
+          let url = "";
+
+          jenisTera === "tera" ? url = "https://script.google.com/macros/s/AKfycbyePBp-WsncJSG-To1A3Ahy6pSW_JT7bvbr4J3bQuIOAP7-OzWNNjX3CATRSV8h9ndQZA/exec" : url = "https://script.google.com/macros/s/AKfycbz9_oI5FDrMNk1jdpZ4jtdxsxq5m-Dj_1dQaxKifUIJ1wSBMbOD5vQhwphJ2s4bz0xPAw/exec";
+
           await fetch(url,{
             method : 'POST',
             body : formData
+          })
+          .then(result => result.json())
+          .then(result => {
+            alert(result.message);
+            editBtn.value = "Ubah Data";
+            editBtn.style.backgroundColor = "#BB0606";
+            editBtn.style.borderColor = "#000000";
           });
 
           console.log('qrcode kosong');
