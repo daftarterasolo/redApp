@@ -1,4 +1,4 @@
-import { getKelurahan, listOfUttpMasyRedApp, getWtuHistory } from '../util/utilFunc.js'; 
+import { getKelurahan, listOfUttpMasyRedApp, getWtuHistory, getMerkHistory, getTipeHistory } from '../util/utilFunc.js'; 
 /*import { lakukanScan } from '../util/siapkanKamera.js';*/
 
 export class createFormMasyRedApp {
@@ -12,6 +12,8 @@ export class createFormMasyRedApp {
 	static dataToSend = {};
 	#dataForm = {};
 	#wtuHistoryData = [];    //field yg digunakan pada method #loadWtuHistory
+	#merkHistoryData = [];   //field yg digunakan pada method #loadMerkHistory
+	#tipeHistoryData = [];   //field yg digunakan pada method #loadTipeHistory
 
 	constructor(formKontainer, str) {
 		this.formKontainer = formKontainer;
@@ -44,6 +46,16 @@ export class createFormMasyRedApp {
 		//console.log(this.#wtuHistoryData[100]);
 	}
 
+	async #loadMerkHistory() {
+		document.getElementById("merkHistory") != null ? this.#merkHistoryData = await getMerkHistory() : '';
+		//console.log(this.#merkHistoryData[100]);
+	}
+
+	async #loadTipeHistory() {
+		document.getElementById("tipeHistory") != null ? this.#tipeHistoryData = await getTipeHistory() : '';
+		//console.log(this.#tipeHistoryData[100]);
+	}
+
 	async generateForm() {
 		this.#generateLoadingBar(true);
 		this.#removeContentComponent();
@@ -51,6 +63,9 @@ export class createFormMasyRedApp {
 		this.constructor.kelurahan = await getKelurahan();
 		this.#generateLoadingBar(false);
 		await this.#loadWtuHistory();
+		await this.#loadMerkHistory();
+		await this.#loadTipeHistory();
+
 	}
 
 	//method utk dijalankan pada generateListUttp()
@@ -350,6 +365,15 @@ export class createFormMasyRedApp {
 		//console.log(this.#pabrikData);
 		return this.#wtuHistoryData;
 	}
+
+	determineDataSrcMerk() {
+		return this.#merkHistoryData;
+	}
+
+	determineDataSrcTipe() {
+		return this.#tipeHistoryData;
+	}
+
 
 	//method utk dijalankan pd method generateBtnHandler()
 	#generateEventHandler() {	
