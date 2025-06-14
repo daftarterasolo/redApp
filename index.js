@@ -70,26 +70,6 @@ function clickLogout() {
 						</div>
 						<datalist id="kelurahan"></datalist>
 						<datalist id="wtuHistory"></datalist>
-						<datalist id="merkHistory"></datalist>
-						<datalist id="tipeHistory"></datalist>
-						<datalist id="buatanHistory">
-							<option value="Germany">Germany</option>
-							<option value="Jerman">Jerman</option>
-							<option value="Japan">Japan</option>
-							<option value="Jepang">Jepang</option>
-							<option value="China">China</option>
-							<option value="Taiwan">Taiwan</option>
-							<option value="Indonesia">Indonesia</option>
-							<option value="Belanda">Belanda</option>
-							<option value="Netherland">Netherland</option>
-							<option value="England">England</option>
-							<option value="Philippines">Philippines</option>
-							<option value="Switzerland">Switzerland</option>
-							<option value="Vietnam">Vietnam</option>
-							<option value="Switzerland">Switzerland</option>
-							<option value="USA">USA</option>
-							<option value="Amerika">Amerika</option>
-						</datalist>
 					</div>
 					<div class="uttpDiv hidden"></div>					
 					<div class="scanDiv hidden">
@@ -102,10 +82,10 @@ function clickLogout() {
 							<input type="text" class="form_data" name="kap" id="kap" readonly placeholder="kapasitas">
 							<input type="text" class="form_data" name="d" id="d" readonly placeholder="dayabaca">
 							<input type="number" class="form_data" name="jml" id="jml" placeholder="jumlah..">
-							<input type="text" class="form_data" name="merk" id="merk" placeholder="merk" list="merkHistory">
-							<input type="text" class="form_data" name="tipe" id="tipe" placeholder="tipe/model" list="tipeHistory">
+							<input type="text" class="form_data" name="merk" id="merk" placeholder="merk">
+							<input type="text" class="form_data" name="tipe" id="tipe" placeholder="tipe/model">
 							<input type="text" class="form_data" name="sn" id="sn" placeholder="no seri">
-							<input type="text" class="form_data" name="buatan" id="buatan" placeholder="buatan" list="buatanHistory">
+							<input type="text" class="form_data" name="buatan" id="buatan" placeholder="buatan">
 							<input type="button" class="form_data" name="setJml" id="setJml" value="Tambahkan ke keranjang">
 						</form>
 						<p style="text-align : right;"><a class="closeFormJml" href=#><span>x</span> Close</a></div></p>
