@@ -24,12 +24,18 @@ export async function listOfUttpMasy() {
 
 export async function listOfUttpPabrik() {
 	let url = "https://script.google.com/macros/s/AKfycbzH27ZTSKFF2Q2xXIRQEs7sd6uNzTfZpp-9BvO9a5JDDrhnf_YHzqc_TYoMtdDNOVI/exec";
-	return await fetch(url).then(datas => datas.json()).then(datas => datas.uttp.filter(e => {return e[0] != "N" && e[0] != "TP" && e[0] != "Meter Kayu" && e[0] != "PUBBM" && e[0] != "TJE"}));		
+	//return await fetch(url).then(datas => datas.json()).then(datas => datas.uttp.filter(e => {return e[0] != "N" && e[0] != "TP" && e[0] != "Meter Kayu" && e[0] != "PUBBM" && e[0] != "TJE"}));	
+	return await fetch(url).then(datas => datas.json()).then(datas => datas.uttp.filter(e => {
+		const firstCondition = e[0] !== "N" && e[0] !== "Meter Kayu" && e[0] !== "PUBBM" && e[0] !== "TE" && e[0] !== "TP";
+		const secondCondition = (e[0] === "TE" && e[1].trim() === "-") || (e[0] === "TP" && e[1].trim() === "-");
+
+		return firstCondition || secondCondition;
+	}));
 }
 
 export async function listOfUttpMasyRedApp() {
 	let url = "https://script.google.com/macros/s/AKfycbzH27ZTSKFF2Q2xXIRQEs7sd6uNzTfZpp-9BvO9a5JDDrhnf_YHzqc_TYoMtdDNOVI/exec";
-	return await fetch(url).then(datas => datas.json()).then(datas => datas.uttp.filter(e => {return e[0]}));		
+	return await fetch(url).then(datas => datas.json()).then(datas => datas.uttp.filter(e => {return e[0] != "PUBBM" && e[0] != "TAK"}));		
 }
 
 export async function getPabrikTimb() {

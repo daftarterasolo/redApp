@@ -145,6 +145,7 @@ export class createFormMasyRedApp {
 	//method utk dijalankan pd pickUttpHandler()
 	#closeFormJmlHandler() {
 		let closeBtn = document.querySelector(".closeFormJml");
+		//let closeBtn = document.querySelector(".closeFormJml_");
 		closeBtn.addEventListener('click',() => {
 			document.querySelector(".jmlhDiv").style.display = "none";
 			document.querySelector(".uttpDiv").style.display = "flex";
@@ -174,6 +175,7 @@ export class createFormMasyRedApp {
 			this.#changeShopChartLayout();
 			document.querySelector(".uttpDiv").style.display = "none";
 			document.querySelector(".jmlhDiv").style.display = "flex";
+			//document.querySelector(".jmlhDiv_").style.display = "flex";
 			this.#setEmptyIfJmlMoreThanOne();
 			this.#closeFormJmlHandler();
 			this.#resetFormJmlh();
@@ -208,6 +210,8 @@ export class createFormMasyRedApp {
 	//method utk dijalankan pada generateListUttp()
 	setJmlPickedUttp() {
 		document.querySelector("#setJml").addEventListener("click", () => {
+		//document.querySelector("#setJml_").addEventListener("click", () => {
+
 			/*
 			this.constructor.showUncompleteMsg(this.constructor.isJmlEmpty("jml"));
 			document.querySelector(".jmlhDiv").style.display = "none";
@@ -223,6 +227,7 @@ export class createFormMasyRedApp {
 			*/
 			this.constructor.showUncompleteMsg(this.constructor.isJmlEmpty("jml"));
 			document.querySelector(".jmlhDiv").style.display = "none";
+			//document.querySelector(".jmlhDiv_").style.display = "none";
 
 			let listTampung = [].concat(this.list[this.#listIndex]);
 

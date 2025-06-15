@@ -96,6 +96,8 @@ function clickLogout() {
 						<!--<h3></h3>--> 
 						<video id="video" autoplay style="max-width : 100%; max-height : 100%;"></video>
 					</div>
+
+					
 					<div class="jmlhDiv hidden">
 						<form class="spe">
 							<input type="text" class="form_data" name="uttp" id="uttp" readonly>
@@ -110,12 +112,13 @@ function clickLogout() {
 						</form>
 						<p style="text-align : right;"><a class="closeFormJml" href=#><span>x</span> Close</a></div></p>
 					</div>`;
+					
 		
 		const formMasyRedApp = new createFormMasyRedApp(document.querySelector(".main"), str);
 		await formMasyRedApp.generateForm();
 
 		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][0]', 'this.list[k][1]', 'this.list[k][2]']
-		formMasyRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]} ${args[4]}</legend></fieldset></div>`;
+		formMasyRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]} ${args[4]} / ${args[5]}</legend></fieldset></div>`;
 		formMasyRedApp.generateBtnHandler();
 
 		const scanHandler = new masyPrepareCam(formMasyRedApp);
@@ -300,7 +303,7 @@ function clickLogout() {
 		formLokoRedApp.generateForm();
 	
 		const args = ['k', 'this.list[k][0]', 'this.list[k][4]', 'this.list[k][0]', 'this.list[k][1]', 'this.list[k][2]']
-		formLokoRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]} ${args[4]}</legend></fieldset></div>`;
+		formLokoRedApp.stringUttp`<div id=${args[0]} class='daftarUttp' style="background-image : url(${args[2]});"><fieldset class="listFieldset"><legend class="listLegend">${args[3]} ${args[4]} / ${args[5]}</legend></fieldset></div>`;
 
 		formLokoRedApp.generateBtnHandler();
 		

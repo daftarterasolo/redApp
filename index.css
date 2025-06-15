@@ -386,7 +386,7 @@ legend.legendTitle {
     position: absolute;
     /*left : 4.25%;*/
     background-color: #000000;
-    top : 20px;
+    /*top : 20px;*/
     border-radius: 6px;
     opacity: 1;
     border: 3px solid #FFFFFF;
@@ -395,9 +395,15 @@ legend.legendTitle {
     flex-direction:row;
     flex-wrap: wrap;
     
-    justify-content: space-between;
+    /*justify-content: space-between;*/
+    justify-content: center;
     overflow : auto;
     scrollbar-color: #38c red;
+    /*margin : 0 auto;*/
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
@@ -406,13 +412,16 @@ legend.legendTitle {
 }
 
 .uttpDiv div {
-    width : 48%;
-    height : 145px;
+    /*width : 48%;*/
+    width : 165px;
+    height : 160px;
     background-color : #000000;
     margin : 2px 2px 15px 2px;
     background-size : cover;
     background-repeat : no-repeat;
     display : grid;
+    /*justify-content: center;
+    align-items: center;*/
     
 }
 
@@ -435,6 +444,10 @@ legend.legendTitle {
     overflow : auto;
     scrollbar-color: #38c red;
     padding-top: 5px;
+
+        top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .hasilKueriDiv {
@@ -475,11 +488,12 @@ legend.legendTitle {
     display : none;	
 }
 
+
 .jmlhDiv {
     width: 95%;
     height : 90%;
     position: absolute;
-    /*left : 4.25%;*/
+   
     background-color: #1E3F66;
     top : 20px;
     border-radius: 6px;
@@ -492,15 +506,18 @@ legend.legendTitle {
     opacity: 0.95;
     justify-content:center;
     overflow-y:scroll;
-    /*justify-content: center;
-    overflow : auto;
-    scrollbar-color: #38c red;*/
+    
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
 .jmlhDiv.hidden {
     display : none; 
 }
+
 
 .jmlhDiv h1 {
     font-family: 'Poppins', sans-serif;
@@ -512,6 +529,7 @@ legend.legendTitle {
     display: grid;
 }
 
+
 .spe input{
     margin: auto;
 }
@@ -519,6 +537,7 @@ legend.legendTitle {
 .spe input:disabled {
     background-color: grey;
 }
+
 
 .subContent {
     height : 350px;
@@ -871,7 +890,7 @@ a#logout {
     padding: 20px; 
     width: auto; 
     font-family : 'Montserrat';
-    font-size: 10px;
+    font-size: 12px;
     color : #FFFFFF;
     font-weight: 500;
 }
@@ -1289,3 +1308,4 @@ form #tgl:focus {
 }
 
 */
+
