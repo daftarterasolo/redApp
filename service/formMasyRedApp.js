@@ -12,8 +12,8 @@ export class createFormMasyRedApp {
 	static dataToSend = {};
 	#dataForm = {};
 	#wtuHistoryData = [];    //field yg digunakan pada method #loadWtuHistory
-	#merkHistoryData = [];   //field yg digunakan pada method #loadMerkHistory
-	#tipeHistoryData = [];   //field yg digunakan pada method #loadTipeHistory
+	//#merkHistoryData = [];   //field yg digunakan pada method #loadMerkHistory
+	//#tipeHistoryData = [];   //field yg digunakan pada method #loadTipeHistory
 
 	constructor(formKontainer, str) {
 		this.formKontainer = formKontainer;
@@ -46,6 +46,7 @@ export class createFormMasyRedApp {
 		//console.log(this.#wtuHistoryData[100]);
 	}
 
+	/*
 	async #loadMerkHistory() {
 		document.getElementById("merkHistory") != null ? this.#merkHistoryData = await getMerkHistory() : '';
 		//console.log(this.#merkHistoryData[100]);
@@ -55,16 +56,19 @@ export class createFormMasyRedApp {
 		document.getElementById("tipeHistory") != null ? this.#tipeHistoryData = await getTipeHistory() : '';
 		//console.log(this.#tipeHistoryData[100]);
 	}
+	*/
 
 	async generateForm() {
 		this.#generateLoadingBar(true);
 		this.#removeContentComponent();
 		this.formKontainer.insertAdjacentHTML('beforeend', this.str);
 		this.constructor.kelurahan = await getKelurahan();
-		this.#generateLoadingBar(false);
 		await this.#loadWtuHistory();
-		await this.#loadMerkHistory();
-		await this.#loadTipeHistory();
+		//await getMerkHistory();
+		//await getTipeHistory();
+		this.#generateLoadingBar(false);
+		//await this.#loadMerkHistory();
+		//await this.#loadTipeHistory();
 
 	}
 
@@ -311,6 +315,8 @@ export class createFormMasyRedApp {
 				await this.generateListUttp();
 				this.setCssUttp();
 				this.#closeBtnHandler();
+				await getMerkHistory();
+				await getTipeHistory();
 			});	
 		}
 	}
@@ -371,6 +377,7 @@ export class createFormMasyRedApp {
 		return this.#wtuHistoryData;
 	}
 
+	/*
 	determineDataSrcMerk() {
 		return this.#merkHistoryData;
 	}
@@ -378,7 +385,7 @@ export class createFormMasyRedApp {
 	determineDataSrcTipe() {
 		return this.#tipeHistoryData;
 	}
-
+	*/
 
 	//method utk dijalankan pd method generateBtnHandler()
 	#generateEventHandler() {	
