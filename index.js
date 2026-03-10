@@ -341,7 +341,7 @@ function clickLogout() {
 
 	let menuManage = document.querySelector('.menu2').children[2];
 	menuManage.addEventListener("click", () => {
-		window.location.replace("registration_pc_2025_revisi.html");
+		window.location.replace("registration_pc_2026_revisi.html");
 	});
 
 	let menuVerif = document.querySelector('.menu2').children[1];
